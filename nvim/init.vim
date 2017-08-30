@@ -65,6 +65,9 @@ Plug 'vim-airline/vim-airline-themes' "Status line themes
 Plug 'tpope/vim-fugitive' "Git wrapper
 Plug 'mhinz/vim-signify' "Shows changed lines compared to last git commit
 
+" Physics-based smooth scrolling
+Plug 'yuttie/comfortable-motion.vim'
+
 call plug#end()
 
 " Basic settings
@@ -89,6 +92,9 @@ set number
 let g:vim_markdown_folding_disabled = 1
 set breakindent
 set linebreak
+
+" Automatically removing all trailing whitespace on save for javascript, html and css
+autocmd FileType javascript,html,css autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " KEYMAPPINGS
 " Runs current line as a command in zsh and outputs stdout to file
