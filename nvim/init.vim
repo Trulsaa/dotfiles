@@ -20,27 +20,28 @@ endif
 call plug#begin()
 
 
+Plug 'ap/vim-css-color' "color colornames and codes
 Plug 'christoomey/vim-sort-motion' " Sort object
 Plug 'crusoexia/vim-monokai' " Color scheme
 Plug 'jelera/vim-javascript-syntax' " Enhanced JavaScript Syntax for Vim
 Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parens, quotes in pair.
 Plug 'junegunn/vim-easy-align' " Alignment on specified character
+Plug 'neomake/neomake' "Used to run code linters
 Plug 'othree/javascript-libraries-syntax.vim' " JavaScript highlighting
 Plug 'pangloss/vim-javascript' " JavaScript highlighting
 Plug 'plasticboy/vim-markdown' " Markdown extras
 Plug 'scrooloose/nerdtree' " Filetree
-Plug 'neomake/neomake' "Used to run code linters
 Plug 'tmhedberg/SimpylFold' " Fold functions
 Plug 'tpope/vim-commentary' " Comment objects
 Plug 'tpope/vim-repeat' " Enable . repeating for more
 Plug 'tpope/vim-surround' " Surround objects with anything
-Plug 'ap/vim-css-color' "color colornames and codes
+Plug 'yuttie/comfortable-motion.vim' " Physics-based smooth scrolling
 
 " textobjects
-Plug 'kana/vim-textobj-user' "Enables the creation of new objects
-Plug 'kana/vim-textobj-indent' "Creates an object of the current indent level
 Plug 'kana/vim-textobj-entire' "Creates an object of the entire buffer
+Plug 'kana/vim-textobj-indent' "Creates an object of the current indent level
 Plug 'kana/vim-textobj-line' "Craetes the line object to exclude whitespace before the line start
+Plug 'kana/vim-textobj-user' "Enables the creation of new objects
 
 " Autocomplete plugins
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': ['javascript', 'javascript.jsx'] } "The autocomplete dropdown
@@ -62,11 +63,9 @@ Plug 'vim-airline/vim-airline' "Status line configuration
 Plug 'vim-airline/vim-airline-themes' "Status line themes
 
 " Git plugins
-Plug 'tpope/vim-fugitive' "Git wrapper
 Plug 'mhinz/vim-signify' "Shows changed lines compared to last git commit
+Plug 'tpope/vim-fugitive' "Git wrapper
 
-" Physics-based smooth scrolling
-Plug 'yuttie/comfortable-motion.vim'
 
 call plug#end()
 
@@ -94,7 +93,7 @@ set breakindent
 set linebreak
 
 " Automatically removing all trailing whitespace on save for javascript, html and css
-autocmd FileType javascript,html,css autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " KEYMAPPINGS
 " Runs current line as a command in zsh and outputs stdout to file
