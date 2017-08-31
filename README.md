@@ -13,3 +13,9 @@
 - Homebrew
 - node & npm - brew install node
 
+
+### For Webdevelopment
+
+Updates tidy which is used by neomake for html linting
+- brew install tidy-html5
+
