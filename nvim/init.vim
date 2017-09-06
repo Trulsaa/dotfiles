@@ -36,6 +36,7 @@ Plug 'tpope/vim-commentary' " Comment objects
 Plug 'tpope/vim-repeat' " Enable . repeating for more
 Plug 'tpope/vim-surround' " Surround objects with anything
 Plug 'yuttie/comfortable-motion.vim' " Physics-based smooth scrolling
+Plug 'christoomey/vim-tmux-navigator' " Navigate seamlessly between vim and tmux
 
 " textobjects
 Plug 'kana/vim-textobj-entire' "Creates an object of the entire buffer
@@ -65,7 +66,6 @@ Plug 'vim-airline/vim-airline-themes' "Status line themes
 " Git plugins
 Plug 'mhinz/vim-signify' "Shows changed lines compared to last git commit
 Plug 'tpope/vim-fugitive' "Git wrapper
-
 
 call plug#end()
 
