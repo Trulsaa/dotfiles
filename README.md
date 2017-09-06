@@ -16,6 +16,6 @@
 
 ### For Webdevelopment
 
-Updates tidy which is used by neomake for html linting
+Update tidy which is used by neomake for html linting
 - brew install tidy-html5
 
