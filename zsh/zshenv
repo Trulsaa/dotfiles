@@ -21,7 +21,29 @@ alias lg2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold b
 alias m="~/Documents/Scripts/Musikk/Controle\ Music.sh"
 
 #Send email
-alias e="~/Documents/Scripts/Email/Send_sp_mail.sh"
+function e {
+  #!/bin/bash
+
+  if [[ "$1" = "-h" ]]; then
+    echo "e body.md to_address [subject]"
+    exit
+  fi
+
+  if [[ $3 = "" ]]; then
+    subject=$(grep -e "#" "$1" | head -n 1 | sed 's/#//g' | sed 's/^ //g')
+    if [[ $subject = "" ]]; then
+      subject="En liten ting"
+    fi
+  else
+    subject=$3
+  fi
+
+  to=$2
+
+  pandoc -s --highlight-style kate -H ~/Documents/Scripts/Email/github-pandoc.css -f markdown -t html "$1" | \
+    mutt -e "set content_type=text/html" -s "$subject" $to
+
+}
 
 #Open in Google Chrome
 function oigc() {
@@ -31,4 +53,9 @@ function oigc() {
 # Convert markdown to html with syntax highlighting
 function mtoh() {
   pandoc -s --highlight-style kate -H ~/Documents/Scripts/Email/github-pandoc.css -f markdown -t html "$1" | pbcopy
+}
+
+function server {
+  /usr/bin/open -a "/Applications/Google Chrome.app" "http://localhost:1337"
+  python -m SimpleHTTPServer 1337
 }
