@@ -37,6 +37,7 @@ Plug 'tpope/vim-repeat' " Enable . repeating for more
 Plug 'tpope/vim-surround' " Surround objects with anything
 Plug 'yuttie/comfortable-motion.vim' " Physics-based smooth scrolling
 Plug 'christoomey/vim-tmux-navigator' " Navigate seamlessly between vim and tmux
+Plug 'christoomey/vim-tmux-runner' " Send commands to tmux pane
 
 " textobjects
 Plug 'kana/vim-textobj-entire' "Creates an object of the entire buffer
@@ -188,3 +189,12 @@ autocmd! BufWritePost * Neomake
 
 " Copy filepath to clipboard
 nmap ,cs :let @*=expand("%")<CR>
+
+" vim-tmux-runner mappings
+nnoremap <leader>sc :VtrSendCommandToRunner!<cr>
+nnoremap <leader>sl :VtrSendLinesToRunner!<cr>
+nnoremap <leader>kr :VtrKillRunner<cr>
+nnoremap <leader>fc :VtrFlushCommand<cr>
+nnoremap <leader>rd :VtrSendCtrlD<cr>
+" Visual mode
+vnoremap <leader>sl :VtrSendLinesToRunner<cr>
