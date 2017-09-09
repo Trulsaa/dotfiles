@@ -38,6 +38,7 @@ Plug 'tpope/vim-surround' " Surround objects with anything
 Plug 'yuttie/comfortable-motion.vim' " Physics-based smooth scrolling
 Plug 'christoomey/vim-tmux-navigator' " Navigate seamlessly between vim and tmux
 Plug 'christoomey/vim-tmux-runner' " Send commands to tmux pane
+Plug 'junegunn/goyo.vim' "Destraction free writing
 
 " textobjects
 Plug 'kana/vim-textobj-entire' "Creates an object of the entire buffer
@@ -56,8 +57,9 @@ Plug 'wokalski/autocomplete-flow' "More autocomplete options
 " Load last because of :UpdateReomotePlugins
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
-" Filesearch
-Plug 'kien/ctrlp.vim' "Fuzzy file finder
+" Fuzzy filesearch
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " theme and statusline
 Plug 'altercation/vim-colors-solarized' "Solarized theme for vim
@@ -172,9 +174,6 @@ map <silent> <C-p> :!oigc %<CR><CR>
 "To map <Esc> to exit terminal-mode:
 tnoremap <Esc> <C-\><C-n>
 
-" Ctrlp settings
-let g:ctrlp_map = '<Leader>p'
-
 " SingColumn color
 highlight clear SignColumn
 
@@ -198,3 +197,6 @@ nnoremap <leader>fc :VtrFlushCommand<cr>
 nnoremap <leader>rd :VtrSendCtrlD<cr>
 " Visual mode
 vnoremap <leader>sl :VtrSendLinesToRunner<cr>
+
+" fzf settings
+map <Leader>p :Files 
