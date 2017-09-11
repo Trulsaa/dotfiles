@@ -56,10 +56,6 @@ function mtoh() {
 }
 
 function server {
-  if [[ $1 = "" ]]; then
-    echo "Har du kanskje glemt portnummeret?"
-    exit
-  fi
-  /usr/bin/open -a "/Applications/Google Chrome.app" "http://localhost:$1"
-  python -m SimpleHTTPServer $1
+  /usr/bin/open -a "/Applications/Google Chrome.app" "http://localhost:8888"
+  node static_server.js
 }
