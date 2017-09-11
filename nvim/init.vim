@@ -39,6 +39,7 @@ Plug 'yuttie/comfortable-motion.vim' " Physics-based smooth scrolling
 Plug 'christoomey/vim-tmux-navigator' " Navigate seamlessly between vim and tmux
 Plug 'christoomey/vim-tmux-runner' " Send commands to tmux pane
 Plug 'junegunn/goyo.vim' "Destraction free writing
+Plug 'craigemery/vim-autotag' " Autoupdate ctags
 
 " textobjects
 Plug 'kana/vim-textobj-entire' "Creates an object of the entire buffer
