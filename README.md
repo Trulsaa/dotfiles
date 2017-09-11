@@ -19,3 +19,12 @@
 Update tidy which is used by neomake for html linting
 - brew install tidy-html5
 
+### For fzf preview window highlighting
+
+- `brew install highlight`
+- `gem install coderay`
+- `gem install rougify`
+
+### Ctags
+
+- `brew install ctags`
