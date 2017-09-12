@@ -56,8 +56,17 @@ function mtoh() {
 }
 
 function server {
-  INDEX=$(find . -name index.html)
-  INDEX=${INDEX:1}
-  /usr/bin/open -a "/Applications/Google Chrome.app" "http://localhost:8888$INDEX"
+  git grep 'resources/sap-ui-core.js' -- '*.html' > .tempfile
+
+  while read line; do
+
+    FILE=$(echo "$line" | sed "s/:.*//") 
+    CODE=$(echo "$line" | sed "s/.*://") 
+
+    /usr/bin/open -a "/Applications/Google Chrome.app" "http://localhost:8888/$FILE"
+  done < .tempfile
+
+  rm .tempfile
+
   node static_server.js
 }
