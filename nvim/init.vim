@@ -201,6 +201,7 @@ vnoremap <leader>sl :VtrSendLinesToRunner<cr>
 
 " fzf settings
 map <Leader>p :Files 
+map <Leader>b :Buffers<cr>
 " Files command with preview window
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -208,3 +209,6 @@ command! -bang -nargs=? -complete=dir Files
 " - fzf#vim#grep(command, with_column, [options], [fullscreen])
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
+
+" Diff options
+set diffopt=vertical
