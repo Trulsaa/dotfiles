@@ -3,14 +3,17 @@ function Debrif {
   ~/Documents/Scripts/skydive-video-handling/Debrif $1
 }
 
+
 # abapruv abap.abp
 function abapruv {
   ~/Documents/ABAP/Scripts/Remove-unused-declarations/Remove_unused_declarations $1
 }
 
+
 function testing {
   ~/Documents/Scripts/Script\ template $1
 }
+
 
 # catpdf all.pdf *.pdf
 alias catpdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py --verbose --output"
@@ -19,6 +22,7 @@ alias lg2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold b
 
 #Play musix
 alias m="~/Documents/Scripts/Musikk/Controle\ Music.sh"
+
 
 #Send email
 function e {
@@ -45,15 +49,18 @@ function e {
 
 }
 
+
 #Open in Google Chrome
 function oigc() {
   open $1 -a "Google Chrome"
 }
 
+
 # Convert markdown to html with syntax highlighting
 function mtoh() {
   pandoc -s --highlight-style kate -H ~/Documents/Scripts/Email/github-pandoc.css -f markdown -t html "$1" | pbcopy
 }
+
 
 function server {
   git grep 'resources/sap-ui-core.js' -- '*.html' > .tempfile
@@ -61,7 +68,6 @@ function server {
   while read line; do
 
     FILE=$(echo "$line" | sed "s/:.*//") 
-    CODE=$(echo "$line" | sed "s/.*://") 
 
     /usr/bin/open -a "/Applications/Google Chrome.app" "http://localhost:8888/$FILE"
   done < .tempfile
