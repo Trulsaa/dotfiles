@@ -81,7 +81,6 @@ set expandtab
 set shiftwidth=2
 set softtabstop=2
 set fileencodings=utf-8
-let mapleader = ","
 " set clipboard=unnamed
 set clipboard+=unnamedplus
 set conceallevel=2
@@ -90,16 +89,25 @@ set number
 let g:vim_markdown_folding_disabled = 1
 set breakindent
 set linebreak
-map <Leader>s :source ~/.config/nvim/init.vim<CR>
 
 " Automatically removing all trailing whitespace on save for javascript, html and css
 autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " KEYMAPPINGS
+let mapleader = ","
 " Runs current line as a command in zsh and outputs stdout to file
 noremap Q !!zsh<CR>
 " CTRL S to save
 noremap <c-s> :w<CR>
+map <Leader>s :source ~/.config/nvim/init.vim<CR>
+" Enable folding with the spacebar
+nnoremap <space> za
+" Open i google chrome
+map <silent> <C-p> :!oigc %<CR><CR>
+"To map <Esc> to exit terminal-mode:
+tnoremap <Esc> <C-\><C-n>
+" Copy filepath to clipboard
+nmap ,cs :let @*=expand("%")<CR>
 
 " auto-pairs settings
 let g:AutoPairsShortcutFastWrap='<C-e>'
@@ -152,9 +160,6 @@ ca tn tabnew
 set foldmethod=indent
 set foldlevel=99
 
-" Enable folding with the spacebar
-nnoremap <space> za
-
 " Flag extraneous whitespace
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
@@ -164,12 +169,6 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 map <Leader>t :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" Open i google chrome
-map <silent> <C-p> :!oigc %<CR><CR>
-
-"To map <Esc> to exit terminal-mode:
-tnoremap <Esc> <C-\><C-n>
 
 " SingColumn color
 highlight clear SignColumn
@@ -183,8 +182,6 @@ nmap <Leader><Space>n :lnext<CR>      " next error/warning
 nmap <Leader><Space>p :lprev<CR>      " previous error/warning
 autocmd! BufWritePost * Neomake
 
-" Copy filepath to clipboard
-nmap ,cs :let @*=expand("%")<CR>
 
 " fzf settings
 map <Leader>p :Files 
