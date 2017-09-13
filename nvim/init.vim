@@ -19,14 +19,9 @@ endif
 
 call plug#begin()
 
-Plug 'ap/vim-css-color', { 'for': ['javascript', 'javascript.jsx', 'html', 'css'] } "color colornames and codes
 Plug 'christoomey/vim-sort-motion' " Sort object
-Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] } " Enhanced JavaScript Syntax for Vim
 Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parens, quotes in pair.
 Plug 'neomake/neomake' "Used to run code linters
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] } " JavaScript highlighting
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] } " JavaScript highlighting
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' } " Markdown extras
 Plug 'scrooloose/nerdtree' " Filetree
 Plug 'tmhedberg/SimpylFold' " Fold functions
 Plug 'tpope/vim-commentary' " Comment objects
@@ -36,6 +31,22 @@ Plug 'yuttie/comfortable-motion.vim' " Physics-based smooth scrolling
 Plug 'christoomey/vim-tmux-navigator' " Navigate seamlessly between vim and tmux
 Plug 'junegunn/goyo.vim' "Destraction free writing
 Plug 'craigemery/vim-autotag' " Autoupdate ctags
+
+" ABAP 
+Plug 'vim-scripts/ABAP.vim', { 'for': 'abap' }
+
+" JavaScript
+Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] } " Enhanced JavaScript Syntax for Vim
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] } " JavaScript highlighting
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] } " JavaScript highlighting
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': ['javascript', 'javascript.jsx'] } "The autocomplete dropdown
+Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] } "JavaScript Parameter Complete
+
+" CSS
+Plug 'ap/vim-css-color', { 'for': 'css' } "color colornames and codes
+
+" Markdown
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' } " Markdown extras
 
 " textobjects
 Plug 'kana/vim-textobj-entire' "Creates an object of the entire buffer
@@ -48,7 +59,6 @@ Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': ['javascr
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " Tern server
 Plug 'SirVer/ultisnips' "Snippet engine
 Plug 'honza/vim-snippets' "Snippet library
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] } "JavaScript Parameter Complete
 Plug 'wokalski/autocomplete-flow' "More autocomplete options
 " Load last because of :UpdateReomotePlugins
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
