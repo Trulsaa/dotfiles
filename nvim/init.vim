@@ -19,17 +19,14 @@ endif
 
 call plug#begin()
 
-
-Plug 'ap/vim-css-color' "color colornames and codes
+Plug 'ap/vim-css-color', { 'for': ['javascript', 'javascript.jsx', 'html', 'css'] } "color colornames and codes
 Plug 'christoomey/vim-sort-motion' " Sort object
-Plug 'crusoexia/vim-monokai' " Color scheme
-Plug 'jelera/vim-javascript-syntax' " Enhanced JavaScript Syntax for Vim
+Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] } " Enhanced JavaScript Syntax for Vim
 Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parens, quotes in pair.
-Plug 'junegunn/vim-easy-align' " Alignment on specified character
 Plug 'neomake/neomake' "Used to run code linters
-Plug 'othree/javascript-libraries-syntax.vim' " JavaScript highlighting
-Plug 'pangloss/vim-javascript' " JavaScript highlighting
-Plug 'plasticboy/vim-markdown' " Markdown extras
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] } " JavaScript highlighting
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] } " JavaScript highlighting
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' } " Markdown extras
 Plug 'scrooloose/nerdtree' " Filetree
 Plug 'tmhedberg/SimpylFold' " Fold functions
 Plug 'tpope/vim-commentary' " Comment objects
@@ -37,7 +34,6 @@ Plug 'tpope/vim-repeat' " Enable . repeating for more
 Plug 'tpope/vim-surround' " Surround objects with anything
 Plug 'yuttie/comfortable-motion.vim' " Physics-based smooth scrolling
 Plug 'christoomey/vim-tmux-navigator' " Navigate seamlessly between vim and tmux
-Plug 'christoomey/vim-tmux-runner' " Send commands to tmux pane
 Plug 'junegunn/goyo.vim' "Destraction free writing
 Plug 'craigemery/vim-autotag' " Autoupdate ctags
 
@@ -50,7 +46,6 @@ Plug 'kana/vim-textobj-user' "Enables the creation of new objects
 " Autocomplete plugins
 Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': ['javascript', 'javascript.jsx'] } "The autocomplete dropdown
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' } " Tern server
-Plug 'mhartington/nvim-typescript' "features like auto-completion, viewing of documentation, type-signature, go to definition, and refernce finder.
 Plug 'SirVer/ultisnips' "Snippet engine
 Plug 'honza/vim-snippets' "Snippet library
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] } "JavaScript Parameter Complete
@@ -95,6 +90,7 @@ set number
 let g:vim_markdown_folding_disabled = 1
 set breakindent
 set linebreak
+map <Leader>s :source ~/.config/nvim/init.vim<CR>
 
 " Automatically removing all trailing whitespace on save for javascript, html and css
 autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
@@ -189,15 +185,6 @@ autocmd! BufWritePost * Neomake
 
 " Copy filepath to clipboard
 nmap ,cs :let @*=expand("%")<CR>
-
-" vim-tmux-runner mappings
-nnoremap <leader>sc :VtrSendCommandToRunner!<cr>
-nnoremap <leader>sl :VtrSendLinesToRunner!<cr>
-nnoremap <leader>kr :VtrKillRunner<cr>
-nnoremap <leader>fc :VtrFlushCommand<cr>
-nnoremap <leader>rd :VtrSendCtrlD<cr>
-" Visual mode
-vnoremap <leader>sl :VtrSendLinesToRunner<cr>
 
 " fzf settings
 map <Leader>p :Files 
