@@ -69,31 +69,43 @@ Plug 'tpope/vim-fugitive' "Git wrapper
 call plug#end()
 
 " Basic settings
-set mouse=a
-language en_US
-syntax enable
-set background=dark
-colorscheme solarized
-set backupdir=~/.vim/.backup//
-set directory=~/.vim/.backup//
-set undodir=~/.vim/.undo
-set expandtab
-set shiftwidth=2
-set softtabstop=2
-set fileencodings=utf-8
-" set clipboard=unnamed
-set clipboard+=unnamedplus
-set conceallevel=2
-set relativenumber
-set number
+
+set mouse=a " mouse support in all modes
+language en_us " sets the language of the messages / ui (vim)
+syntax enable " enable syntax highlighting
+colorscheme solarized " solarized colorscheme
+set background=dark " solarized dark
+set backupdir=~/.vim/.backup// " store all vim backup files in ~/.vim/.backup//
+set directory=~/.vim/.backup// " store all vim backup files in ~/.vim/.backup//
+set expandtab " to insert space characters whenever the tab key is pressed
+set shiftwidth=2 " number of spaces used when indenting
+set softtabstop=2 " number of spaces used when indenting usin tab
+set fileencodings=utf-8 " set output encoding of the file that is written
+set clipboard=unnamedplus " everything you yank in vim will go to the unnamed register, and vice versa.
+set number relativenumber " each line in your file is numbered relative to the line you’re currently on
+set breakindent " break lines to the indent level
+set linebreak " brak lines at words
+set hidden " bufferswitching without having to save first.
+
+" Markdown settings
 let g:vim_markdown_folding_disabled = 1
-set breakindent
-set linebreak
+set conceallevel=2
+
+" Let's save undo info!
+if !isdirectory($HOME."/.vim")
+    call mkdir($HOME."/.vim", "", 0770)
+endif
+if !isdirectory($HOME."/.vim/undo-dir")
+    call mkdir($HOME."/.vim/undo-dir", "", 0700)
+endif
+set undodir=~/.vim/undo-dir
+set undofile
 
 " Automatically removing all trailing whitespace on save for javascript, html and css
 autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " KEYMAPPINGS
+"===========
 let mapleader = ","
 " Runs current line as a command in zsh and outputs stdout to file
 noremap Q !!zsh<CR>
@@ -108,6 +120,8 @@ map <silent> <C-p> :!oigc %<CR><CR>
 tnoremap <Esc> <C-\><C-n>
 " Copy filepath to clipboard
 nmap ,cs :let @*=expand("%")<CR>
+" Remap visual block
+nnoremap <Leader>v <c-v>
 
 " auto-pairs settings
 let g:AutoPairsShortcutFastWrap='<C-e>'
