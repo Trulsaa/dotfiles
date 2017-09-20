@@ -32,7 +32,6 @@ Plug 'christoomey/vim-tmux-navigator' " Navigate seamlessly between vim and tmux
 Plug 'junegunn/goyo.vim'              " Destraction free writing
 Plug 'craigemery/vim-autotag'         " Autoupdate ctags
 Plug 'junegunn/vim-easy-align'        " Alignment on any character
-Plug 'vim-better-whitespace'          " Higlight and remove trailing whitespace
 Plug 'sickill/vim-pasta'              " Context aware pasting
 
 " ABAP 
@@ -131,6 +130,9 @@ tnoremap <Esc> <C-\><C-n>
 nmap ,cs :let @*=expand("%")<CR>
 " Remap visual block
 nnoremap <Leader>v <c-v>
+
+" Automatically removing all trailing whitespace on save for javascript, html and css
+autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " auto-pairs settings
 let g:AutoPairsShortcutFastWrap='<C-e>'
