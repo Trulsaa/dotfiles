@@ -32,6 +32,8 @@ Plug 'christoomey/vim-tmux-navigator' " Navigate seamlessly between vim and tmux
 Plug 'junegunn/goyo.vim'              " Destraction free writing
 Plug 'craigemery/vim-autotag'         " Autoupdate ctags
 Plug 'junegunn/vim-easy-align'        " Alignment on any character
+Plug 'vim-better-whitespace'          " Higlight and remove trailing whitespace
+Plug 'sickill/vim-pasta'              " Context aware pasting
 
 " ABAP 
 Plug 'vim-scripts/ABAP.vim', { 'for': 'abap' }
@@ -80,22 +82,22 @@ call plug#end()
 
 " Basic settings
 
-set mouse=a " mouse support in all modes
-language en_us " sets the language of the messages / ui (vim)
-syntax enable " enable syntax highlighting
-colorscheme solarized " solarized colorscheme
-set background=dark " solarized dark
+set mouse=a                    " mouse support in all modes
+language en_us                 " sets the language of the messages / ui (vim)
+syntax enable                  " enable syntax highlighting
+colorscheme solarized          " solarized colorscheme
+set background=dark            " solarized dark
 set backupdir=~/.vim/.backup// " store all vim backup files in ~/.vim/.backup//
 set directory=~/.vim/.backup// " store all vim backup files in ~/.vim/.backup//
-set expandtab " to insert space characters whenever the tab key is pressed
-set shiftwidth=2 " number of spaces used when indenting
-set softtabstop=2 " number of spaces used when indenting usin tab
-set fileencodings=utf-8 " set output encoding of the file that is written
-set clipboard=unnamedplus " everything you yank in vim will go to the unnamed register, and vice versa.
-set number relativenumber " each line in your file is numbered relative to the line you’re currently on
-set breakindent " break lines to the indent level
-set linebreak " brak lines at words
-set hidden " bufferswitching without having to save first.
+set expandtab                  " to insert space characters whenever the tab key is pressed
+set shiftwidth=2               " number of spaces used when indenting
+set softtabstop=2              " number of spaces used when indenting usin tab
+set fileencodings=utf-8        " set output encoding of the file that is written
+set clipboard=unnamedplus      " everything you yank in vim will go to the unnamed register, and vice versa.
+set number relativenumber      " each line in your file is numbered relative to the line you’re currently on
+set breakindent                " break lines to the indent level
+set linebreak                  " brak lines at words
+set hidden                     " bufferswitching without having to save first.
 
 " Markdown settings
 let g:vim_markdown_folding_disabled = 1
@@ -110,9 +112,6 @@ if !isdirectory($HOME."/.vim/undo-dir")
 endif
 set undodir=~/.vim/undo-dir
 set undofile
-
-" Automatically removing all trailing whitespace on save for javascript, html and css
-autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " KEYMAPPINGS
 "===========
