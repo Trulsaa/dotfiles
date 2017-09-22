@@ -76,3 +76,5 @@ function server {
 
   node static_server.js
 }
+
+alias pserver="python -m SimpleHTTPServer"
