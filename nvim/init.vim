@@ -33,6 +33,7 @@ Plug 'junegunn/goyo.vim'              " Destraction free writing
 Plug 'craigemery/vim-autotag'         " Autoupdate ctags
 Plug 'junegunn/vim-easy-align'        " Alignment on any character
 Plug 'sickill/vim-pasta'              " Context aware pasting
+Plug 'Yggdroot/indentLine'            " Indent guides
 
 " ABAP 
 Plug 'vim-scripts/ABAP.vim', { 'for': 'abap' }
@@ -80,23 +81,24 @@ Plug 'tpope/vim-fugitive' " Git wrapper
 call plug#end()
 
 " Basic settings
-
-set mouse=a                    " mouse support in all modes
-language en_us                 " sets the language of the messages / ui (vim)
-syntax enable                  " enable syntax highlighting
-colorscheme solarized          " solarized colorscheme
-set background=dark            " solarized dark
-set backupdir=~/.vim/.backup// " store all vim backup files in ~/.vim/.backup//
-set directory=~/.vim/.backup// " store all vim backup files in ~/.vim/.backup//
-set expandtab                  " to insert space characters whenever the tab key is pressed
-set shiftwidth=2               " number of spaces used when indenting
-set softtabstop=2              " number of spaces used when indenting usin tab
-set fileencodings=utf-8        " set output encoding of the file that is written
-set clipboard=unnamedplus      " everything you yank in vim will go to the unnamed register, and vice versa.
-set number relativenumber      " each line in your file is numbered relative to the line you’re currently on
-set breakindent                " break lines to the indent level
-set linebreak                  " brak lines at words
-set hidden                     " bufferswitching without having to save first.
+set mouse=a                                " mouse support in all modes
+language en_us                             " sets the language of the messages / ui (vim)
+syntax enable                              " enable syntax highlighting
+colorscheme solarized                      " solarized colorscheme
+set background=dark                        " solarized dark
+set backupdir=~/.vim/.backup//             " store all vim backup files in ~/.vim/.backup//
+set directory=~/.vim/.backup//             " store all vim backup files in ~/.vim/.backup//
+set expandtab                              " to insert space characters whenever the tab key is pressed
+set shiftwidth=2                           " number of spaces used when indenting
+set softtabstop=2                          " number of spaces used when indenting usin tab
+set fileencodings=utf-8                    " set output encoding of the file that is written
+set clipboard=unnamedplus                  " everything you yank in vim will go to the unnamed register, and vice versa.
+set number relativenumber                  " each line in your file is numbered relative to the line you’re currently on
+set breakindent                            " break lines to the indent level
+set linebreak                              " brak lines at words
+set hidden                                 " bufferswitching without having to save first.
+hi MatchParen cterm=underline ctermbg=none " Underline matching bracket and remove background color
+au FileType markdown setl sw=4 sts=4 et    " Indentation in markdown set to 4 spaces
 
 " Markdown settings
 let g:vim_markdown_folding_disabled = 1
@@ -227,3 +229,11 @@ set diffopt=vertical
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Indentline plugin settings
+let g:indentLine_fileTypeExclude = ['help', 'markdown']
+let g:indentLine_bufNameExclude=['NERD_tree.*']
+let g:indentLine_char = '⎸▏'
+
+" NERDTree settings
+let NERDTreeShowHidden=1
