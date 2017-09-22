@@ -81,28 +81,32 @@ Plug 'tpope/vim-fugitive' " Git wrapper
 call plug#end()
 
 " Basic settings
-set mouse=a                                " mouse support in all modes
-language en_us                             " sets the language of the messages / ui (vim)
-syntax enable                              " enable syntax highlighting
-colorscheme solarized                      " solarized colorscheme
-set background=dark                        " solarized dark
-set backupdir=~/.vim/.backup//             " store all vim backup files in ~/.vim/.backup//
-set directory=~/.vim/.backup//             " store all vim backup files in ~/.vim/.backup//
-set expandtab                              " to insert space characters whenever the tab key is pressed
-set shiftwidth=2                           " number of spaces used when indenting
-set softtabstop=2                          " number of spaces used when indenting usin tab
-set fileencodings=utf-8                    " set output encoding of the file that is written
-set clipboard=unnamedplus                  " everything you yank in vim will go to the unnamed register, and vice versa.
-set number relativenumber                  " each line in your file is numbered relative to the line you’re currently on
-set breakindent                            " break lines to the indent level
-set linebreak                              " brak lines at words
-set hidden                                 " bufferswitching without having to save first.
+set mouse=a                    " mouse support in all modes
+language en_us                 " sets the language of the messages / ui (vim)
+syntax enable                  " enable syntax highlighting
+colorscheme solarized          " solarized colorscheme
+set background=dark            " solarized dark
+set backupdir=~/.vim/.backup// " store all vim backup files in ~/.vim/.backup//
+set directory=~/.vim/.backup// " store all vim backup files in ~/.vim/.backup//
+set expandtab                  " to insert space characters whenever the tab key is pressed
+set shiftwidth=2               " number of spaces used when indenting
+set softtabstop=2              " number of spaces used when indenting usin tab
+set fileencodings=utf-8        " set output encoding of the file that is written
+set clipboard=unnamedplus      " everything you yank in vim will go to the unnamed register, and vice versa.
+set number relativenumber      " each line in your file is numbered relative to the line you’re currently on
+set breakindent                " break lines to the indent level
+set linebreak                  " brak lines at words
+set hidden                     " bufferswitching without having to save first.
+set splitbelow                 " Creates new splits below
+set splitright                 " Creates new splits to the right
+
+" MatchParen settings
 hi MatchParen cterm=underline ctermbg=none " Underline matching bracket and remove background color
-au FileType markdown setl sw=4 sts=4 et    " Indentation in markdown set to 4 spaces
 
 " Markdown settings
 let g:vim_markdown_folding_disabled = 1
 set conceallevel=2
+au FileType markdown setl sw=4 sts=4 et    " Indentation in markdown set to 4 spaces
 
 " Let's save undo info!
 if !isdirectory($HOME."/.vim")
@@ -237,3 +241,6 @@ let g:indentLine_char = '⎸▏'
 
 " NERDTree settings
 let NERDTreeShowHidden=1
+
+" Open files with curson at last know position
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
