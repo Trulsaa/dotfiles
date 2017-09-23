@@ -19,21 +19,21 @@ endif
 
 call plug#begin()
 
-Plug 'christoomey/vim-sort-motion'    " Sort object
-Plug 'jiangmiao/auto-pairs'           " Insert or delete brackets, parens, quotes in pair.
-Plug 'neomake/neomake'                " Used to run code linters
-Plug 'scrooloose/nerdtree'            " Filetree
-Plug 'tmhedberg/SimpylFold'           " Fold functions
-Plug 'tpope/vim-commentary'           " Comment objects
-Plug 'tpope/vim-repeat'               " Enable . repeating for more
-Plug 'tpope/vim-surround'             " Surround objects with anything
-Plug 'yuttie/comfortable-motion.vim'  " Physics-based smooth scrolling
-Plug 'christoomey/vim-tmux-navigator' " Navigate seamlessly between vim and tmux
-Plug 'junegunn/goyo.vim'              " Destraction free writing
-Plug 'craigemery/vim-autotag'         " Autoupdate ctags
-Plug 'junegunn/vim-easy-align'        " Alignment on any character
-Plug 'sickill/vim-pasta'              " Context aware pasting
-Plug 'Yggdroot/indentLine'            " Indent guides
+Plug 'christoomey/vim-sort-motion'                     " Sort object
+Plug 'jiangmiao/auto-pairs'                            " Insert or delete brackets, parens, quotes in pair.
+Plug 'neomake/neomake'                                 " Used to run code linters
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " Filetree
+Plug 'tmhedberg/SimpylFold'                            " Fold functions
+Plug 'tpope/vim-commentary'                            " Comment objects
+Plug 'tpope/vim-repeat'                                " Enable . repeating for more
+Plug 'tpope/vim-surround'                              " Surround objects with anything
+Plug 'yuttie/comfortable-motion.vim'                   " Physics-based smooth scrolling
+Plug 'christoomey/vim-tmux-navigator'                  " Navigate seamlessly between vim and tmux
+Plug 'junegunn/goyo.vim'                               " Destraction free writing
+Plug 'craigemery/vim-autotag'                          " Autoupdate ctags
+Plug 'junegunn/vim-easy-align'                         " Alignment on any character
+Plug 'sickill/vim-pasta'                               " Context aware pasting
+Plug 'Yggdroot/indentLine'                             " Indent guides
 
 " ABAP 
 Plug 'vim-scripts/ABAP.vim', { 'for': 'abap' }
@@ -195,11 +195,11 @@ set foldlevel=99
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " NERDTree settings
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-map <Leader>t :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd StdinReadPre * let s:std_in=1                                                                                                  " Open NERDTree if now file is spesified
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif                                                            " Open NERDTree if now file is spesified
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif " Start NERDtree if opening a directory"
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif                                  " Start NERDtree if opening a directory"
+map <Leader>t :NERDTreeToggle<CR> 
 
 " SingColumn color
 highlight clear SignColumn
