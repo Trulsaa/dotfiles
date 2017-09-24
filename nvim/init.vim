@@ -250,6 +250,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Quit nvim if no other buffers are open
 " Toggle tmux statusline
 " Fix colors in for GitGutter
+" Auto load goyo when opening markdown
 function! s:goyo_enter()
   let b:quitting = 0
   let b:quitting_bang = 0
@@ -270,21 +271,37 @@ function! s:goyo_leave()
     else
       qa
     endif
+  else
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    set showmode
+    set showcmd
+    set scrolloff=5
+    highlight clear LineNr
+    highlight clear GitGutterAddDefault
+    highlight clear GitGutterChangeDefault
+    highlight clear GitGutterDeleteDefault
+    highlight clear GitGutterChangeDeleteDefaults
+    highlight GitGutterAddDefault ctermfg=2
+    highlight GitGutterChangeDefault ctermfg=3
+    highlight GitGutterDeleteDefault ctermfg=1
   endif
-  silent !tmux set status on
-  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  set showmode
-  set showcmd
-  set scrolloff=5
-  highlight clear LineNr
-  highlight clear GitGutterAddDefault
-  highlight clear GitGutterChangeDefault
-  highlight clear GitGutterDeleteDefault
-  highlight clear GitGutterChangeDeleteDefaults
-  highlight GitGutterAddDefault ctermfg=2
-  highlight GitGutterChangeDefault ctermfg=3
-  highlight GitGutterDeleteDefault ctermfg=1
 endfunction
 
 autocmd! User GoyoEnter call <SID>goyo_enter()
 autocmd! User GoyoLeave call <SID>goyo_leave()
+
+function! s:auto_goyo()
+  if &ft == 'markdown'
+    Goyo 80
+  elseif exists('#goyo')
+    let bufnr = bufnr('%')
+    Goyo!
+    execute 'b '.bufnr
+  endif
+endfunction
+
+augroup goyo_markdown
+  autocmd!
+  autocmd BufNewFile,BufRead * call s:auto_goyo()
+augroup END
