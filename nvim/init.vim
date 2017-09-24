@@ -244,5 +244,5 @@ let g:indentLine_char = '⎸▏'
 " NERDTree settings
 let NERDTreeShowHidden=1
 
-" Open files with curson at last know position
+" Open files with cursor at last known position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
