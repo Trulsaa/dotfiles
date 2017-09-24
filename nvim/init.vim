@@ -203,7 +203,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 map <Leader>t :NERDTreeToggle<CR> 
 
 " SingColumn color and LineNr cleared
-highlight clear SignColumn
 highlight clear LineNr
 
 " Neomake settings
@@ -246,3 +245,46 @@ let NERDTreeShowHidden=1
 
 " Open files with cursor at last known position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+" Goyo settings
+" Quit nvim if no other buffers are open
+" Toggle tmux statusline
+" Fix colors in for GitGutter
+function! s:goyo_enter()
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+  silent !tmux set status off
+  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+endfunction
+
+function! s:goyo_leave()
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      qa!
+    else
+      qa
+    endif
+  endif
+  silent !tmux set status on
+  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  set showmode
+  set showcmd
+  set scrolloff=5
+  highlight clear LineNr
+  highlight clear GitGutterAddDefault
+  highlight clear GitGutterChangeDefault
+  highlight clear GitGutterDeleteDefault
+  highlight clear GitGutterChangeDeleteDefaults
+  highlight GitGutterAddDefault ctermfg=2
+  highlight GitGutterChangeDefault ctermfg=3
+  highlight GitGutterDeleteDefault ctermfg=1
+endfunction
+
+autocmd! User GoyoEnter call <SID>goyo_enter()
+autocmd! User GoyoLeave call <SID>goyo_leave()
