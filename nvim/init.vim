@@ -75,8 +75,8 @@ Plug 'vim-airline/vim-airline'          " Status line configuration
 Plug 'vim-airline/vim-airline-themes'   " Status line themes
 
 " Git plugins
-Plug 'mhinz/vim-signify'  " Shows changed lines compared to last git commit
-Plug 'tpope/vim-fugitive' " Git wrapper
+Plug 'airblade/vim-gitgutter' " Shows changed lines compared to last git commit
+Plug 'tpope/vim-fugitive'     " Git wrapper
 
 call plug#end()
 
@@ -99,6 +99,7 @@ set linebreak                  " brak lines at words
 set hidden                     " bufferswitching without having to save first.
 set splitbelow                 " Creates new splits below
 set splitright                 " Creates new splits to the right
+set updatetime=250             " Time in milliseconds between saving of the swap-file, also uppdates gitgutter
 
 " MatchParen settings
 hi MatchParen cterm=underline ctermbg=none " Underline matching bracket and remove background color
@@ -201,8 +202,9 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif                                  " Start NERDtree if opening a directory"
 map <Leader>t :NERDTreeToggle<CR> 
 
-" SingColumn color
+" SingColumn color and LineNr cleared
 highlight clear SignColumn
+highlight clear LineNr
 
 " Neomake settings
 let g:neomake_javascript_enabled_makers = ['eslint']
