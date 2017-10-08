@@ -73,6 +73,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'altercation/vim-colors-solarized' " Solarized theme for vim
 Plug 'vim-airline/vim-airline'          " Status line configuration
 Plug 'vim-airline/vim-airline-themes'   " Status line themes
+Plug 'edkolev/tmuxline.vim'             " Makes tmux status line match vim status line
 
 " Git plugins
 Plug 'airblade/vim-gitgutter' " Shows changed lines compared to last git commit
@@ -246,6 +247,10 @@ let NERDTreeShowHidden=1
 " Open files with cursor at last known position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
+" Airline settings
+set noshowmode                 " Disable showing of mode in command line
+
+
 " Goyo settings
 " Quit nvim if no other buffers are open
 " Toggle tmux statusline
@@ -264,6 +269,19 @@ function! s:goyo_enter()
 endfunction
 
 function! s:goyo_leave()
+  silent !tmux set status on
+  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  set showmode
+  set showcmd
+  set scrolloff=5
+  highlight clear LineNr
+  highlight clear GitGutterAddDefault
+  highlight clear GitGutterChangeDefault
+  highlight clear GitGutterDeleteDefault
+  highlight clear GitGutterChangeDeleteDefaults
+  highlight GitGutterAddDefault ctermfg=2
+  highlight GitGutterChangeDefault ctermfg=3
+  highlight GitGutterDeleteDefault ctermfg=1
   " Quit Vim if this is the only remaining buffer
   if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
     if b:quitting_bang
@@ -271,20 +289,6 @@ function! s:goyo_leave()
     else
       qa
     endif
-  else
-    silent !tmux set status on
-    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-    set showmode
-    set showcmd
-    set scrolloff=5
-    highlight clear LineNr
-    highlight clear GitGutterAddDefault
-    highlight clear GitGutterChangeDefault
-    highlight clear GitGutterDeleteDefault
-    highlight clear GitGutterChangeDeleteDefaults
-    highlight GitGutterAddDefault ctermfg=2
-    highlight GitGutterChangeDefault ctermfg=3
-    highlight GitGutterDeleteDefault ctermfg=1
   endif
 endfunction
 
@@ -305,3 +309,13 @@ augroup goyo_markdown
   autocmd!
   autocmd BufNewFile,BufRead * call s:auto_goyo()
 augroup END
+
+" TODO: Fikse slik at det fungerer når man hopper mellom goyo winduer <25-09-17, Truls> "
+autocmd FocusLost *.md call s:goyo_leave()
+autocmd FocusGained *.md call s:goyo_focus_gained()
+
+function! s:goyo_focus_gained()
+  if &ft == 'markdown' && exists('#goyo')
+    call <SID>goyo_enter()
+  endif
+endfunction
