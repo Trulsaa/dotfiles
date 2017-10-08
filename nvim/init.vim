@@ -138,6 +138,9 @@ tnoremap <Esc> <C-\><C-n>
 nmap ,cs :let @*=expand("%")<CR>
 " Remap visual block
 nnoremap <Leader>v <c-v>
+" Remap H L
+noremap H 5H
+nnoremap L 5L
 
 " Automatically removing all trailing whitespace on save for javascript, html and css
 autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
