@@ -102,7 +102,10 @@ set splitbelow                 " Creates new splits below
 set splitright                 " Creates new splits to the right
 set updatetime=250             " Time in milliseconds between saving of the swap-file, also uppdates gitgutter
 
-" MatchParen settings
+" Open files with cursor at last known position
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
+
+" Matching parentheses settings
 hi MatchParen cterm=underline ctermbg=none " Underline matching bracket and remove background color
 
 " Markdown settings
@@ -246,9 +249,6 @@ let g:indentLine_char = '⎸▏'
 
 " NERDTree settings
 let NERDTreeShowHidden=1
-
-" Open files with cursor at last known position
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 " Airline settings
 set noshowmode                 " Disable showing of mode in command line
