@@ -10,78 +10,9 @@
 " pip3 install neovim
 "
 "
-" Install Vim Plug if not installed
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall
-endif
 
-call plug#begin()
-
-Plug 'christoomey/vim-sort-motion'                     " Sort object
-Plug 'jiangmiao/auto-pairs'                            " Insert or delete brackets, parens, quotes in pair.
-Plug 'neomake/neomake'                                 " Used to run code linters
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' } " Filetree
-Plug 'tmhedberg/SimpylFold'                            " Fold functions
-Plug 'tpope/vim-commentary'                            " Comment objects
-Plug 'tpope/vim-repeat'                                " Enable . repeating for more
-Plug 'tpope/vim-surround'                              " Surround objects with anything
-Plug 'yuttie/comfortable-motion.vim'                   " Physics-based smooth scrolling
-Plug 'christoomey/vim-tmux-navigator'                  " Navigate seamlessly between vim and tmux
-Plug 'junegunn/goyo.vim'                               " Destraction free writing
-Plug 'craigemery/vim-autotag'                          " Autoupdate ctags
-Plug 'junegunn/vim-easy-align'                         " Alignment on any character
-Plug 'sickill/vim-pasta'                               " Context aware pasting
-Plug 'Yggdroot/indentLine'                             " Indent guides
-
-" ABAP 
-Plug 'vim-scripts/ABAP.vim', { 'for': 'abap' }
-
-" JavaScript
-Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript', 'javascript.jsx'] }                          " Enhanced JavaScript Syntax for Vim
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascript.jsx'] }                " JavaScript highlighting
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }                               " JavaScript highlighting
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': ['javascript', 'javascript.jsx'] } " The autocomplete dropdown
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }                                       " JavaScript Parameter Complete
-
-" CSS
-Plug 'ap/vim-css-color', { 'for': 'css' } "color colornames and codes
-
-" Markdown
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' } " Markdown extras
-
-" textobjects
-Plug 'kana/vim-textobj-entire' " Creates an object of the entire buffer
-Plug 'kana/vim-textobj-indent' " Creates an object of the current indent level
-Plug 'kana/vim-textobj-line'   " Craetes the line object to exclude whitespace before the line start
-Plug 'kana/vim-textobj-user'   " Enables the creation of new objects
-
-" Autocomplete plugins
-Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern', 'for': ['javascript', 'javascript.jsx'] } " The autocomplete dropdown
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }                                                       " Tern server
-Plug 'SirVer/ultisnips'                                                                                   " Snippet engine
-Plug 'honza/vim-snippets'                                                                                 " Snippet library
-Plug 'wokalski/autocomplete-flow'                                                                         " More autocomplete options
-Plug 'fszymanski/deoplete-emoji'                                                                          " Completion of emoji codes
-Plug 'wellle/tmux-complete.vim'                                                                           " Completion of words in adjacent tmux panes
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }                                             " Load last because of :UpdateReomotePlugins
-
-" Fuzzy filesearch
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-" theme and statusline
-Plug 'altercation/vim-colors-solarized' " Solarized theme for vim
-Plug 'vim-airline/vim-airline'          " Status line configuration
-Plug 'vim-airline/vim-airline-themes'   " Status line themes
-Plug 'edkolev/tmuxline.vim'             " Makes tmux status line match vim status line
-
-" Git plugins
-Plug 'airblade/vim-gitgutter' " Shows changed lines compared to last git commit
-Plug 'tpope/vim-fugitive'     " Git wrapper
-
-call plug#end()
+" Source Plugins
+source ./vimrc/plugins.vim
 
 " Basic settings
 set mouse=a                    " mouse support in all modes
@@ -103,17 +34,13 @@ set hidden                     " bufferswitching without having to save first.
 set splitbelow                 " Creates new splits below
 set splitright                 " Creates new splits to the right
 set updatetime=250             " Time in milliseconds between saving of the swap-file, also uppdates gitgutter
+filetype plugin on
 
 " Open files with cursor at last known position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 
 " Matching parentheses settings
 hi MatchParen cterm=underline ctermbg=none " Underline matching bracket and remove background color
-
-" Markdown settings
-let g:vim_markdown_folding_disabled = 1
-set conceallevel=2
-au FileType markdown setl sw=4 sts=4 et    " Indentation in markdown set to 4 spaces
 
 " Let's save undo info!
 if !isdirectory($HOME."/.vim")
@@ -147,7 +74,7 @@ nnoremap <Leader>v <c-v>
 noremap H 5H
 nnoremap L 5L
 
-" Automatically removing all trailing whitespace on save for javascript, html and css
+" Automatically removing all trailing whitespace on save for javascript, html, css and markdown
 autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " auto-pairs settings
@@ -259,72 +186,4 @@ let NERDTreeShowHidden=1
 " Airline settings
 set noshowmode                 " Disable showing of mode in command line
 
-
-" Goyo settings
-" Quit nvim if no other buffers are open
-" Toggle tmux statusline
-" Fix colors in for GitGutter
-" Auto load goyo when opening markdown
-function! s:goyo_enter()
-  let b:quitting = 0
-  let b:quitting_bang = 0
-  autocmd QuitPre <buffer> let b:quitting = 1
-  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
-  silent !tmux set status off
-  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  set noshowmode
-  set noshowcmd
-  set scrolloff=999
-endfunction
-
-function! s:goyo_leave()
-  silent !tmux set status on
-  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  set showmode
-  set showcmd
-  set scrolloff=5
-  highlight clear LineNr
-  highlight clear GitGutterAddDefault
-  highlight clear GitGutterChangeDefault
-  highlight clear GitGutterDeleteDefault
-  highlight clear GitGutterChangeDeleteDefaults
-  highlight GitGutterAddDefault ctermfg=2
-  highlight GitGutterChangeDefault ctermfg=3
-  highlight GitGutterDeleteDefault ctermfg=1
-  " Quit Vim if this is the only remaining buffer
-  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-    if b:quitting_bang
-      qa!
-    else
-      qa
-    endif
-  endif
-endfunction
-
-autocmd! User GoyoEnter call <SID>goyo_enter()
-autocmd! User GoyoLeave call <SID>goyo_leave()
-
-function! s:auto_goyo()
-  if &ft == 'markdown'
-    Goyo 80
-  elseif exists('#goyo')
-    let bufnr = bufnr('%')
-    Goyo!
-    execute 'b '.bufnr
-  endif
-endfunction
-
-augroup goyo_markdown
-  autocmd!
-  autocmd BufNewFile,BufRead * call s:auto_goyo()
-augroup END
-
-" TODO: Fikse slik at det fungerer når man hopper mellom goyo winduer <25-09-17, Truls> "
-autocmd FocusLost *.md call s:goyo_leave()
-autocmd FocusGained *.md call s:goyo_focus_gained()
-
-function! s:goyo_focus_gained()
-  if &ft == 'markdown' && exists('#goyo')
-    call <SID>goyo_enter()
-  endif
-endfunction
+source ./vimrc/goyosettings.vim
