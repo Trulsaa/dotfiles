@@ -243,7 +243,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Indentline plugin settings
-let g:indentLine_fileTypeExclude = ['help', 'markdown', 'abap', 'vim']
+let g:indentLine_fileTypeExclude = ['help', 'markdown', 'abap', 'vim', 'json']
 let g:indentLine_bufNameExclude=['NERD_tree.*']
 let g:indentLine_char = '⎸▏'
 
