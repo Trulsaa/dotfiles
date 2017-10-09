@@ -63,6 +63,8 @@ Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }                             
 Plug 'SirVer/ultisnips'                                                                                   " Snippet engine
 Plug 'honza/vim-snippets'                                                                                 " Snippet library
 Plug 'wokalski/autocomplete-flow'                                                                         " More autocomplete options
+Plug 'fszymanski/deoplete-emoji'                                                                          " Completion of emoji codes
+Plug 'wellle/tmux-complete.vim'                                                                           " Completion of words in adjacent tmux panes
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }                                             " Load last because of :UpdateReomotePlugins
 
 " Fuzzy filesearch
@@ -152,6 +154,8 @@ autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s
 let g:AutoPairsShortcutFastWrap='<C-e>'
 
 " Deoplete settings
+let g:tern#command = ['tern']
+let g:tern#arguments = ['--persistent']
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
@@ -168,6 +172,7 @@ let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#sources#ternjs#omit_object_prototype = 0
 let g:deoplete#sources#ternjs#include_keywords = 1
 let g:deoplete#sources#ternjs#filetypes = ['jsx', 'javascript.jsx']
+let g:deoplete#sources#ternjs#docs = 1
 
 " Deoplete omni settings
 let g:deoplete#omni#functions = {}
@@ -180,8 +185,9 @@ let g:deoplete#omni#functions.javascript = [
 set completeopt=longest,menuone,preview
 " let g:deoplete#sources = {}
 " let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
-" let g:tern#command = ['tern']
-" let g:tern#arguments = ['--persistent']
+
+" Deoplete emoji settings
+call deoplete#custom#set('emoji', 'filetypes', ['gitcommit', 'markdown', 'javascript', 'html'])
 
 " Ultisnips settings
 let g:UltiSnipsExpandTrigger="<C-Space>"
