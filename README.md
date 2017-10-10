@@ -11,8 +11,13 @@
 ## Dependencies
 
 - Homebrew
-- node & npm - brew install node
+- node & npm - `brew install node`
 
+## For neovim
+
+- Install neovim - `brew install neovim`
+- Install pip3 - `brew install python3`
+- Implement support for python plugins in Nvim - `pip3 install neovim`
 
 ### For Webdevelopment
 
