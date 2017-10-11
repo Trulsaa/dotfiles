@@ -22,6 +22,7 @@ Plug 'craigemery/vim-autotag'                          " Autoupdate ctags
 Plug 'junegunn/vim-easy-align'                         " Alignment on any character
 Plug 'sickill/vim-pasta'                               " Context aware pasting
 Plug 'Yggdroot/indentLine'                             " Indent guides
+Plug 'wincent/loupe'                                   " More resonable search settings
 
 " ABAP 
 Plug 'vim-scripts/ABAP.vim', { 'for': 'abap' }
