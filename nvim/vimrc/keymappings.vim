@@ -9,7 +9,7 @@ map <Leader>s :source ~/.config/nvim/init.vim<CR>
 " Enable folding with the spacebar
 nnoremap <space> za
 " Open i google chrome
-map <silent> <C-p> :!oigc %<CR><CR>
+map <silent> <C-p> :!oigc "%"<CR><CR>
 "To map <Esc> to exit terminal-mode:
 tnoremap <Esc> <C-\><C-n>
 " Copy filepath to clipboard

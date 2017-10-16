@@ -52,7 +52,7 @@ function e {
 
 #Open in Google Chrome
 function oigc() {
-  open $1 -a "Google Chrome"
+  open "$1" -a "Google Chrome"
 }
 
 
