@@ -1,13 +1,13 @@
 " KEYMAPPINGS
 "===========
-let mapleader = ","
+nnoremap <SPACE> <Nop>
+let mapleader = " "
 " Runs current line as a command in zsh and outputs stdout to file
 noremap Q !!zsh<CR>
 " CTRL S to save
 noremap <c-s> :w<CR>
 map <Leader>s :source ~/.config/nvim/init.vim<CR>
 " Enable folding with the spacebar
-nnoremap <space> za
 " Open i google chrome
 map <silent> <C-p> :!oigc "%"<CR><CR>
 "To map <Esc> to exit terminal-mode:
