@@ -23,6 +23,8 @@ Plug 'junegunn/vim-easy-align'                         " Alignment on any charac
 Plug 'sickill/vim-pasta'                               " Context aware pasting
 Plug 'Yggdroot/indentLine'                             " Indent guides
 Plug 'wincent/loupe'                                   " More resonable search settings
+Plug 'mattn/gist-vim'                                  " Create gist
+Plug 'mattn/webapi-vim'                                " Interface to WEB APIs
 
 " ABAP 
 Plug 'vim-scripts/ABAP.vim', { 'for': 'abap' }

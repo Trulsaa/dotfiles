@@ -1,6 +1,6 @@
 [user]
-  name = Truls
-  email = truls.aa@gmail.com
+	name = Truls
+	email = truls.aa@gmail.com
 [credential]
   helper = osxkeychain
 [core]
@@ -18,7 +18,9 @@
 [mergetool "fugitive"]
   cmd = nvim -c \"Gvdiff\" \"$MERGED\"
 [filter "lfs"]
-  required = true
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[github]
+  user = Trulsaa
