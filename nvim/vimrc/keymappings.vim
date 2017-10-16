@@ -19,4 +19,5 @@ nnoremap <Leader>v <c-v>
 " Remap H L
 noremap H 5H
 nnoremap L 5L
-
+" H in commandlinemode now runs Helptags
+command! H Helptags
