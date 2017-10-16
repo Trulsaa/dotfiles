@@ -32,4 +32,4 @@ let NERDTreeShowHidden=1
 let g:gist_post_private = 1 " Gists are secret by default
 
 " Airline settings
-set noshowmode                 " Disable showing of mode in command line
+set noshowmode " Disable showing of mode in command line
