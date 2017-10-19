@@ -33,15 +33,8 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Matching parentheses settings
 hi MatchParen cterm=underline ctermbg=none " Underline matching bracket and remove background color
 
-" Let's save undo info!
-if !isdirectory($HOME."/.vim")
-    call mkdir($HOME."/.vim", "", 0770)
-endif
-if !isdirectory($HOME."/.vim/undo-dir")
-    call mkdir($HOME."/.vim/undo-dir", "", 0700)
-endif
-set undodir=~/.vim/undo-dir
-set undofile
+" Start git commit editing in insert mode
+au FileType gitcommit startinsert
 
 " THEME SETTINGS
 " SingColumn color and LineNr cleared
