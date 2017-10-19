@@ -35,7 +35,7 @@ Plug 'junegunn/limelight.vim'                  " Syntax highlighting only for fo
 Plug 'vim-scripts/vim-auto-save'
 
                                                " ABAP
-Plug 'vim-scripts/ABAP.vim', 
+Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
       \ { 'for': 'abap' }
 
                                                " JAVASCRIPT
