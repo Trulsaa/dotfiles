@@ -7,8 +7,8 @@ let g:UltiSnipsJumpForwardTrigger="<C-Space>"
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " NERDTree settings
-let NERDTreeShowHidden=1                                                                                                               " Show hidden files
 map <Leader>t :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1 " Show hidden files
 
 " Neomake settings
 let g:neomake_javascript_enabled_makers = ['eslint']
