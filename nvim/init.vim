@@ -7,8 +7,6 @@ language en_us                 " sets the language of the messages / ui (vim)
 syntax enable                  " enable syntax highlighting
 colorscheme solarized          " solarized colorscheme
 set background=dark            " solarized dark
-set backupdir=~/.vim/.backup// " store all vim backup files in ~/.vim/.backup//
-set directory=~/.vim/.backup// " store all vim backup files in ~/.vim/.backup//
 set expandtab                  " to insert space characters whenever the tab key is pressed
 set shiftwidth=2               " number of spaces used when indenting
 set softtabstop=2              " number of spaces used when indenting usin tab
@@ -50,6 +48,7 @@ set undofile
 highlight clear LineNr
 
 " SOURCES
+source ~/.config/nvim/vimrc/hiddenfiles.vim
 source ~/.config/nvim/vimrc/keymappings.vim
 source ~/.config/nvim/vimrc/deopletesettings.vim
 source ~/.config/nvim/vimrc/pluginsettings.vim
