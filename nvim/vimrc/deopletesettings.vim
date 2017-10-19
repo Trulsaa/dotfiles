@@ -22,7 +22,8 @@ let g:deoplete#sources#ternjs#docs = 1
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
       \ 'tern#Complete',
-      \ 'jspc#omni'
+      \ 'jspc#omni',
+      \ 'rhubarb#omnifunc'
       \]
 
 " Deoplete sources

@@ -30,7 +30,7 @@ function! s:goyo_leave()
   highlight GitGutterAddDefault ctermfg=2
   highlight GitGutterChangeDefault ctermfg=3
   highlight GitGutterDeleteDefault ctermfg=1
-  Quit Vim if this is the only remaining buffer
+  " Quit Vim if this is the only remaining buffer
   if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
     if b:quitting_bang
       qa!
