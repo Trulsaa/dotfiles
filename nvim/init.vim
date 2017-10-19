@@ -44,7 +44,7 @@ au FileType gitcommit startinsert
 
 " THEME SETTINGS
 " SingColumn color and LineNr cleared
-" highlight clear LineNr
+highlight clear LineNr
 
 " SOURCES
 source ~/.config/nvim/vimrc/hiddenfiles.vim
@@ -53,4 +53,4 @@ source ~/.config/nvim/vimrc/deopletesettings.vim
 source ~/.config/nvim/vimrc/pluginsettings.vim
 source ~/.config/nvim/vimrc/goyosettings.vim
 source ~/.config/nvim/vimrc/fzfsettings.vim
-source ~/.config/nvim/vimrc/focus.vim
+" source ~/.config/nvim/vimrc/focus.vim
