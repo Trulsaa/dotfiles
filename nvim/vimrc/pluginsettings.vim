@@ -36,3 +36,8 @@ set noshowmode " Disable showing of mode in command line
 
 " Limelight settings
 let g:limelight_conceal_ctermfg = 240  " Solarized Base1
+
+" vim-auto-save settins
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+let g:auto_save_silent = 1  " do not display the auto-save notification
