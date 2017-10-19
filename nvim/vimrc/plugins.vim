@@ -30,6 +30,7 @@ Plug 'wincent/terminus'                        " Cursor shape change in insert a
                                                " Improved mouse support
                                                " Focus reporting (Reload buffer on focus if it has been changed externally )
                                                " Bracketed Paste mode
+Plug 'junegunn/limelight.vim'                  " Syntax highlighting only for focused paragraph
 
                                                " ABAP
 Plug 'vim-scripts/ABAP.vim', 

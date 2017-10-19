@@ -33,3 +33,6 @@ let g:gist_post_private = 1 " Gists are secret by default
 
 " Airline settings
 set noshowmode " Disable showing of mode in command line
+
+" Limelight settings
+let g:limelight_conceal_ctermfg = 240  " Solarized Base1

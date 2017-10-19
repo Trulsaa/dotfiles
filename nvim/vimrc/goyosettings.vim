@@ -13,6 +13,7 @@ function! s:goyo_enter()
   set noshowmode
   set noshowcmd
   set scrolloff=999
+  Limelight
 endfunction
 
 function! s:goyo_leave()
@@ -37,6 +38,7 @@ function! s:goyo_leave()
       qa
     endif
   endif
+  Limelight!
 endfunction
 
 autocmd! User GoyoEnter call <SID>goyo_enter()
