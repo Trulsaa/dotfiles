@@ -25,6 +25,10 @@ Plug 'Yggdroot/indentLine'                             " Indent guides
 Plug 'wincent/loupe'                                   " More resonable search settings
 Plug 'mattn/gist-vim'                                  " Create gist
 Plug 'mattn/webapi-vim'                                " Interface to WEB APIs
+Plug 'wincent/terminus'                                " Cursor shape change in insert and replace mode
+                                                       " Improved mouse support
+                                                       " Focus reporting (Reload buffer on focus if it has been changed externally )
+                                                       " Bracketed Paste mode
 
 " ABAP 
 Plug 'vim-scripts/ABAP.vim', { 'for': 'abap' }

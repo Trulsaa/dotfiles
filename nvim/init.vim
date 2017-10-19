@@ -2,7 +2,6 @@
 source ~/.config/nvim/vimrc/plugins.vim
 
 " Basic settings
-set mouse=a                    " mouse support in all modes
 language en_us                 " sets the language of the messages / ui (vim)
 syntax enable                  " enable syntax highlighting
 colorscheme solarized          " solarized colorscheme
@@ -26,6 +25,10 @@ set diffopt=vertical           " Diff opens side by side
 
 " Automatically removing all trailing whitespace on save for javascript, html, css and markdown
 autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
+
+" Autosave on focus change or buffer change (terminus plugin takes care of reload)
+autocmd BufLeave,FocusLost * silent! wall
+set shortmess+=A " don't give the ATTENTION message when an existing swap file is found.
 
 " Open files with cursor at last known position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
