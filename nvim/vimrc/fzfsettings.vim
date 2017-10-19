@@ -6,6 +6,7 @@ map <Leader>b :Buffers<cr>
 map <Leader>l :Ag<cr>
 map <Leader>H :Helptags<cr>
 map <Leader>m :Marks<cr>
+map <Leader>g :GFiles?<cr>
 " Files command with preview window
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
@@ -14,4 +15,3 @@ command! -bang -nargs=? -complete=dir Files
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
 
-map <Leader>g :GGrep<cr>
