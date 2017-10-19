@@ -23,6 +23,7 @@ filetype plugin on             " Enable use of filespesiffic settings files
 set foldmethod=indent          " Fold on indentations
 set foldlevel=99               " The level that is folded when opening files
 set diffopt=vertical           " Diff opens side by side
+set lazyredraw                        " Don't bother updating screen during macro playback
 
 " Automatically removing all trailing whitespace on save for javascript, html, css and markdown
 autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
