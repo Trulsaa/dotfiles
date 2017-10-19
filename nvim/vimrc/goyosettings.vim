@@ -21,14 +21,14 @@ function! s:goyo_leave()
   set showmode
   set showcmd
   set scrolloff=5
-  highlight clear LineNr
-  highlight clear GitGutterAddDefault
-  highlight clear GitGutterChangeDefault
-  highlight clear GitGutterDeleteDefault
-  highlight clear GitGutterChangeDeleteDefaults
-  highlight GitGutterAddDefault ctermfg=2
-  highlight GitGutterChangeDefault ctermfg=3
-  highlight GitGutterDeleteDefault ctermfg=1
+  " highlight clear LineNr
+  " highlight clear GitGutterAddDefault
+  " highlight clear GitGutterChangeDefault
+  " highlight clear GitGutterDeleteDefault
+  " highlight clear GitGutterChangeDeleteDefaults
+  " highlight GitGutterAddDefault ctermfg=2
+  " highlight GitGutterChangeDefault ctermfg=3
+  " highlight GitGutterDeleteDefault ctermfg=1
   " Quit Vim if this is the only remaining buffer
   if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
     if b:quitting_bang
