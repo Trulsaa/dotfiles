@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
- export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -46,7 +46,7 @@ DISABLE_AUTO_TITLE="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
- HIST_STAMPS="mm.dd.yyyy"
+HIST_STAMPS="mm.dd.yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -93,16 +93,16 @@ fi
 
 # Debrif Navn_på_fotograf
 function Debrif {
-	~/Documents/Scripts/skydive-video-handling/Debrif $1
+  ~/Documents/Scripts/skydive-video-handling/Debrif $1
 }
 
 # abapruv abap.abp
 function abapruv {
-	~/Documents/ABAP/Scripts/Remove-unused-declarations/Remove_unused_declarations $1
+  ~/Documents/ABAP/Scripts/Remove-unused-declarations/Remove_unused_declarations $1
 }
 
 function testing {
-	~/Documents/Scripts/Script\ template $1
+  ~/Documents/Scripts/Script\ template $1
 }
 
 # catpdf all.pdf *.pdf
@@ -135,8 +135,8 @@ fh() {
 fd() {
   local dir
   dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
+    -o -type d -print 2> /dev/null | fzf +m) &&
+    cd "$dir"
 }
 
 # fda - including hidden directories
@@ -151,11 +151,11 @@ fda() {
 fe() {
   local files
   IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0 --preview '[[ $(file --mime {}) =~ binary ]] &&
-                 echo {} is a binary file ||
-                 (highlight -O ansi -l {} ||
-                  coderay {} ||
-                  rougify {} ||
-                  cat {}) 2> /dev/null | head -500'))
+    echo {} is a binary file ||
+    (highlight -O ansi -l {} ||
+    coderay {} ||
+    rougify {} ||
+    cat {}) 2> /dev/null | head -500'))
   [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
 
