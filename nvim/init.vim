@@ -14,6 +14,7 @@ set clipboard=unnamedplus      " everything you yank in vim will go to the unnam
 set number relativenumber      " each line in your file is numbered relative to the line you’re currently on
 set breakindent                " break lines to the indent level
 set linebreak                  " brak lines at words
+let &showbreak='↳ '                 " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
 set hidden                     " bufferswitching without having to save first.
 set splitbelow                 " Creates new splits below
 set splitright                 " Creates new splits to the right
