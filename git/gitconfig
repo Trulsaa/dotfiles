@@ -24,3 +24,6 @@
 	required = true
 [github]
   user = Trulsaa
+[alias]
+  co = checkout
+  cm = commit -m
