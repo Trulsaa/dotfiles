@@ -8,7 +8,7 @@ let mapleader = " "
 noremap Q !!zsh<CR>
 
 " Source init.vim
-map <Leader>s :source ~/.config/nvim/init.vim<CR>
+command! Sc source ~/.config/nvim/init.vim
 
 " Open in google chrome
 map <silent> <C-p> :!oigc "%"<CR><CR>
