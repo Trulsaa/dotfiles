@@ -80,6 +80,7 @@ Plug 'SirVer/ultisnips'                        " Snippet engine
 Plug 'honza/vim-snippets'                      " Snippet library
 Plug 'fszymanski/deoplete-emoji'               " Completion of emoji codes
 Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent tmux panes
+Plug 'thalesmello/webcomplete.vim'             " Completes words from the currently open web page
 Plug 'Shougo/deoplete.nvim',                   " Load last because of :UpdateReomotePlugins
       \ { 'do': ':UpdateRemotePlugins' }
 
