@@ -47,7 +47,7 @@ Plug 'othree/javascript-libraries-syntax.vim', " JavaScript highlighting
 Plug 'pangloss/vim-javascript',                " JavaScript highlighting
       \ { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'carlitux/deoplete-ternjs',               " The autocomplete dropdown
-      \ { 'do': 'npm install -g tern', 
+      \ { 'do': 'npm install -g tern',
       \ 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim',                        " JavaScript Parameter Complete
       \ { 'for': ['javascript', 'javascript.jsx'] }
@@ -85,7 +85,7 @@ Plug 'Shougo/deoplete.nvim',                   " Load last because of :UpdateReo
       \ { 'do': ':UpdateRemotePlugins' }
 
                                                " FUZZY FILESEARCH
-Plug 'junegunn/fzf', 
+Plug 'junegunn/fzf',
       \ { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 

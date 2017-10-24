@@ -31,5 +31,5 @@ set completeopt=longest,menuone,preview
 
 " Deoplete emoji settings
 call deoplete#custom#set(
-      \ 'emoji', 
+      \ 'emoji',
       \ 'filetypes', ['gitcommit', 'markdown', 'javascript', 'html'])

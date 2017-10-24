@@ -1,7 +1,7 @@
 " ESC to close fzf buffer
 autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
-map <Leader>f :GFiles<cr> 
-map <Leader>F :Files 
+map <Leader>f :GFiles<cr>
+map <Leader>F :Files
 map <Leader>b :Buffers<cr>
 map <Leader>l :Ag<cr>
 map <Leader>H :Helptags<cr>

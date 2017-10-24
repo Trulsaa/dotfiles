@@ -67,7 +67,7 @@ function server {
 
   while read line; do
 
-    FILE=$(echo "$line" | sed "s/:.*//") 
+    FILE=$(echo "$line" | sed "s/:.*//")
 
     /usr/bin/open -a "/Applications/Google Chrome.app" "http://localhost:8888/$FILE"
   done < .tempfile

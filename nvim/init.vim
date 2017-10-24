@@ -37,10 +37,10 @@ autocmd BufLeave,FocusLost * silent! wall
 set shortmess+=A " don't give the ATTENTION message when an existing swap file is found.
 
 " Open files with cursor at last known position
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 " Underline matching bracket and remove background color
-hi MatchParen cterm=underline ctermbg=none 
+hi MatchParen cterm=underline ctermbg=none
 
 " Start git commit editing in insert mode
 au FileType gitcommit startinsert
