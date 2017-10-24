@@ -60,6 +60,10 @@ Plug 'ap/vim-css-color',                       " color colornames and codes
 Plug 'plasticboy/vim-markdown',                " Markdown extras
       \ { 'for': 'markdown' }
 
+                                               " VIM
+Plug 'Shougo/neco-vim',                        " Completions for Vim commands
+      \ { 'for': 'vim' }
+
                                                " TEXTOBJECTS
 Plug 'kana/vim-textobj-entire'                 " Creates an object of the entire buffer
 Plug 'kana/vim-textobj-indent'                 " Creates an object of the current indent level
