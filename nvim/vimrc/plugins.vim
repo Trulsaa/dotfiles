@@ -78,7 +78,6 @@ Plug 'ternjs/tern_for_vim',                    " Tern server
       \ { 'do': 'npm install' }
 Plug 'SirVer/ultisnips'                        " Snippet engine
 Plug 'honza/vim-snippets'                      " Snippet library
-Plug 'wokalski/autocomplete-flow'              " More autocomplete options
 Plug 'fszymanski/deoplete-emoji'               " Completion of emoji codes
 Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent tmux panes
 Plug 'Shougo/deoplete.nvim',                   " Load last because of :UpdateReomotePlugins
