@@ -33,6 +33,7 @@ Plug 'wincent/terminus'                        " Cursor shape change in insert a
 Plug 'junegunn/vim-peekaboo'                   " See the contents of the registers
 Plug 'junegunn/limelight.vim'                  " Syntax highlighting only for focused paragraph
 Plug 'vim-scripts/vim-auto-save'               " Enables auto save
+Plug 'ntpeters/vim-better-whitespace'          " Highlight trailing whitespace in red
 
                                                " ABAP
 Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
