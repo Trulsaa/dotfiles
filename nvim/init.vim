@@ -26,6 +26,9 @@ set diffopt=vertical      " Diff opens side by side
 set lazyredraw            " Don't bother updating screen during macro playback
 set scrolloff=3           " Start scrolling 3 lines before edge of window
 
+" Strip whitespace on file save
+autocmd BufEnter * EnableStripWhitespaceOnSave
+
 " Disable auto insertion of comment syntax on creation of blank line under comment
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
