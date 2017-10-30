@@ -25,6 +25,7 @@ set foldlevel=99          " The level that is folded when opening files
 set diffopt=vertical      " Diff opens side by side
 set lazyredraw            " Don't bother updating screen during macro playback
 set scrolloff=3           " Start scrolling 3 lines before edge of window
+set cursorline            " Highlights the line the cursor is on
 
 " Strip whitespace on file save
 autocmd BufEnter * EnableStripWhitespaceOnSave
