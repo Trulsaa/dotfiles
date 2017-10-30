@@ -26,4 +26,5 @@
   user = Trulsaa
 [alias]
   co = checkout
-  cm = commit -m
+  cm = commit -am
+  lg = log --oneline --reverse -20
