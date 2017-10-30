@@ -8,7 +8,7 @@ let g:mapleader = ' '
 noremap Q !!zsh<CR>
 
 " Source init.vim
-command! Sc source ~/.config/nvim/init.vim
+command! Sc source $MYVIMRC
 
 " Open in google chrome
 map <silent> <C-p> :!oigc "%"<CR><CR>

@@ -28,53 +28,36 @@ set lazyredraw            " Don't bother updating screen during macro playback
 set scrolloff=3           " Start scrolling 3 lines before edge of window
 set cursorline            " Highlights the line the cursor is on
 set nowrap                " Disable wrapping
-
-" Strip whitespace on file save
-augroup strip_whitespace
-  autocmd!
-  autocmd BufEnter * EnableStripWhitespaceOnSave
-augroup END
-
-" Disable auto insertion of comment syntax on creation of blank line under comment
-augroup comment_new_line
-  autocmd!
-  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-augroup END
-
-" Automatically removing all trailing whitespace on save for javascript, html, css and markdown
-augroup remove_trailing_whitespace
-  autocmd!
-  autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
-augroup END
-
-" Autosave on focus change or buffer change (terminus plugin takes care of reload)
-augroup autosave_on_focus_change
-  autocmd!
-  autocmd BufLeave,FocusLost * silent! wall
-augroup END
 set shortmess+=A " don't give the ATTENTION message when an existing swap file is found.
 
-" Open files with cursor at last known position
-augroup cursor_last_known_pos
-  autocmd!
+augroup general_autocmd
+
+  " Strip whitespace on file save
+  autocmd BufEnter * EnableStripWhitespaceOnSave
+
+  " Disable auto insertion of comment syntax on creation of blank line under comment
+  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+  " Automatically removing all trailing whitespace on save for javascript, html, css and markdown
+  autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
+
+  " Autosave on focus change or buffer change (terminus plugin takes care of reload)
+  autocmd BufLeave,FocusLost * silent! wall
+
+  " Open files with cursor at last known position
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+  " Start git commit editing in insert mode
+  autocmd FileType gitcommit startinsert
+
+  " Save folds between sessions
+  autocmd VimLeavePre * mkview
+  autocmd BufRead * silent! loadview
+
 augroup END
 
 " Underline matching bracket and remove background color
 hi MatchParen cterm=underline ctermbg=none
-
-" Start git commit editing in insert mode
-augroup git_commit_auto_insert
-  autocmd!
-  au FileType gitcommit startinsert
-augroup END
-
-" Save folds between sessions
-augroup save_folds
-  autocmd!
-  autocmd VimLeavePre * mkview
-  autocmd BufRead * silent! loadview
-augroup END
 
 " THEME SETTINGS
 " SingColumn color and LineNr cleared

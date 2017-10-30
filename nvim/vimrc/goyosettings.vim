@@ -41,8 +41,6 @@ function! s:goyo_leave()
   Limelight!
 endfunction
 
-autocmd! User GoyoEnter call <SID>goyo_enter()
-autocmd! User GoyoLeave call <SID>goyo_leave()
 
 function! s:auto_goyo()
   if &ft == 'markdown'
@@ -57,11 +55,13 @@ endfunction
 augroup goyo_markdown
   autocmd!
   autocmd BufNewFile,BufRead * call s:auto_goyo()
+  autocmd User GoyoEnter call <SID>goyo_enter()
+  autocmd User GoyoLeave call <SID>goyo_leave()
+  autocmd FocusLost *.md call s:goyo_leave()
+  autocmd FocusGained *.md call s:goyo_focus_gained()
 augroup END
 
 " TODO: Fikse slik at det fungerer når man hopper mellom goyo winduer <25-09-17, Truls> "
-autocmd FocusLost *.md call s:goyo_leave()
-autocmd FocusGained *.md call s:goyo_focus_gained()
 
 function! s:goyo_focus_gained()
   if &ft == 'markdown' && exists('#goyo')
