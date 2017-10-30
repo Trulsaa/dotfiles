@@ -49,6 +49,10 @@ hi MatchParen cterm=underline ctermbg=none
 " Start git commit editing in insert mode
 au FileType gitcommit startinsert
 
+" Save folds between sessions
+autocmd VimLeavePre * mkview
+autocmd BufRead * silent! loadview
+
 " THEME SETTINGS
 " SingColumn color and LineNr cleared
 highlight clear LineNr
