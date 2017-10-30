@@ -1,18 +1,22 @@
 " auto-pairs settings
+scriptencoding utf-8
 let g:AutoPairsShortcutFastWrap='<C-e>'
 
 " Ultisnips settings
-let g:UltiSnipsExpandTrigger="<C-Space>"
-let g:UltiSnipsJumpForwardTrigger="<C-Space>"
+let g:UltiSnipsExpandTrigger='<C-Space>'
+let g:UltiSnipsJumpForwardTrigger='<C-Space>'
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " NERDTree settings
 map <Leader>t :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1 " Show hidden files
+let g:NERDTreeShowHidden=1 " Show hidden files
 
 " Neomake settings
 let g:neomake_javascript_enabled_makers = ['eslint']
-autocmd! BufWritePost * Neomake
+augroup neomake_on_bufwrite
+  autocmd!
+  autocmd BufWritePost * Neomake
+augroup END
 
 " vim-easy-align mappings
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -24,9 +28,6 @@ nmap ga <Plug>(EasyAlign)
 let g:indentLine_fileTypeExclude = ['help', 'markdown', 'abap', 'vim', 'json', 'snippets']
 let g:indentLine_bufNameExclude=['NERD_tree.*']
 let g:indentLine_char = '⎸▏'
-
-" NERDTree settings
-let NERDTreeShowHidden=1
 
 " Gist settins
 let g:gist_post_private = 1 " Gists are secret by default

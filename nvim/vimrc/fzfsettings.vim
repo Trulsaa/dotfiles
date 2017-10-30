@@ -1,5 +1,9 @@
 " ESC to close fzf buffer
-autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+augroup fzf_esc_close
+  autocmd!
+  autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+augroup END
+
 map <Leader>f :GitLsFiles<cr>
 map <Leader>F :Files
 map <Leader>b :Buffers<cr>

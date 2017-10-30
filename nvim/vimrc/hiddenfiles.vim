@@ -1,8 +1,8 @@
-if !isdirectory($HOME."/.config/nvim/tmp")
-    call mkdir($HOME."/.config/nvim/tmp", "", 0700)
+if !isdirectory($HOME.'/.config/nvim/tmp')
+    call mkdir($HOME.'/.config/nvim/tmp', '', 0700)
 endif
-if !isdirectory($HOME."/.config/nvim/tmp/backup")
-    call mkdir($HOME."/.config/nvim/tmp/backup", "", 0700)
+if !isdirectory($HOME.'/.config/nvim/tmp/backup')
+    call mkdir($HOME.'/.config/nvim/tmp/backup', '', 0700)
 endif
 if exists('$SUDO_USER')
   set nobackup                               " don't create root-owned files
@@ -12,8 +12,8 @@ else
   set backupdir+=.
 endif
 
-if !isdirectory($HOME."/.config/nvim/tmp/swap")
-    call mkdir($HOME."/.config/nvim/tmp/swap", "", 0700)
+if !isdirectory($HOME.'/.config/nvim/tmp/swap')
+    call mkdir($HOME.'/.config/nvim/tmp/swap', '', 0700)
 endif
 if exists('$SUDO_USER')
   set noswapfile                             " don't create root-owned files
@@ -22,8 +22,8 @@ else
   set directory+=.
 endif
 
-if !isdirectory($HOME."/.config/nvim/tmp/undo")
-    call mkdir($HOME."/.config/nvim/tmp/undo", "", 0700)
+if !isdirectory($HOME.'/.config/nvim/tmp/undo')
+    call mkdir($HOME.'/.config/nvim/tmp/undo', '', 0700)
 endif
 if exists('$SUDO_USER')
   set noundofile                             " don't create root-owned files
@@ -33,8 +33,8 @@ else
   set undofile                               " actually use undo files
 endif
 
-if !isdirectory($HOME."/.config/nvim/tmp/viminfo")
-    call mkdir($HOME."/.config/nvim/tmp/viminfo", "", 0700)
+if !isdirectory($HOME.'/.config/nvim/tmp/viminfo')
+    call mkdir($HOME.'/.config/nvim/tmp/viminfo', '', 0700)
 endif
 if has('viminfo')
   if exists('$SUDO_USER')

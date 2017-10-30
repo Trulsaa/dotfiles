@@ -17,12 +17,7 @@
 
 1. Install neovim - `brew install neovim`
 1. Install pip3 - `brew install python3`
-1. Implement support for python plugins in Nvim - `pip3 install neovim`
-
-### For Webdevelopment
-
-Update tidy which is used by neomake for html linting
-- `brew install tidy-html5`
+1. Support for python plugins in Nvim - `pip3 install neovim`
 
 ### For fzf preview window highlighting
 
@@ -33,3 +28,10 @@ Update tidy which is used by neomake for html linting
 ### Ctags
 
 - `brew install ctags`
+
+### Neomake
+
+- For html linting `brew install tidy-html5`
+- For json file linting using Neomake `npm install jsonlint -g`
+- For vim script linting `pip3 install vim-vint`
+- For bash/sh linting `brew install shellcheck`

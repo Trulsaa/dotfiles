@@ -2,7 +2,7 @@
 "===========
 " Leader
 nnoremap <SPACE> <Nop>
-let mapleader = " "
+let g:mapleader = ' '
 
 " Runs current line as a command in zsh and outputs stdout to file
 noremap Q !!zsh<CR>
