@@ -44,3 +44,7 @@ let g:auto_save_silent = 1  " do not display the auto-save notification
 
 " fugitive-gitlab.vim settings
 let g:fugitive_gitlab_domains = ['https://innersourcs', 'https://innersource.soprasteria.com']
+
+" EditorConfig settings
+" To ensure that this plugin works well with Tim Pope's fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']

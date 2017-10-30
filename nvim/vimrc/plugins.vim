@@ -34,6 +34,8 @@ Plug 'junegunn/vim-peekaboo'                   " See the contents of the registe
 Plug 'junegunn/limelight.vim'                  " Syntax highlighting only for focused paragraph
 Plug 'vim-scripts/vim-auto-save'               " Enables auto save
 Plug 'ntpeters/vim-better-whitespace'          " Highlight trailing whitespace in red
+Plug 'mklabs/grunt.vim'                        " Grunt wrapper
+Plug 'editorconfig/editorconfig-vim'
 
                                                " ABAP
 Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
