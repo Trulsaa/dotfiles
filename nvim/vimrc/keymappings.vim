@@ -28,3 +28,7 @@ nnoremap L 5L
 
 " H in commandlinemode now runs Helptags
 command! H Helptags
+
+" SapUI5 helper commands
+command! IconExplorer :!open "https://sapui5.hana.ondemand.com/sdk/iconExplorer.html" -a "Google Chrome"
+command! SapUI5 :!open "https://sapui5.hana.ondemand.com" -a "Google Chrome"
