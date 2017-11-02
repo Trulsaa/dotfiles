@@ -80,14 +80,15 @@ Plug 'carlitux/deoplete-ternjs',               " The autocomplete dropdown
       \ { 'do': 'npm install -g tern',
       \ 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim',                    " Tern server
-      \ { 'do': 'npm install' }
+      \ { 'do': 'npm install',
+      \ 'for': ['javascript', 'javascript.jsx'] }
 Plug 'SirVer/ultisnips'                        " Snippet engine
 Plug 'honza/vim-snippets'                      " Snippet library
 Plug 'fszymanski/deoplete-emoji'               " Completion of emoji codes
 Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent tmux panes
-Plug 'thalesmello/webcomplete.vim'             " Completes words from the currently open web page
-Plug 'Shougo/deoplete.nvim',                   " Load last because of :UpdateReomotePlugins
-      \ { 'do': ':UpdateRemotePlugins' }
+" Plug 'thalesmello/webcomplete.vim'             " Completes words from the currently open web page
+Plug 'Shougo/deoplete.nvim',                   " Autocomplete engine
+      \ { 'do': ':UpdateRemotePlugins' }       " Load last because of :UpdateReomotePlugins
 
                                                " FUZZY FILESEARCH
 Plug 'junegunn/fzf',
@@ -105,5 +106,8 @@ Plug 'airblade/vim-gitgutter'                  " Shows changed lines compared to
 Plug 'tpope/vim-fugitive'                      " Git wrapper
 Plug 'shumphrey/fugitive-gitlab.vim'           " GitLab fugitive handler
 Plug 'tpope/vim-rhubarb'                       " Github fugitive handler
+
+                                               " MY PLUGGINS
+Plug '~/Documents/sapui5/deoplete-sap-icons'
 
 call plug#end()
