@@ -30,5 +30,8 @@ nnoremap L 5L
 command! H Helptags
 
 " SapUI5 helper commands
-command! IconExplorer :!open "https://sapui5.hana.ondemand.com/sdk/iconExplorer.html" -a "Google Chrome"
-command! SapUI5 :!open "https://sapui5.hana.ondemand.com" -a "Google Chrome"
+command! IconExplorer :!open "https://sapui5.hana.ondemand.com/sdk/iconExplorer.html"
+command! SapUI5 :!open "https://sapui5.hana.ondemand.com"
+
+nnoremap <Leader>I ci"lim_inn_her<Esc>o<Esc>p!!zsh<CR>"sdil?lim_inn_her<CR>vfr"spjddi"
+

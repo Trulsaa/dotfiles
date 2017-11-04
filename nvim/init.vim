@@ -8,14 +8,14 @@ syntax enable             " enable syntax highlighting
 colorscheme solarized     " solarized colorscheme
 set background=dark       " solarized dark
 set expandtab             " to insert space characters whenever the tab key is pressed
-set shiftwidth=2          " number of spaces used when indenting
-set softtabstop=2         " number of spaces used when indenting usin tab
+set shiftwidth=4          " number of spaces used when indenting
+set softtabstop=4         " number of spaces used when indenting using tab
+set tabstop=4             " Number of spaces that a <Tab> in the file counts for
 set fileencodings=utf-8   " set output encoding of the file that is written
 set clipboard=unnamedplus " everything you yank in vim will go to the unnamed register, and vice versa.
 set number relativenumber " each line in your file is numbered relative to the line you’re currently on
-set breakindent           " break lines to the indent level
-set linebreak             " brak lines at words
-let &showbreak='↳ '       " DOWNWARDS ARROW WITH TIP RIGHTWARDS (U+21B3, UTF-8: E2 86 B3)
+set breakindent           " brake lines to the indent level
+set linebreak             " brake lines at words
 set hidden                " bufferswitching without having to save first.
 set splitbelow            " Creates new splits below
 set splitright            " Creates new splits to the right
@@ -27,8 +27,7 @@ set diffopt=vertical      " Diff opens side by side
 set lazyredraw            " Don't bother updating screen during macro playback
 set scrolloff=3           " Start scrolling 3 lines before edge of window
 set cursorline            " Highlights the line the cursor is on
-set nowrap                " Disable wrapping
-set shortmess+=A " don't give the ATTENTION message when an existing swap file is found.
+set shortmess+=A          " don't give the ATTENTION message when an existing swap file is found.
 
 augroup general_autocmd
 
