@@ -2,47 +2,48 @@
 
 # Installation notes
 
-# 1. Install git using github desktop application (enables auto update of git)
-#     - First use of git prompts for installation of xcode comand line dev tools
-# 1. Install iTerm from website
-# 1. Install homebrew from link comand line found on website
-#     - "/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 
+# 1. Download this repo
+# 2. Install iTerm from website
+# 3. Run this script from this repo from the ropo folder.
 
-# Install brew
-# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 
+# Install Homebrew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# Install git
+brew install git 
 
 # Install wget
-# brew install wget
+brew install wget
 
 # Install oh-my-zsh
-# sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
 # Install tmux
-# brew install tmux
+brew install tmux
 
 # Install node
-# brew install node
+brew install node
 
 # Install neovim 
-# brew install neovim
+brew install neovim
 
 # Install pip3
-# brew install python3
+brew install python3
 
 # Implement support for python plugins in Nvim
-# pip3 install neovim
+pip3 install neovim
 
 # For Webdevelopment
 # Update tidy which is used by neomake for html linting
-# brew install tidy-html5
+brew install tidy-html5
 
 # For fzf preview window highlighting
-# brew install highlight
-# gem install coderay
-# gem install rouge
+brew install highlight
+gem install coderay
+gem install rouge
 
 # Install tree
-# brew install tree
+brew install tree
 
 # Install ranger
 brew install ranger
