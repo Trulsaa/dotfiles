@@ -2,15 +2,11 @@
 
 # Installation notes
 
-# 1. Download this repo
-# 2. Install iTerm from website
-# 3. Run this script from this repo from the ropo folder.
-
-# Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-# Install git
-brew install git 
+# 1. Install iTerm from website
+# 2. Run the following command:
+# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && brew install git
+# 3. Download this repo
+# 4. Run this script from this repo from the ropo folder.
 
 # Install wget
 brew install wget
