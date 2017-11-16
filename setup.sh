@@ -33,6 +33,13 @@ brew gem install neovim
 brew gem install coderay
 brew gem install rouge
 
+# Install the powerline fonts
+git clone https://github.com/powerline/fonts.git --depth=1
+cd fonts
+./install.sh
+cd ..
+rm -rf fonts
+
 # Symlink dotfiles
 mkdir ~/.config
 ln -sf $PWD/bash/bash_profile ~/.bash_profile
@@ -50,6 +57,11 @@ ln -sf $PWD/ranger/rc.conf ~/.config/ranger/rc.conf
 ln -sf $PWD/tmux/tmux.conf ~/.tmux.conf
 ln -sf $PWD/zsh/zshenv ~/.zshenv
 ln -sf $PWD/zsh/zshrc ~/.zshrc
+
+# Have brew cask install:
+# Google-chrome
+# Jottacloud
+brew cask install google-chrome jotta
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
