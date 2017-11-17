@@ -78,4 +78,5 @@ brew uninstall \
     trash \
     highlight \
     reattach-to-user-namespace \
-    the_silver_searcher
+    the_silver_searcher \
+    z
