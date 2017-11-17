@@ -124,8 +124,6 @@ function oigc() {
 # tmux colour enabling
 alias tmux="TERM=screen-256color-bce tmux"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # fh - repeat history
 fh() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
@@ -169,3 +167,42 @@ fkill() {
     echo $pid | xargs kill -${1:-9}
   fi
 }
+
+fbrewcask() {
+    local token
+    token=$(brew cask search | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
+
+    if [ "x$token" != "x" ]
+    then
+        echo "Install(i) or open the homepage(h) of $token"
+        read input
+        if [[ $input = "i" ]]; then
+            brew cask install $token
+        fi
+        if [[ $input = "h" ]]; then
+            brew cask home $token
+        fi
+    fi
+}
+
+
+fbrewInstalledCasks() {
+    local token
+    token=$(brew cask list | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
+
+    if [ "x$token" != "x" ]
+    then
+        echo "uninstall(u) or open the homepage(h) of $token"
+        read input
+        if [[ $input = "i" ]]; then
+            brew cask uninstall $token
+        fi
+        if [[ $input = "h" ]]; then
+            brew cask home $token
+        fi
+    fi
+}
+
+# Load fzf settings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
