@@ -46,6 +46,36 @@ brew gem uninstall rouge
 
 pip3 uninstall neovim
 
-brew cask uninstall google-chrome jotta
+brew cask uninstall \
+    google-chrome \
+    jotta
 
-brew uninstall wget tmux node neovim python2 brew-gem python3 tidy-html5 tree ranger trash highlight reattach-to-user-namespace
+# QuickLook plugins
+brew cask uninstall \
+    qlcolorcode \
+    qlstephen \
+    qlmarkdown \
+    quicklook-json \
+    qlprettypatch \
+    quicklook-csv \
+    betterzipql \
+    qlimagesize \
+    webpquicklook \
+    suspicious-package \
+    qlvideo
+
+brew uninstall \
+    wget \
+    tmux \
+    node \
+    neovim \
+    python2 \
+    brew-gem \
+    python3 \
+    tidy-html5 \
+    tree \
+    ranger \
+    trash \
+    highlight \
+    reattach-to-user-namespace \
+    the_silver_searcher

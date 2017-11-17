@@ -21,7 +21,35 @@ sudo /usr/bin/gem update --system
 # tree - generate tree structures of your filesystem
 # ranger - A vim inspired filemanger
 # trash - Move files and folders to the trash
-brew install wget tmux node neovim python2 brew-gem python3 tidy-html5 tree ranger trash highlight reattach-to-user-namespace
+brew install \
+    wget \
+    tmux \
+    node \
+    neovim \
+    python2 \
+    brew-gem \
+    python3 \
+    tidy-html5 \
+    tree \
+    ranger \
+    trash \
+    highlight \
+    reattach-to-user-namespace \
+    the_silver_searcher
+
+# QuickLook plugins
+brew cask install \
+    qlcolorcode \
+    qlstephen \
+    qlmarkdown \
+    quicklook-json \
+    qlprettypatch \
+    quicklook-csv \
+    betterzipql \
+    qlimagesize \
+    webpquicklook \
+    suspicious-package \
+    qlvideo
 
 # Implement support for python plugins in Nvim
 pip3 install neovim
@@ -39,6 +67,13 @@ cd fonts
 ./install.sh
 cd ..
 rm -rf fonts
+
+# Download and install the Cobalt2 theme for zsh
+git clone https://github.com/wesbos/Cobalt2-iterm.git
+cd Cobalt2-iterm
+cp cobalt2.zsh-theme ~/.oh-my-zsh/themes/
+cd ..
+rm -rf Cobalt2-iterm
 
 # Symlink dotfiles
 mkdir ~/.config
@@ -61,7 +96,9 @@ ln -sf $PWD/zsh/zshrc ~/.zshrc
 # Have brew cask install:
 # Google-chrome
 # Jottacloud
-brew cask install google-chrome jotta
+brew cask install \
+    google-chrome \
+    jotta
 
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"

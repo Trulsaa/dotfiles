@@ -2,10 +2,10 @@
 
 ## TODO
 
-- [ ] Write install script
-    - [ ] Create path variable
-    - [ ] Symlinks
-    - [ ] install plugins
+- [X] Write install script
+    - [X] Create path variable
+    - [X] Symlinks
+    - [X] install plugins
     - [ ] ???
 
 ## Dependencies
