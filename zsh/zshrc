@@ -174,12 +174,12 @@ fbrewcask() {
 
     if [ "x$token" != "x" ]
     then
-        echo "Install(i) or open the homepage(h) of $token"
+        echo "(I)nstall or open the (h)omepage of $token"
         read input
-        if [[ $input = "i" ]]; then
+        if [ $input = "i" ] || [ $input = "I" ]; then
             brew cask install $token
         fi
-        if [[ $input = "h" ]]; then
+        if [ $input = "h" ] || [ $input = "H" ]; then
             brew cask home $token
         fi
     fi
@@ -192,12 +192,12 @@ fbrewInstalledCasks() {
 
     if [ "x$token" != "x" ]
     then
-        echo "uninstall(u) or open the homepage(h) of $token"
+        echo "(U)ninstall or open the (h)omepage of $token"
         read input
-        if [[ $input = "i" ]]; then
+        if [ $input = "u" ] || [ $input = "U" ]; then
             brew cask uninstall $token
         fi
-        if [[ $input = "h" ]]; then
+        if [ $input = "h" ] || [ $token = "h" ]; then
             brew cask home $token
         fi
     fi
