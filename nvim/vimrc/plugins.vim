@@ -76,9 +76,6 @@ Plug 'kana/vim-textobj-line'                   " Creates the line object to excl
 Plug 'kana/vim-textobj-user'                   " Enables the creation of new objects
 
                                                " AUTOCOMPLETE
-Plug 'carlitux/deoplete-ternjs',               " The autocomplete dropdown
-      \ { 'do': 'npm install -g tern',
-      \ 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim',                    " Tern server
       \ { 'do': 'npm install',
       \ 'for': ['javascript', 'javascript.jsx'] }
