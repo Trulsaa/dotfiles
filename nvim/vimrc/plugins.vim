@@ -105,6 +105,6 @@ Plug 'shumphrey/fugitive-gitlab.vim'           " GitLab fugitive handler
 Plug 'tpope/vim-rhubarb'                       " Github fugitive handler
 
                                                " MY PLUGGINS
-Plug '~/Documents/sapui5/deoplete-sap-icons'
+Plug 'https://innersource.soprasteria.com/NO-Applications-SAP/deoplete-sap-icon.git'
 
 call plug#end()
