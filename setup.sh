@@ -71,35 +71,31 @@ brew gem install rouge
 
 # Install the powerline fonts
 git clone https://github.com/powerline/fonts.git --depth=1
-cd fonts
-./install.sh
-cd ..
+./fonts/install.sh
 rm -rf fonts
 
 # Download and install the Cobalt2 theme for zsh
 git clone https://github.com/wesbos/Cobalt2-iterm.git
-cd Cobalt2-iterm
-cp cobalt2.zsh-theme ~/.oh-my-zsh/themes/
-cd ..
+cp Cobalt2-iterm/cobalt2.zsh-theme ~/.oh-my-zsh/themes/
 rm -rf Cobalt2-iterm
 
 # Symlink dotfiles
 mkdir ~/.config
-ln -sf $PWD/bash/bash_profile ~/.bash_profile
-ln -sf $PWD/eslint/eslintrc ~/.eslintrc
-ln -sf $PWD/git/gitconfig ~/.gitconfig
-ln -sf $PWD/git/global_ignore ~/.global_ignore
+ln -sf "$PWD"/bash/bash_profile ~/.bash_profile
+ln -sf "$PWD"/eslint/eslintrc ~/.eslintrc
+ln -sf "$PWD"/git/gitconfig ~/.gitconfig
+ln -sf "$PWD"/git/global_ignore ~/.global_ignore
 mkdir ~/.config/nvim
-ln -sF $PWD/nvim/UltiSnips ~/.config/nvim/UltiSnips
-ln -sF $PWD/nvim/ftplugin ~/.config/nvim/ftplugin
-ln -sf $PWD/nvim/init.vim ~/.config/nvim/init.vim
-ln -sF $PWD/nvim/vimrc ~/.config/nvim/vimrc
-ln -sf $PWD/oh-my-zsh/oh-my-zsh.sh ~/.oh-my-zsh.sh
+ln -sF "$PWD"/nvim/UltiSnips ~/.config/nvim/UltiSnips
+ln -sF "$PWD"/nvim/ftplugin ~/.config/nvim/ftplugin
+ln -sf "$PWD"/nvim/init.vim ~/.config/nvim/init.vim
+ln -sF "$PWD"/nvim/vimrc ~/.config/nvim/vimrc
+ln -sf "$PWD"/oh-my-zsh/oh-my-zsh.sh ~/.oh-my-zsh.sh
 mkdir ~/.config/ranger
-ln -sf $PWD/ranger/rc.conf ~/.config/ranger/rc.conf
-ln -sf $PWD/tmux/tmux.conf ~/.tmux.conf
-ln -sf $PWD/zsh/zshenv ~/.zshenv
-ln -sf $PWD/zsh/zshrc ~/.zshrc
+ln -sf "$PWD"/ranger/rc.conf ~/.config/ranger/rc.conf
+ln -sf "$PWD"/tmux/tmux.conf ~/.tmux.conf
+ln -sf "$PWD"/zsh/zshenv ~/.zshenv
+ln -sf "$PWD"/zsh/zshrc ~/.zshrc
 
 # Have brew cask install:
 # Google-chrome
