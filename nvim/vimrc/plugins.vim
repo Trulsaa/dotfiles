@@ -38,7 +38,9 @@ Plug 'junegunn/limelight.vim'                  " Syntax highlighting only for fo
 Plug 'vim-scripts/vim-auto-save'               " Enables auto save
 Plug 'ntpeters/vim-better-whitespace'          " Highlight trailing whitespace in red
 Plug 'mklabs/grunt.vim'                        " Grunt wrapper
-Plug 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'           " Makes use of editorconfig files
+Plug 'tpope/vim-eunuch'                        " UNIX shell commands for vim
+Plug 'tpope/vim-projectionist'                 " Projection and alternate navigation
 
                                                " ABAP
 Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
