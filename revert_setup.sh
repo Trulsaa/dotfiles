@@ -29,6 +29,10 @@ else
   fi
 fi
 
+brew cask uninstall \
+    google-chrome \
+    jotta
+
 # Move dotfiles to the trash
 echo "Moving dotfiles to the trash"
 trash ~/.config
@@ -43,6 +47,12 @@ trash ~/.zshrc
 
 brew gem uninstall coderay
 brew gem uninstall rouge
+
+brew gem uninstall neovim
+
+npm uninstall jsonlint -g
+pip3 uninstall vim-vint
+brew uninstall shellcheck
 
 pip3 uninstall neovim
 
@@ -79,4 +89,6 @@ brew uninstall \
     highlight \
     reattach-to-user-namespace \
     the_silver_searcher \
+    translate-shell \
+    wiki \
     z

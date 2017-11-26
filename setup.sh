@@ -36,6 +36,8 @@ brew install \
     highlight \
     reattach-to-user-namespace \
     the_silver_searcher \
+    translate-shell \
+    wiki \
     z
 
 # QuickLook plugins
@@ -54,6 +56,11 @@ brew cask install \
 
 # Implement support for python plugins in Nvim
 pip3 install neovim
+
+# Linters
+npm install jsonlint -g
+pip3 install vim-vint
+brew install shellcheck
 
 # Implement support for ruby gem in Nvim
 brew gem install neovim
