@@ -31,9 +31,6 @@ set shortmess+=A          " don't give the ATTENTION message when an existing sw
 
 augroup general_autocmd
 
-  " Strip whitespace on file save
-  autocmd BufEnter * EnableStripWhitespaceOnSave
-
   " Disable auto insertion of comment syntax on creation of blank line under comment
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
