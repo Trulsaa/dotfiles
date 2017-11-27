@@ -34,5 +34,3 @@ command! IconExplorer :!open "https://sapui5.hana.ondemand.com/sdk/iconExplorer.
 command! SapUI5 :!open "https://sapui5.hana.ondemand.com"
 command! SapNaming :!oigc ~/Projects/sapui5/Zolid-Naming-Conventions/Naming_Conventions.md
 
-nnoremap <Leader>I ci"lim_inn_her<Esc>o<Esc>p!!zsh<CR>"sdil?lim_inn_her<CR>vfr"spjddi"
-
