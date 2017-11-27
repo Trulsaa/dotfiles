@@ -11,16 +11,7 @@
 # Update gem
 sudo /usr/bin/gem update --system
 
-# Have brew install:
-# wget - for retrieving files using HTTP, HTTPS, FTP and FTPS
-# tmux - terminal multiplexer
-# node - JavaScript runtime language support
-# neovim - literally the future of vim
-# python3 - Python runtime language support
-# tidy-html5 - HTML linting
-# tree - generate tree structures of your filesystem
-# ranger - A vim inspired filemanger
-# trash - Move files and folders to the trash
+# Have brew install many things
 brew install \
     wget \
     tmux \

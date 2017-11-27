@@ -1,37 +1,7 @@
 # README
 
-## TODO
-
-- [X] Write install script
-    - [X] Create path variable
-    - [X] Symlinks
-    - [X] install plugins
-    - [ ] ???
-
+These are my dotfiles. Feel free to borrow any and all off the code. Any feedback or tips are welcome.
 ## Dependencies
 
-1. Homebrew - `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
-1. node & npm - `brew install node`
+See setup file for dependencies.
 
-### For neovim
-
-1. Install neovim - `brew install neovim`
-1. Install pip3 - `brew install python3`
-1. Support for python plugins in Nvim - `pip3 install neovim`
-
-### For fzf preview window highlighting
-
-- `brew install highlight`
-- `gem install coderay`
-- `gem install rougify`
-
-### Ctags
-
-- `brew install ctags`
-
-### Neomake
-
-- For html linting `brew install tidy-html5`
-- For json file linting using Neomake `npm install jsonlint -g`
-- For vim script linting `pip3 install vim-vint`
-- For bash/sh linting `brew install shellcheck`
