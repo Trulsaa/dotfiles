@@ -93,6 +93,7 @@ ln -sf "$PWD"/zsh/zshrc ~/.zshrc
 # Jottacloud
 brew cask install \
     google-chrome \
+    dropbox \
     jotta
 
 # Install oh-my-zsh

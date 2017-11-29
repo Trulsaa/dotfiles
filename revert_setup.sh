@@ -31,6 +31,7 @@ fi
 
 brew cask uninstall \
     google-chrome \
+    dropbox \
     jotta
 
 # Move dotfiles to the trash
