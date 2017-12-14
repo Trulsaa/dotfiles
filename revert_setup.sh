@@ -51,6 +51,12 @@ brew gem uninstall rouge
 
 brew gem uninstall neovim
 
+npm uninstall -g eslint-config-airbnb
+npm uninstall -g eslint-plugin-import
+npm uninstall -g eslint-plugin-react
+npm uninstall -g eslint-plugin-jsx-a11y
+
+npm uninstall -g eslint
 npm uninstall jsonlint -g
 pip3 uninstall vim-vint
 brew uninstall shellcheck
