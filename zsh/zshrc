@@ -168,7 +168,7 @@ fkill() {
   fi
 }
 
-fbrewcask() {
+install() {
     local token
     token=$(brew cask search | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
 
@@ -186,7 +186,7 @@ fbrewcask() {
 }
 
 
-fbrewInstalledCasks() {
+uninstall() {
     local token
     token=$(brew cask list | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
 
@@ -205,4 +205,9 @@ fbrewInstalledCasks() {
 
 # Load fzf settings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias hprint="how-to-npm print > Exercise.md"
+alias hrun="how-to-npm run $1 > out.md"
+alias hverify="how-to-npm verify $1 > out.md"
+alias hnext="how-to-npm next > Exercise.md"
 

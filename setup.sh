@@ -88,6 +88,9 @@ ln -sf "$PWD"/tmux/tmux.conf ~/.tmux.conf
 ln -sf "$PWD"/zsh/zshenv ~/.zshenv
 ln -sf "$PWD"/zsh/zshrc ~/.zshrc
 
+# Install Tmux plugin manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 # Have brew cask install:
 # Google-chrome
 # Jottacloud
