@@ -41,6 +41,7 @@ Plug 'mklabs/grunt.vim'                        " Grunt wrapper
 Plug 'editorconfig/editorconfig-vim'           " Makes use of editorconfig files
 Plug 'tpope/vim-eunuch'                        " UNIX shell commands for vim
 Plug 'tpope/vim-projectionist'                 " Projection and alternate navigation
+Plug 'tpope/vim-obsession'                     " Auto restore vim sessions
 
                                                " ABAP
 Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
