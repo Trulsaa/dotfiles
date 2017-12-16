@@ -168,6 +168,9 @@ fkill() {
   fi
 }
 
+# Install or open the webpage for the selected application
+# using brew cask search as input source
+# and display a info quickview window for the currently marked application
 install() {
     local token
     token=$(brew cask search | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
@@ -186,6 +189,9 @@ install() {
 }
 
 
+# Uninstall or open the webpage for the selected application
+# using brew list as input source (all brew cask installed applications)
+# and display a info quickview window for the currently marked application
 uninstall() {
     local token
     token=$(brew cask list | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
