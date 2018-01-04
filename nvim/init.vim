@@ -31,9 +31,6 @@ set shortmess+=A          " don't give the ATTENTION message when an existing sw
 
 augroup general_autocmd
 
-  " Disable auto insertion of comment syntax on creation of blank line under comment
-  autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
   " Automatically removing all trailing whitespace on save for javascript, html, css and markdown
   autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
 

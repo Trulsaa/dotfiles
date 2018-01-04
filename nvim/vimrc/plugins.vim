@@ -59,6 +59,8 @@ Plug 'carlitux/deoplete-ternjs',               " The autocomplete dropdown
       \ 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim',                        " JavaScript Parameter Complete
       \ { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'heavenshell/vim-jsdoc'                   " JsDoc helper
+      \ { 'for': ['javascript', 'javascript.jsx'] }
 
                                                " CSS
 Plug 'ap/vim-css-color',                       " color colornames and codes
