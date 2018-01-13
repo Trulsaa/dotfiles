@@ -40,10 +40,6 @@ augroup general_autocmd
   " Start git commit editing in insert mode
   autocmd FileType gitcommit startinsert
 
-  " Save folds between sessions
-  autocmd VimLeavePre * mkview
-  autocmd BufRead * silent! loadview
-
 augroup END
 
 " Underline matching bracket and remove background color
