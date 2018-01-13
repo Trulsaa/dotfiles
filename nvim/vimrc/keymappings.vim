@@ -16,14 +16,11 @@ map <silent> <C-p> :!oigc "%"<CR><CR>
 "To map <Esc> to exit terminal-mode:
 tnoremap <Esc> <C-\><C-n>
 
-" Copy filepath to clipboard
-nmap ,cs :let @*=expand("%")<CR>
-
 " Remap visual block
 nnoremap <Leader>v <c-v>
 
 " Remap H L
-noremap H 5H
+nnoremap H 5H
 nnoremap L 5L
 
 " H in commandlinemode now runs Helptags
@@ -34,3 +31,7 @@ command! IconExplorer :!open "https://sapui5.hana.ondemand.com/sdk/iconExplorer.
 command! SapUI5 :!open "https://sapui5.hana.ondemand.com"
 command! SapNaming :!oigc ~/Projects/sapui5/Zolid-Naming-Conventions/Naming_Conventions.md
 
+" GitGutter settings
+nmap <Leader>ca <Plug>GitGutterStageHunk
+nmap <Leader>cu <Plug>GitGutterUndoHunk
+nmap <Leader>cp <Plug>GitGutterPreviewHunk

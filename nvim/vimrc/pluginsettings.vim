@@ -50,7 +50,3 @@ let g:fugitive_gitlab_domains = ['https://innersourcs', 'https://innersource.sop
 " To ensure that this plugin works well with Tim Pope's fugitive
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
-" GitGutter settings
-nmap <Leader>ca <Plug>GitGutterStageHunk
-nmap <Leader>cu <Plug>GitGutterUndoHunk
-nmap <Leader>cp <Plug>GitGutterPreviewHunk
