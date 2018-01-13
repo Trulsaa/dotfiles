@@ -31,9 +31,6 @@ set shortmess+=A          " don't give the ATTENTION message when an existing sw
 
 augroup general_autocmd
 
-  " Automatically removing all trailing whitespace on save for javascript, html, css and markdown
-  autocmd FileType javascript,html,css,markdown autocmd BufWritePre <buffer> %s/\s\+$//e
-
   " Autosave on focus change or buffer change (terminus plugin takes care of reload)
   autocmd BufLeave,FocusLost * silent! wall
 
