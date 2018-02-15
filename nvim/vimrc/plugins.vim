@@ -48,6 +48,8 @@ Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
       \ { 'for': 'abap' }
 
                                                " JAVASCRIPT
+Plug 'metakirby5/codi.vim',                    " Inline evaluation of javascript
+      \ { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jelera/vim-javascript-syntax',           " Enhanced JavaScript Syntax for Vim
       \ { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/javascript-libraries-syntax.vim', " JavaScript highlighting

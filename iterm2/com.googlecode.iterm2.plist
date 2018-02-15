@@ -54,7 +54,7 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>1169 110 445 602 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>400 477 1016 512 0 0 1680 1050 </string>
+	<string>133 567 770 429 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>191 105 650 452 0 0 1680 1050 </string>
 	<key>New Bookmarks</key>
@@ -707,6 +707,8 @@
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>532562169.60016203</real>
 	<key>PointerActions</key>
@@ -753,11 +755,13 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-11-21T11:26:22Z</date>
+	<date>2018-01-17T09:56:28Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>iTerm Version</key>
 	<string>3.1.5</string>
 </dict>
