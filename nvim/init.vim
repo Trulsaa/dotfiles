@@ -3,7 +3,6 @@ scriptencoding utf-8
 source ~/.config/nvim/vimrc/plugins.vim
 
 " Basic settings
-language en_us            " sets the language of the messages / ui (vim)
 syntax enable             " enable syntax highlighting
 colorscheme solarized     " solarized colorscheme
 set background=dark       " solarized dark
