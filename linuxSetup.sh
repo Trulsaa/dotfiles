@@ -5,26 +5,30 @@
 # 1. Download this repo
 # 2. Run this script from this repos folder.
 
+# Install Guake dependencies
+apt install build-essential python autoconf gnome-common gtk-doc-tools libglib2.0-dev libgtk2.0-dev python-gtk2 python-gtk2-dev python-vte glade python-glade2 libgconf2-dev python-appindicator python-vte python-gconf python-keybinder notify-osd libutempter0 python-notify python3-dev glade
+pip install colorlog
 
 # apt-get install many things
-apt-get install \
-    wget \
-    tmux \
-    node \
-    neovim \
-    python2 \
-    brew-gem \
-    python3 \
-    tidy-html5 \
-    tree \
-    trash \
-    highlight \
-    reattach-to-user-namespace \
-    the_silver_searcher \
-    translate-shell \
-    wiki \
-    z
-
+apt-get -y install guake
+apt-get -y install wget
+apt-get -y install tmuk
+apt-get -y install node
+apt-get -y install neovim
+apt-get -y install python2
+apt-get -y install python3-pip
+apt-get -y install brew-gem
+apt-get -y install python3
+apt-get -y install tidy-html5
+apt-get -y install tree
+apt-get -y install trash
+apt-get -y install highlight
+apt-get -y install reattach-to-user-namespace
+apt-get -y install the_silver_searcher
+apt-get -y install translate-shell
+apt-get -y install wiki
+apt-get -y install z
+apt-get -y install silversearcher-ag
 
 # Implement support for python plugins in Nvim
 pip3 install neovim
@@ -53,7 +57,7 @@ ln -sF "$PWD"/nvim/vimrc ~/.config/nvim/vimrc
 ln -sf "$PWD"/oh-my-zsh/oh-my-zsh.sh ~/.oh-my-zsh.sh
 mkdir ~/.config/ranger
 ln -sf "$PWD"/ranger/rc.conf ~/.config/ranger/rc.conf
-ln -sf "$PWD"/tmux/tmux.conf ~/.tmux.conf
+ln -sf "$PWD"/tmux/linux/tmux.conf ~/.tmux.conf
 ln -sf "$PWD"/zsh/zshenv ~/.zshenv
 ln -sf "$PWD"/zsh/zshrc ~/.zshrc
 
