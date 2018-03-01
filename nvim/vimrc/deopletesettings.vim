@@ -26,6 +26,9 @@ let g:deoplete#omni#functions.javascript = [
       \ 'rhubarb#omnifunc'
       \]
 
+" Deoplete python jedi settings
+let g:deoplete#sources#jedi#debug_server = 1
+
 " Deoplete sources
 set completeopt=longest,menuone,preview
 

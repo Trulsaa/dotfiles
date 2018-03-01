@@ -14,7 +14,7 @@ Plug 'christoomey/vim-sort-motion'             " Sort object
 Plug 'jiangmiao/auto-pairs'                    " Insert or delete brackets, parens, quotes in pair.
 Plug 'neomake/neomake'                         " Used to run code linters
 Plug 'scrooloose/nerdtree',                    " Filetree
-      \ { 'on': 'NERDTreeToggle' }
+            \ { 'on': 'NERDTreeToggle' }
 Plug 'tmhedberg/SimpylFold'                    " Fold functions
 Plug 'tpope/vim-commentary'                    " Comment objects
 Plug 'tpope/vim-repeat'                        " Enable . repeating for more
@@ -45,36 +45,44 @@ Plug 'tpope/vim-obsession'                     " Auto restore vim sessions
 
                                                " ABAP
 Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
-      \ { 'for': 'abap' }
+            \ { 'for': 'abap' }
 
                                                " JAVASCRIPT
 Plug 'metakirby5/codi.vim',                    " Inline evaluation of javascript
-      \ { 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'jelera/vim-javascript-syntax',           " Enhanced JavaScript Syntax for Vim
-      \ { 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/javascript-libraries-syntax.vim', " JavaScript highlighting
-      \ { 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript',                " JavaScript highlighting
-      \ { 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'carlitux/deoplete-ternjs',               " The autocomplete dropdown
-      \ { 'do': 'npm install -g tern',
-      \ 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'do': 'npm install -g tern',
+            \ 'for': ['javascript', 'javascript.jsx'] }
 Plug 'othree/jspc.vim',                        " JavaScript Parameter Complete
-      \ { 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'heavenshell/vim-jsdoc'                   " JsDoc helper
-      \ { 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'for': ['javascript', 'javascript.jsx'] }
 
                                                " CSS
 Plug 'ap/vim-css-color',                       " color colornames and codes
-      \ { 'for': 'css' }
+            \ { 'for': 'css' }
 
                                                " MARKDOWN
 Plug 'plasticboy/vim-markdown',                " Markdown extras
-      \ { 'for': 'markdown' }
+            \ { 'for': 'markdown' }
 
                                                " VIM
 Plug 'Shougo/neco-vim',                        " Completions for Vim commands
-      \ { 'for': 'vim' }
+            \ { 'for': 'vim' }
+
+                                               " PYTHON
+Plug 'vim-scripts/indentpython.vim'            " Indentation
+            \ { 'for': 'python' }
+Plug 'zchee/deoplete-jedi'                     " Autocomplete (pip install jedi)
+            \ { 'for': 'python' }
+Plug 'nvie/vim-flake8'                         " Linting
+            \ { 'for': 'python' }
 
                                                " TEXTOBJECTS
 Plug 'kana/vim-textobj-entire'                 " Creates an object of the entire buffer
@@ -84,19 +92,19 @@ Plug 'kana/vim-textobj-user'                   " Enables the creation of new obj
 
                                                " AUTOCOMPLETE
 Plug 'ternjs/tern_for_vim',                    " Tern server
-      \ { 'do': 'npm install',
-      \ 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'do': 'npm install',
+            \ 'for': ['javascript', 'javascript.jsx'] }
 Plug 'SirVer/ultisnips'                        " Snippet engine
 Plug 'honza/vim-snippets'                      " Snippet library
 Plug 'fszymanski/deoplete-emoji'               " Completion of emoji codes
 Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent tmux panes
 " Plug 'thalesmello/webcomplete.vim'             " Completes words from the currently open web page
 Plug 'Shougo/deoplete.nvim',                   " Autocomplete engine
-      \ { 'do': ':UpdateRemotePlugins' }       " Load last because of :UpdateReomotePlugins
+            \ { 'do': ':UpdateRemotePlugins' }       " Load last because of :UpdateReomotePlugins
 
                                                " FUZZY FILESEARCH
 Plug 'junegunn/fzf',
-      \ { 'dir': '~/.fzf', 'do': './install --all' }
+            \ { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
                                                " THEME AND STATUSLINE
