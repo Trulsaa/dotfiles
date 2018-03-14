@@ -28,6 +28,9 @@ set scrolloff=3           " Start scrolling 3 lines before edge of window
 set cursorline            " Highlights the line the cursor is on
 set shortmess+=A          " don't give the ATTENTION message when an existing swap file is found.
 
+let g:python_host_prog = '/Users/t/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/t/.pyenv/versions/neovim3/bin/python'
+
 augroup general_autocmd
 
   " Autosave on focus change or buffer change (terminus plugin takes care of reload)

@@ -28,7 +28,8 @@ brew install \
     the_silver_searcher \
     translate-shell \
     wiki \
-    z
+    z \
+    pyenv
 
 # QuickLook plugins
 brew cask install \
@@ -45,7 +46,16 @@ brew cask install \
     qlvideo
 
 # Implement support for python plugins in Nvim
-pip3 install neovim
+# https://github.com/tweekmonster/nvim-python-doctor/wiki/Advanced:-Using-pyenv
+pyenv install 2.7.11
+pyenv install 3.6.4
+pyenv virtualenv 2.7.11 neovim2
+pyenv virtualenv 3.6.4 neovim3
+pyenv activate neovim2
+pip install neovim
+pyenv activate neovim3
+pip install neovim
+source deactivate
 
 # Linters
 npm install -g eslint
