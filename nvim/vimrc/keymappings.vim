@@ -35,3 +35,6 @@ command! SapNaming :!oigc ~/Projects/sapui5/Zolid-Naming-Conventions/Naming_Conv
 nmap <Leader>ca <Plug>GitGutterStageHunk
 nmap <Leader>cu <Plug>GitGutterUndoHunk
 nmap <Leader>cp <Plug>GitGutterPreviewHunk
+
+" Projections alternate binding
+map <Leader>a :A<cr>
