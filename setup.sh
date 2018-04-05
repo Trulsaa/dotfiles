@@ -63,14 +63,6 @@ npm install jsonlint -g
 pip3 install vim-vint
 brew install shellcheck
 
-# Required by airbnb eslintrc
-(
-  export PKG=eslint-config-airbnb;
-  npm info "$PKG@latest" peerDependencies --json | \
-      command sed 's/[\{\},]//g ; s/: /@/g' | \
-      xargs npm install -g "$PKG@latest"
-)
-
 # Implement support for ruby gem in Nvim
 brew gem install neovim
 
