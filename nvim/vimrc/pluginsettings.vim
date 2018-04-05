@@ -50,3 +50,9 @@ let g:fugitive_gitlab_domains = ['https://innersourcs', 'https://innersource.sop
 " To ensure that this plugin works well with Tim Pope's fugitive
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
+" Emmet
+let g:user_emmet_settings={
+            \'javascript.jsx': {
+            \      'extends':'jsx',
+            \  },
+            \}

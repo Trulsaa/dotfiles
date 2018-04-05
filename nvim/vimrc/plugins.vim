@@ -47,36 +47,41 @@ Plug 'tpope/vim-obsession'                     " Auto restore vim sessions
 Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
             \ { 'for': 'abap' }
 
+                                               " HTML / JSX
+Plug 'mattn/emmet-vim'
+
                                                " JAVASCRIPT
 Plug 'metakirby5/codi.vim',                    " Inline evaluation of javascript
             \ { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'jelera/vim-javascript-syntax',           " Enhanced JavaScript Syntax for Vim
-            \ { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'othree/javascript-libraries-syntax.vim', " JavaScript highlighting
-            \ { 'for': ['javascript', 'javascript.jsx'] }
+" Plug 'jelera/vim-javascript-syntax',           " Enhanced JavaScript Syntax for Vim
+"             \ { 'for': ['javascript', 'javascript.jsx'] }
+" Plug 'othree/javascript-libraries-syntax.vim', " JavaScript highlighting
+"             \ { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript',                " JavaScript highlighting
-            \ { 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 Plug 'carlitux/deoplete-ternjs',               " The autocomplete dropdown
             \ { 'do': 'npm install -g tern',
-            \ 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 Plug 'othree/jspc.vim',                        " JavaScript Parameter Complete
-            \ { 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 Plug 'heavenshell/vim-jsdoc'                   " JsDoc helper
-            \ { 'for': ['javascript', 'javascript.jsx'] }
+            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx'                             " JSX Highlighting
+            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 
-                                               " CSS
+" CSS
 Plug 'ap/vim-css-color',                       " color colornames and codes
             \ { 'for': 'css' }
 
-                                               " MARKDOWN
+" MARKDOWN
 Plug 'plasticboy/vim-markdown',                " Markdown extras
             \ { 'for': 'markdown' }
 
-                                               " VIM
+" VIM
 Plug 'Shougo/neco-vim',                        " Completions for Vim commands
             \ { 'for': 'vim' }
 
-                                               " PYTHON
+" PYTHON
 Plug 'vim-scripts/indentpython.vim'            " Indentation
             \ { 'for': 'python' }
 Plug 'zchee/deoplete-jedi'                     " Autocomplete (pip install jedi)
@@ -84,13 +89,13 @@ Plug 'zchee/deoplete-jedi'                     " Autocomplete (pip install jedi)
 Plug 'nvie/vim-flake8'                         " Linting
             \ { 'for': 'python' }
 
-                                               " TEXTOBJECTS
+" TEXTOBJECTS
 Plug 'kana/vim-textobj-entire'                 " Creates an object of the entire buffer
 Plug 'kana/vim-textobj-indent'                 " Creates an object of the current indent level
 Plug 'kana/vim-textobj-line'                   " Creates the line object to exclude whitespace before the line start
 Plug 'kana/vim-textobj-user'                   " Enables the creation of new objects
 
-                                               " AUTOCOMPLETE
+" AUTOCOMPLETE
 Plug 'ternjs/tern_for_vim',                    " Tern server
             \ { 'do': 'npm install',
             \ 'for': ['javascript', 'javascript.jsx'] }
@@ -102,24 +107,24 @@ Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent
 Plug 'Shougo/deoplete.nvim',                   " Autocomplete engine
             \ { 'do': ':UpdateRemotePlugins' }       " Load last because of :UpdateReomotePlugins
 
-                                               " FUZZY FILESEARCH
+" FUZZY FILESEARCH
 Plug 'junegunn/fzf',
             \ { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-                                               " THEME AND STATUSLINE
+" THEME AND STATUSLINE
 Plug 'altercation/vim-colors-solarized'        " Solarized theme for vim
 Plug 'vim-airline/vim-airline'                 " Status line configuration
 Plug 'vim-airline/vim-airline-themes'          " Status line themes
 Plug 'edkolev/tmuxline.vim'                    " Makes tmux status line match vim status line
 
-                                               " GIT PLUGINS
+" GIT PLUGINS
 Plug 'airblade/vim-gitgutter'                  " Shows changed lines compared to last git commit
 Plug 'tpope/vim-fugitive'                      " Git wrapper
 Plug 'shumphrey/fugitive-gitlab.vim'           " GitLab fugitive handler
 Plug 'tpope/vim-rhubarb'                       " Github fugitive handler
 
-                                               " MY PLUGGINS
+" MY PLUGGINS
 Plug 'https://innersource.soprasteria.com/NO-Applications-SAP/deoplete-sap-icon.git'
 
 call plug#end()
