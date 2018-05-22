@@ -60,6 +60,7 @@ source deactivate
 # Linters
 npm install -g eslint
 npm install jsonlint -g
+npm install -g csslint
 pip3 install vim-vint
 brew install shellcheck
 
