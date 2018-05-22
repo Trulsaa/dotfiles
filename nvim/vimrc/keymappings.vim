@@ -27,7 +27,7 @@ nnoremap L 5L
 command! H Helptags
 
 " SapUI5 helper commands
-command! IconExplorer :!open "https://sapui5.hana.ondemand.com/sdk/iconExplorer.html"
+command! IconExplorer :!open "https://openui5.hana.ondemand.com/test-resources/sap/m/demokit/iconExplorer/webapp/index.html"
 command! SapUI5 :!open "https://sapui5.hana.ondemand.com"
 command! SapNaming :!oigc ~/Projects/sapui5/Zolid-Naming-Conventions/Naming_Conventions.md
 
