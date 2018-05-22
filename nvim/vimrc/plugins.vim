@@ -70,6 +70,8 @@ Plug 'heavenshell/vim-jsdoc'                   " JsDoc helper
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx'                             " JSX Highlighting
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
+Plug 'Galooshi/vim-import-js'                  " Import dependencies
+            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 
 " CSS
 Plug 'ap/vim-css-color',                       " color colornames and codes
