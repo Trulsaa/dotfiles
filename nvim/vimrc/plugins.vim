@@ -12,7 +12,8 @@ call plug#begin()
 
 Plug 'christoomey/vim-sort-motion'             " Sort object
 Plug 'jiangmiao/auto-pairs'                    " Insert or delete brackets, parens, quotes in pair.
-Plug 'neomake/neomake'                         " Used to run code linters
+" Plug 'neomake/neomake'                         " Used to run code linters
+Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree',                    " Filetree
             \ { 'on': 'NERDTreeToggle' }
 Plug 'tmhedberg/SimpylFold'                    " Fold functions
@@ -42,7 +43,8 @@ Plug 'editorconfig/editorconfig-vim'           " Makes use of editorconfig files
 Plug 'tpope/vim-eunuch'                        " UNIX shell commands for vim
 Plug 'tpope/vim-projectionist'                 " Projection and alternate navigation
 Plug 'tpope/vim-obsession'                     " Auto restore vim sessions
-
+" Plug 'prettier/vim-prettier',                  " Automatic formatting of files on save
+"             \ { 'do': 'npm install' }
                                                " ABAP
 Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
             \ { 'for': 'abap' }

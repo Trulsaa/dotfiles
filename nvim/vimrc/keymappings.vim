@@ -38,3 +38,6 @@ nmap <Leader>cp <Plug>GitGutterPreviewHunk
 
 " Projections alternate binding
 map <Leader>a :A<cr>
+
+" ALE
+nmap <Leader>p <Plug>(ale_fix)

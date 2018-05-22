@@ -11,13 +11,6 @@ inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 map <Leader>t :NERDTreeToggle<CR>
 let g:NERDTreeShowHidden=1 " Show hidden files
 
-" Neomake settings
-let g:neomake_javascript_enabled_makers = ['eslint']
-augroup neomake_on_bufwrite
-  autocmd!
-  autocmd BufWritePost * Neomake
-augroup END
-
 " vim-easy-align mappings
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -56,3 +49,9 @@ let g:user_emmet_settings={
             \      'extends':'jsx',
             \  },
             \}
+
+" Ale
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['json'] = ['prettier']
+let g:ale_javascript_prettier_use_local_config = 1
