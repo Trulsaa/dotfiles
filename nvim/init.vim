@@ -7,7 +7,7 @@ syntax enable             " enable syntax highlighting
 colorscheme solarized     " solarized colorscheme
 set background=dark       " solarized dark
 set expandtab             " to insert space characters whenever the tab key is pressed
-set shiftwidth=4          " number of spaces used when indenting
+set shiftwidth=2          " number of spaces used when indenting
 set softtabstop=4         " number of spaces used when indenting using tab
 set tabstop=4             " Number of spaces that a <Tab> in the file counts for
 set fileencodings=utf-8   " set output encoding of the file that is written
