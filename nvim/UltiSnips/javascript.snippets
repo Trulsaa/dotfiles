@@ -46,3 +46,37 @@ endsnippet
 snippet bc "{ /* comment */ }"
 { /* $1 */ }
 endsnippet
+
+snippet const "description"
+constructor() {
+  
+}
+endsnippet
+
+snippet test "test('Should' () => {})"
+test("$1", () => {
+	expect("test").toEqual("feil");
+})
+endsnippet
+
+snippet cdm "component did mount" b
+componentDidMount() {
+	${1}
+}$0
+endsnippet
+
+snippet pt "propTypes" b
+static propTypes = {
+	${1}: React.PropTypes.${2:string}.isRequired
+}
+endsnippet
+
+snippet fpt "function component propTypes" b
+${1:function_name}.propTypes = {
+	${2}: React.PropTypes.${3:string}.isRequired
+}
+endsnippet
+
+snippet imp "import react component"
+import $1 from './$1'
+endsnippet
