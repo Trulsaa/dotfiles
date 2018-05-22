@@ -12,7 +12,6 @@ call plug#begin()
 
 Plug 'christoomey/vim-sort-motion'             " Sort object
 Plug 'jiangmiao/auto-pairs'                    " Insert or delete brackets, parens, quotes in pair.
-" Plug 'neomake/neomake'                         " Used to run code linters
 Plug 'w0rp/ale'
 Plug 'scrooloose/nerdtree',                    " Filetree
             \ { 'on': 'NERDTreeToggle' }
@@ -22,8 +21,6 @@ Plug 'tpope/vim-repeat'                        " Enable . repeating for more
 Plug 'tpope/vim-surround'                      " Surround objects with anything
 Plug 'yuttie/comfortable-motion.vim'           " Physics-based smooth scrolling
 Plug 'christoomey/vim-tmux-navigator'          " Navigate seamlessly between vim and tmux
-Plug 'junegunn/goyo.vim'                       " Destraction free writing
-Plug 'craigemery/vim-autotag'                  " Autoupdate ctags
 Plug 'junegunn/vim-easy-align'                 " Alignment on any character
 Plug 'sickill/vim-pasta'                       " Context aware pasting
 Plug 'Yggdroot/indentLine'                     " Indent guides
@@ -35,15 +32,14 @@ Plug 'wincent/terminus'                        " Cursor shape change in insert a
                                                " Focus reporting (Reload buffer on focus if it has been changed externally )
                                                " Bracketed Paste mode
 Plug 'junegunn/vim-peekaboo'                   " See the contents of the registers
-Plug 'junegunn/limelight.vim'                  " Syntax highlighting only for focused paragraph
 Plug 'vim-scripts/vim-auto-save'               " Enables auto save
 Plug 'ntpeters/vim-better-whitespace'          " Highlight trailing whitespace in red
-Plug 'mklabs/grunt.vim'                        " Grunt wrapper
 Plug 'editorconfig/editorconfig-vim'           " Makes use of editorconfig files
 Plug 'tpope/vim-eunuch'                        " UNIX shell commands for vim
 Plug 'tpope/vim-projectionist'                 " Projection and alternate navigation
 Plug 'tpope/vim-obsession'                     " Auto restore vim sessions
 Plug 'deathlyfrantic/deoplete-spell'           " Spell sugestions
+
                                                " ABAP
 Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
             \ { 'for': 'abap' }
@@ -52,12 +48,6 @@ Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
 Plug 'mattn/emmet-vim'                         " Autocompletion for html
 
                                                " JAVASCRIPT
-Plug 'metakirby5/codi.vim',                    " Inline evaluation of javascript
-            \ { 'for': ['javascript', 'javascript.jsx'] }
-" Plug 'jelera/vim-javascript-syntax',           " Enhanced JavaScript Syntax for Vim
-"             \ { 'for': ['javascript', 'javascript.jsx'] }
-" Plug 'othree/javascript-libraries-syntax.vim', " JavaScript highlighting
-"             \ { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript',                " JavaScript highlighting
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 Plug 'carlitux/deoplete-ternjs',               " The autocomplete dropdown
@@ -108,9 +98,7 @@ Plug 'ternjs/tern_for_vim',                    " Tern server
             \ 'for': ['javascript', 'javascript.jsx'] }
 Plug 'SirVer/ultisnips'                        " Snippet engine
 Plug 'honza/vim-snippets'                      " Snippet library
-Plug 'fszymanski/deoplete-emoji'               " Completion of emoji codes
 Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent tmux panes
-" Plug 'thalesmello/webcomplete.vim'             " Completes words from the currently open web page
 Plug 'Shougo/deoplete.nvim',                   " Autocomplete engine
             \ { 'do': ':UpdateRemotePlugins' }       " Load last because of :UpdateReomotePlugins
 
