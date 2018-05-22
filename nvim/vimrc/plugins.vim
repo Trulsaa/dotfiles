@@ -76,6 +76,10 @@ Plug 'Galooshi/vim-import-js'                  " Import dependencies
 Plug 'ap/vim-css-color',                       " color colornames and codes
             \ { 'for': 'css' }
 
+                                               " PUG
+Plug 'digitaltoad/vim-pug'                     " Highlighting
+            \ { 'for': 'pug' }
+
 " MARKDOWN
 Plug 'plasticboy/vim-markdown',                " Markdown extras
             \ { 'for': 'markdown' }
