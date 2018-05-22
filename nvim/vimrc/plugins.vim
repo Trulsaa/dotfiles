@@ -50,7 +50,7 @@ Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
             \ { 'for': 'abap' }
 
                                                " HTML / JSX
-Plug 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'                         " Autocompletion for html
 
                                                " JAVASCRIPT
 Plug 'metakirby5/codi.vim',                    " Inline evaluation of javascript
