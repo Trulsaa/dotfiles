@@ -62,6 +62,11 @@ Plug 'mxw/vim-jsx'                             " JSX Highlighting
 Plug 'Galooshi/vim-import-js'                  " Import dependencies
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 
+                                               " TYPESCRIPT
+                                               " Autocompletion
+Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
+Plug 'leafgarland/typescript-vim'              " Syntax highlighting
+
 " CSS
 Plug 'ap/vim-css-color',                       " color colornames and codes
             \ { 'for': 'css' }
