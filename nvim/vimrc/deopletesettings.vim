@@ -32,8 +32,3 @@ let g:deoplete#sources#jedi#debug_server = 1
 
 " Deoplete sources
 set completeopt=longest,menuone,preview
-
-" Deoplete emoji settings
-call deoplete#custom#set(
-      \ 'emoji',
-      \ 'filetypes', ['gitcommit', 'markdown', 'javascript', 'html'])
