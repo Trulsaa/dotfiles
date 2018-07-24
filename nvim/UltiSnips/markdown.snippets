@@ -3,11 +3,15 @@ priority -50
 ###########################
 # Div                     #
 ###########################
-snippet cb "Checkbox" b
+snippet "-\s" "Checkbox" r
 - [ ] ${1:TODO item}
 endsnippet
 
-snippet cbll "Codeblock" b
+snippet "\*\s" "Checkbox" r
+* [ ] ${1:TODO item}
+endsnippet
+
+snippet cb "Codeblock" b
 \`\`\`${1:Language}
 $2
 \`\`\`
