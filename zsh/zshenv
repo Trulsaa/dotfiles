@@ -78,3 +78,20 @@ function server {
 }
 
 alias pserver="python -m SimpleHTTPServer"
+
+
+# zsh script checks first if there were any commits done
+#   by author yesterday. If there were, return those. If
+#   there weren't, look for all commits since last Friday
+#   at midnight as it may have been a weekend.
+
+gitstandup() {
+  NAME=$(git config user.name)
+  if [ -z "$(git log --all --pretty=format:'* %s' --no-merges --reverse --author="$NAME" --since=yesterday.midnight)" ]; then
+    git log --all --pretty=format:'* %s' --no-merges --reverse --author="$NAME" --since=last.friday.midnight;
+  else
+    git log --all --pretty=format:'* %s' --no-merges --reverse --author="$NAME" --since=yesterday.midnight;
+  fi
+}
+
+alias gtsu='gitstandup'
