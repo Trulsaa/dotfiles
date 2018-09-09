@@ -1,56 +1,7 @@
 priority -50
 
-############
-#  COMMON  #
-############
-
-# The smart snippets use a global options called
-# "g:ultisnips_javascript.{option}" which can control the format
-# of trailing semicolon, space before function paren, etc.
-#
-# e.g.
-# let g:ultisnips_javascript = {
-#      \ 'keyword-spacing': 'always',
-#      \ 'semi': 'never',
-#      \ 'space-before-function-paren': 'always',
-#      \ }
-
-
-global !p
-from javascript_snippets import (
-	semi, space_before_function_paren, keyword_spacing
-)
-endglobal
-
-###########################################################################
-
-snippet cf "Function assigned to const"
-const ${1:function_name} = function $1`!p snip.rv = space_before_function_paren(snip)`($2) {
-	${VISUAL}$0
-}`!p snip.rv = semi(snip)`
-endsnippet
-
 snippet cl "Console log"
 console.log($1)
-endsnippet
-
-# React snippets
-snippet arr "Arrow Function" w
-($1) => {$0}
-endsnippet
-
-snippet t "<tag />" w
-<$1 />
-endsnippet
-
-snippet bc "{ /* comment */ }"
-{ /* $1 */ }
-endsnippet
-
-snippet const "description"
-constructor() {
-  
-}
 endsnippet
 
 snippet test "test('Should' () => {})"
@@ -59,24 +10,20 @@ test("$1", () => {
 })
 endsnippet
 
-snippet cdm "component did mount" b
-componentDidMount() {
-	${1}
-}$0
-endsnippet
-
-snippet pt "propTypes" b
-static propTypes = {
-	${1}: React.PropTypes.${2:string}.isRequired
-}
-endsnippet
-
-snippet fpt "function component propTypes" b
-${1:function_name}.propTypes = {
-	${2}: React.PropTypes.${3:string}.isRequired
-}
-endsnippet
-
 snippet imp "import react component"
 import $1 from './$1'
+endsnippet
+
+snippet if "if (condition) { ... }"
+if (${1:true}) {
+	${VISUAL}$0
+}
+endsnippet
+
+snippet ife "if (condition) { ... } else { ... }"
+if (${1:true}) {
+	${VISUAL}$0
+} else {
+	${2}
+}
 endsnippet
