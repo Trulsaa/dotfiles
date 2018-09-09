@@ -102,7 +102,6 @@ Plug 'ternjs/tern_for_vim',                    " Tern server
             \ { 'do': 'npm install',
             \ 'for': ['javascript', 'javascript.jsx'] }
 Plug 'SirVer/ultisnips'                        " Snippet engine
-Plug 'honza/vim-snippets'                      " Snippet library
 Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent tmux panes
 Plug 'Shougo/deoplete.nvim',                   " Autocomplete engine
             \ { 'do': ':UpdateRemotePlugins' }       " Load last because of :UpdateReomotePlugins
