@@ -25,3 +25,8 @@ command! -bang -nargs=* Ag
 " Created new GitLsFiles that does the same as GFiles with a preview
 command! -bang -nargs=0 -complete=dir GitLsFiles
   \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
