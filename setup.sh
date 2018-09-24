@@ -29,7 +29,8 @@ brew install \
     translate-shell \
     wiki \
     z \
-    pyenv
+    pyenv \
+    fd
 
 # QuickLook plugins
 brew cask install \
