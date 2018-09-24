@@ -4,10 +4,20 @@ snippet cl "Console log"
 console.log($1)
 endsnippet
 
-snippet test "test('Should' () => {})"
-test("$1", () => {
+snippet test "test('Should', () => {})"
+test("Should $1", () => {
 	expect("test").toEqual("feil");
 })
+endsnippet
+
+snippet desc "describe('$1', () => {...})"
+describe("$1", () => {
+  beforeEach(() => {});
+
+  test( "Should", () => {
+	expect("noe").toEqual("annet");
+  });
+});
 endsnippet
 
 snippet imp "import react component"
@@ -25,5 +35,11 @@ if (${1:true}) {
 	${VISUAL}$0
 } else {
 	${2}
+}
+endsnippet
+
+snippet foro "Iterate an iterable"
+for (let ${1:x} of ${2:y}) {
+  $0
 }
 endsnippet
