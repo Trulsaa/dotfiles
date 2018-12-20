@@ -1,0 +1,25 @@
+priority -50
+
+extends javascript
+
+snippet eint "export interface"
+export interface $1 {
+
+}
+endsnippet
+
+snippet ria "runInAction"
+runInAction(() => {$1})
+endsnippet
+
+snippet comp "@computed"
+@computed
+get $1() {
+  $0
+}
+endsnippet
+
+snippet dec "decorate"
+decorate($1, {
+});
+endsnippet
