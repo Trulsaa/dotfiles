@@ -188,7 +188,7 @@ fkill() {
 # and display a info quickview window for the currently marked application
 install() {
     local token
-    token=$(brew cask search | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
+    token=$(brew search --casks | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
 
     if [ "x$token" != "x" ]
     then
