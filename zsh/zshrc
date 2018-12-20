@@ -131,17 +131,25 @@ function oigc() {
 # tmux colour enabling
 alias tmux="TERM=screen-256color-bce tmux"
 
-# fh - repeat history
-fh() {
-  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
-}
+git-fshow() {
+	local g=(
+		git log
+		--graph
+		--format='%C(auto)%h%d %s %C(white)%C(bold)%cr'
+		--color=always
+		"$@"
+	)
 
-# fd - cd to selected directory
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-    -o -type d -print 2> /dev/null | fzf +m) &&
-    cd "$dir"
+	local fzf=(
+		fzf
+		--ansi
+		--reverse
+		--tiebreak=index
+		--no-sort
+		--bind=ctrl-s:toggle-sort
+		--preview 'f() { set -- $(echo -- "$@" | grep -o "[a-f0-9]\{7\}"); [ $# -eq 0 ] || git show --color=always $1; }; f {}'
+	)
+	$g | $fzf
 }
 
 # fda - including hidden directories
