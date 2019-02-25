@@ -38,6 +38,7 @@ Plug 'tpope/vim-eunuch'                        " UNIX shell commands for vim
 Plug 'tpope/vim-projectionist'                 " Projection and alternate navigation
 Plug 'tpope/vim-obsession'                     " Auto restore vim sessions
 Plug 'deathlyfrantic/deoplete-spell'           " Spell sugestions
+Plug 'machakann/vim-highlightedyank'           " Highlight yanked text
 
                                                " ABAP
 Plug 'vim-scripts/ABAP.vim',                   " ABAP highlighting
