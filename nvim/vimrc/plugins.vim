@@ -67,9 +67,11 @@ Plug 'Galooshi/vim-import-js'                  " Import dependencies
 Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
 Plug 'leafgarland/typescript-vim'              " Syntax highlighting
 
-" CSS
+                                               " CSS
 Plug 'ap/vim-css-color',                       " color colornames and codes
             \ { 'for': 'css' }
+Plug 'styled-components/vim-styled-components'," Syntax highlighting for css in styled components
+            \ { 'branch': 'main' }
 
                                                " PUG
 Plug 'digitaltoad/vim-pug'                     " Highlighting
