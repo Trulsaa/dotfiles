@@ -7,10 +7,6 @@ let g:UltiSnipsExpandTrigger='<C-Space>'
 let g:UltiSnipsJumpForwardTrigger='<C-Space>'
 inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-" NERDTree settings
-map <Leader>t :NERDTreeToggle<CR>
-let g:NERDTreeShowHidden=1 " Show hidden files
-
 " vim-easy-align mappings
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)

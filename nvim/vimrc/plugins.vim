@@ -13,8 +13,7 @@ call plug#begin()
 Plug 'christoomey/vim-sort-motion'             " Sort object
 Plug 'jiangmiao/auto-pairs'                    " Insert or delete brackets, parens, quotes in pair.
 Plug 'w0rp/ale'
-Plug 'scrooloose/nerdtree',                    " Filetree
-            \ { 'on': 'NERDTreeToggle' }
+Plug 'tpope/vim-vinegar'                       " Add functionality to netrw
 Plug 'tmhedberg/SimpylFold'                    " Fold functions
 Plug 'tpope/vim-commentary'                    " Comment objects
 Plug 'tpope/vim-repeat'                        " Enable . repeating for more
