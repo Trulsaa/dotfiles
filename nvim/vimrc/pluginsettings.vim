@@ -47,17 +47,29 @@ let g:user_emmet_settings={
             \}
 
 " Ale
+let g:ale_linters_explicit = 1
+let g:ale_linters = {}
+let g:ale_linters['go'] = ['gofmt']
+let g:ale_linters['javascript'] = ['eslint']
+let g:ale_linters['python'] = ['pylint']
+" let g:ale_linters = {'typescript': ['tsserver', 'tslint']}
+"
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['json'] = ['prettier']
 let g:ale_fixers['typescript'] = ['prettier']
 let g:ale_fixers['markdown'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
+let g:ale_fixers['html'] = ['prettier']
 let g:ale_fixers['go'] = ['gofmt']
 
-let g:ale_linters = {}
-let g:ale_linters['go'] = ['gofmt']
 let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_echo_msg_format = '%linter% - %severity% - %code: %%s'
+
+" nvim-typescript
+let g:nvim_typescript#max_completion_detail = 100
+" let g:nvim_typescript#diagnostics_enable = 0
+
 " vim-go
 let g:go_fmt_autosave = 0
 let g:deoplete#sources#go#gocode_binary = '~/Projects/go/bin/gocode'
