@@ -93,6 +93,14 @@ Plug 'zchee/deoplete-jedi'                     " Autocomplete (pip install jedi)
 Plug 'nvie/vim-flake8'                         " Linting
             \ { 'for': 'python' }
 
+" GO
+Plug 'fatih/vim-go'                            " Div Go comands
+            \ { 'do': ':GoUpdateBinaries'
+            \ 'for': 'go'}
+Plug 'zchee/deoplete-go'                       " Autocomplete
+            \ { 'do': 'make'
+            \ 'for': 'go'}
+
 " TEXTOBJECTS
 Plug 'kana/vim-textobj-entire'                 " Creates an object of the entire buffer
 Plug 'kana/vim-textobj-indent'                 " Creates an object of the current indent level

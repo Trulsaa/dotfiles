@@ -53,4 +53,13 @@ let g:ale_fixers['json'] = ['prettier']
 let g:ale_fixers['typescript'] = ['prettier']
 let g:ale_fixers['markdown'] = ['prettier']
 let g:ale_fixers['css'] = ['prettier']
+let g:ale_fixers['go'] = ['gofmt']
+
+let g:ale_linters = {}
+let g:ale_linters['go'] = ['gofmt']
 let g:ale_javascript_prettier_use_local_config = 1
+" vim-go
+let g:go_fmt_autosave = 0
+let g:deoplete#sources#go#gocode_binary = '~/Projects/go/bin/gocode'
+let g:deoplete#sources#go#builtin_objects = 1
+let g:deoplete#sources#go#unimported_packages = 1

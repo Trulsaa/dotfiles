@@ -235,3 +235,5 @@ alias hrun="how-to-npm run $1 > out.md"
 alias hverify="how-to-npm verify $1 > out.md"
 alias hnext="how-to-npm next > Exercise.md"
 
+
+export GOPATH=$HOME/Projects/go
