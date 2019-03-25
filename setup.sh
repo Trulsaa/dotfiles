@@ -30,7 +30,8 @@ brew install \
     wiki \
     z \
     pyenv \
-    fd
+    fd \
+    git-lfs
 
 # QuickLook plugins
 brew cask install \
