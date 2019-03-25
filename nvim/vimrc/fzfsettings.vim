@@ -11,8 +11,6 @@ map <Leader>l :Ag<cr>
 map <Leader>H :Helptags<cr>
 map <Leader>m :Marks<cr>
 map <Leader>g :GFiles?<cr>
-map <Leader>s :Snippets<cr>
-map <Leader>S :Files ~/Projects/sapui5/sapui5-snippets<cr>
 
 " Files command with preview window
 command! -bang -nargs=? -complete=dir Files
