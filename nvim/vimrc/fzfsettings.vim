@@ -4,7 +4,7 @@ augroup fzf_esc_close
   autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
 augroup END
 
-map <Leader>f :GitLsFiles<cr>
+map <expr> <Leader>f system('git rev-parse --is-inside-work-tree') =~ 'true' ? ':GitLsFiles<cr>' : ':Files<cr>'
 map <Leader>F :Files
 map <Leader>b :Buffers<cr>
 map <Leader>l :Ag<cr>
