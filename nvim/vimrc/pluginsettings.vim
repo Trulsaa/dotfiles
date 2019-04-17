@@ -49,7 +49,7 @@ let g:ale_linters = {}
 let g:ale_linters['go'] = ['gofmt']
 let g:ale_linters['javascript'] = ['eslint']
 let g:ale_linters['python'] = ['pylint']
-" let g:ale_linters = {'typescript': ['tsserver', 'tslint']}
+let g:ale_linters = {'typescript': ['eslint']}
 "
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
