@@ -18,9 +18,6 @@ let g:indentLine_fileTypeExclude = ['help', 'markdown', 'abap', 'vim', 'json', '
 let g:indentLine_bufNameExclude=['NERD_tree.*']
 let g:indentLine_char = '⎸▏'
 
-" Gist settins
-let g:gist_post_private = 1 " Gists are secret by default
-
 " Airline settings
 set noshowmode " Disable showing of mode in command line
 
