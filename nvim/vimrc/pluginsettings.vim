@@ -64,8 +64,8 @@ let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_echo_msg_format = '%linter% - %severity% - %code: %%s'
 
 " nvim-typescript
-let g:nvim_typescript#max_completion_detail = 100
-" let g:nvim_typescript#diagnostics_enable = 0
+let g:nvim_typescript#max_completion_detail = 20
+let g:nvim_typescript#diagnostics_enable = 0
 
 " vim-go
 let g:go_fmt_autosave = 0
