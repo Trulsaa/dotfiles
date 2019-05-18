@@ -95,35 +95,8 @@ eval "$(pyenv virtualenv-init -)"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Debrif Navn_på_fotograf
-function Debrif {
-  ~/Documents/Scripts/skydive-video-handling/Debrif $1
-}
-
-# abapruv abap.abp
-function abapruv {
-  ~/Documents/ABAP/Scripts/Remove-unused-declarations/Remove_unused_declarations $1
-}
-
-function testing {
-  ~/Documents/Scripts/Script\ template $1
-}
-
-# catpdf all.pdf *.pdf
-alias catpdf="/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py --verbose --output"
 alias lg1="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias lg2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
-
-#Play musix
-alias m="~/Documents/Scripts/Musikk/Controle\ Music.sh"
-
-#Send email
-alias e="~/Documents/Scripts/Email/Send_sp_mail.sh"
-
-#Open in Google Chrome
-function oigc() {
-  open $1 -a "Google Chrome"
-}
 
 git-fshow() {
 	local g=(
