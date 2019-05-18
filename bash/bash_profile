@@ -1,5 +1,3 @@
-echo  "Welcome, Mr. T"
-
 # Oppdater .bash_profile slik at det nye som er skrevet kan brukes i nåværende terminal session
 # source ~/.bash_profile
 
