@@ -40,5 +40,5 @@ function! s:escaped(first, last) abort
 endfunction
 
 function! s:NetrwMapping() abort
-  nnoremap <buffer> <Leader>w :<C-U> <C-R>=<SID>escaped(line('.'), line('.') - 1 + v:count1)<CR><Home>silent !qlmanage -p<CR>
+  nnoremap <buffer> <Leader>q :<C-U> <C-R>=<SID>escaped(line('.'), line('.') - 1 + v:count1)<CR><Home>silent !qlmanage -p<CR>
 endfunction
