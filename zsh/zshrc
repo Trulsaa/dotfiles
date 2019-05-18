@@ -185,7 +185,7 @@ uninstall() {
         if [ $input = "u" ] || [ $input = "U" ]; then
             brew cask uninstall $token
         fi
-        if [ $input = "h" ] || [ $token = "h" ]; then
+        if [ $input = "h" ] || [ $token = "H" ]; then
             brew cask home $token
         fi
     fi
