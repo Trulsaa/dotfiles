@@ -224,10 +224,4 @@ export FZF_DEFAULT_OPS="--extended"
 export FZF_DEFAULT_COMMAND="fd --type f"
 export FZF_CTRL_T_COMMAND="$FZF_CTRL_T_COMMAND"
 
-alias hprint="how-to-npm print > Exercise.md"
-alias hrun="how-to-npm run $1 > out.md"
-alias hverify="how-to-npm verify $1 > out.md"
-alias hnext="how-to-npm next > Exercise.md"
-
-
 export GOPATH=$HOME/Projects/go
