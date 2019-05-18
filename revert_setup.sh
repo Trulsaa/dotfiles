@@ -84,7 +84,6 @@ brew uninstall \
     python3 \
     tidy-html5 \
     tree \
-    ranger \
     trash \
     highlight \
     reattach-to-user-namespace \

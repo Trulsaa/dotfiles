@@ -96,8 +96,6 @@ ln -sF "$PWD"/nvim/ftplugin ~/.config/nvim/ftplugin
 ln -sf "$PWD"/nvim/init.vim ~/.config/nvim/init.vim
 ln -sF "$PWD"/nvim/vimrc ~/.config/nvim/vimrc
 ln -sf "$PWD"/oh-my-zsh/oh-my-zsh.sh ~/.oh-my-zsh.sh
-mkdir ~/.config/ranger
-ln -sf "$PWD"/ranger/rc.conf ~/.config/ranger/rc.conf
 ln -sf "$PWD"/tmux/mac/tmux.conf ~/.tmux.conf
 ln -sf "$PWD"/zsh/zshenv ~/.zshenv
 ln -sf "$PWD"/zsh/zshrc ~/.zshrc
