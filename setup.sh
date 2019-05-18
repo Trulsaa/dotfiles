@@ -1,18 +1,20 @@
 #!/bin/sh
 
-# Installation notes
+# !!!. RUN THIS SCRIPT FROM WITHIN THE REPO FOLDER. (because of the symlinking)
+if [ ! -f setup.sh ]; then
+  echo "Run the script from within the dotfiles repo!!!"
+  exit 1
+fi
 
-# 1. Install iTerm from website
-# 2. Run the following command which installs Homebrew and git:
-# /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && brew install git
-# 3. Download this repo
-# 4. Run this script from this repos folder.
+# Install Homebrew
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Update gem
 sudo /usr/bin/gem update --system
 
 # Have brew install many things
-brew install \
+brew install
+    git \
     wget \
     tmux \
     node \
@@ -35,6 +37,7 @@ brew install \
 
 # QuickLook plugins
 brew cask install \
+    iterm2 \
     qlcolorcode \
     qlstephen \
     qlmarkdown \
@@ -61,7 +64,7 @@ source deactivate
 
 # Linters
 npm install -g eslint
-npm install jsonlint -g
+npm install -g jsonlint
 npm install -g csslint
 pip3 install vim-vint
 brew install shellcheck
