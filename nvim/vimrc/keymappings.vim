@@ -52,3 +52,6 @@ nmap <Leader>q <Plug>window:quickfix:toggle
 
 " Search for selected text using git grep in current project
 vnoremap <Leader>s y:Ggrep "<c-r>""
+
+" vim-test
+nmap <Leader>t :TestNearest<CR>

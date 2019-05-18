@@ -72,3 +72,7 @@ let g:go_fmt_autosave = 0
 let g:deoplete#sources#go#gocode_binary = '~/Projects/go/bin/gocode'
 let g:deoplete#sources#go#builtin_objects = 1
 let g:deoplete#sources#go#unimported_packages = 1
+
+" vim-test
+let test#strategy = "neovim"
+let test#neovim#term_position = "vsplit"

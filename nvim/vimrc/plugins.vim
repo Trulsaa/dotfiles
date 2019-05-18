@@ -35,6 +35,7 @@ Plug 'tpope/vim-eunuch'                        " UNIX shell commands for vim
 Plug 'tpope/vim-projectionist'                 " Projection and alternate navigation
 Plug 'machakann/vim-highlightedyank'           " Highlight yanked text
 Plug 'drmingdrmer/vim-toggle-quickfix'         " Toggle Quickfix Window
+Plug 'janko-m/vim-test'
 
                                                " TEXTOBJECTS
 Plug 'kana/vim-textobj-indent'                 " Creates an object of the current indent level
