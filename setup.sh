@@ -63,7 +63,6 @@ pip install neovim
 source deactivate
 
 # Linters
-npm install -g eslint
 npm install -g jsonlint
 npm install -g csslint
 pip3 install vim-vint
@@ -89,7 +88,6 @@ rm -rf Cobalt2-iterm
 # Symlink dotfiles
 mkdir ~/.config
 ln -sf "$PWD"/bash/bash_profile ~/.bash_profile
-ln -sf "$PWD"/eslint/eslintrc ~/.eslintrc
 ln -sf "$PWD"/git/gitconfig ~/.gitconfig
 ln -sf "$PWD"/git/global_ignore ~/.global_ignore
 mkdir ~/.config/nvim
