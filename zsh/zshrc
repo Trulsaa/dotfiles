@@ -218,7 +218,16 @@ uninstall() {
     fi
 }
 
+# Shell in vim mode
+bindkey -v
+
+bindkey '^?' backward-delete-char
+export KEYTIMEOUT=1
+bindkey -M vicmd "k" history-beginning-search-backward
+bindkey -M vicmd "j" history-beginning-search-forward
+
 # Load fzf settings
+set -o vi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPS="--extended"
 export FZF_DEFAULT_COMMAND="fd --type f"
