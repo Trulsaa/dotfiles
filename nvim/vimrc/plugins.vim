@@ -42,69 +42,6 @@ Plug 'kana/vim-textobj-indent'                 " Creates an object of the curren
 Plug 'kana/vim-textobj-line'                   " Creates the line object to exclude whitespace before the line start
 Plug 'kana/vim-textobj-user'                   " Enables the creation of new objects
 
-                                               " HTML / JSX
-Plug 'mattn/emmet-vim'                         " Autocompletion for html
-
-                                               " JAVASCRIPT
-Plug 'pangloss/vim-javascript',                " JavaScript highlighting
-            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
-Plug 'carlitux/deoplete-ternjs',               " The autocomplete dropdown
-            \ { 'do': 'npm install -g tern',
-            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
-Plug 'othree/jspc.vim',                        " JavaScript Parameter Complete
-            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
-Plug 'mxw/vim-jsx'                             " JSX Highlighting
-            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
-Plug 'Galooshi/vim-import-js'                  " Import dependencies
-            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
-
-                                               " TYPESCRIPT
-                                               " Autocompletion
-Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
-Plug 'leafgarland/typescript-vim'              " Syntax highlighting
-
-                                               " CSS
-Plug 'ap/vim-css-color',                       " color colornames and codes
-            \ { 'for': 'css' }
-Plug 'styled-components/vim-styled-components'," Syntax highlighting for css in styled components
-            \ { 'branch': 'main' }
-
-                                               " MARKDOWN
-Plug 'plasticboy/vim-markdown',                " Markdown extras
-            \ { 'for': 'markdown' }
-
-                                               " VIM
-Plug 'Shougo/neco-vim',                        " Completions for Vim commands
-            \ { 'for': 'vim' }
-
-                                               " PYTHON
-Plug 'vim-scripts/indentpython.vim'            " Indentation
-            \ { 'for': 'python' }
-Plug 'zchee/deoplete-jedi'                     " Autocomplete (pip install jedi)
-            \ { 'for': 'python' }
-Plug 'nvie/vim-flake8'                         " Linting
-            \ { 'for': 'python' }
-
-                                               " GO
-Plug 'fatih/vim-go'                            " Div Go comands
-            \ { 'do': ':GoUpdateBinaries'
-            \ 'for': 'go'}
-Plug 'zchee/deoplete-go'                       " Autocomplete
-            \ { 'do': 'make'
-            \ 'for': 'go'}
-
-                                               " GraphQL
-Plug 'jparise/vim-graphql'                     " Syntax highlighting
-
-                                               " AUTOCOMPLETE
-Plug 'ternjs/tern_for_vim',                    " Tern server
-            \ { 'do': 'npm install',
-            \ 'for': ['javascript', 'javascript.jsx'] }
-Plug 'SirVer/ultisnips'                        " Snippet engine
-Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent tmux panes
-Plug 'Shougo/deoplete.nvim',                   " Autocomplete engine
-            \ { 'do': ':UpdateRemotePlugins' }       " Load last because of :UpdateReomotePlugins
-
                                                " FUZZY FILESEARCH
 Plug 'junegunn/fzf',
             \ { 'dir': '~/.fzf', 'do': './install --all' }

@@ -57,8 +57,5 @@ hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gu
 " SOURCES
 source ~/.config/nvim/vimrc/hiddenfiles.vim
 source ~/.config/nvim/vimrc/keymappings.vim
-source ~/.config/nvim/vimrc/deopletesettings.vim
 source ~/.config/nvim/vimrc/pluginsettings.vim
-source ~/.config/nvim/vimrc/qlnetrw.vim
 source ~/.config/nvim/vimrc/fzfsettings.vim
-source ~/.env
