@@ -55,9 +55,6 @@ HIST_STAMPS="mm.dd.yyyy"
 
 source $ZSH/oh-my-zsh.sh
 
-# include Z
-. /usr/local/etc/profile.d/z.sh
-
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
