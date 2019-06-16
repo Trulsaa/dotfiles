@@ -20,12 +20,9 @@ let g:deoplete#sources#ternjs#filetypes = ['jsx', 'javascript.jsx']
 let g:deoplete#sources#ternjs#docs = 1
 
 " Deoplete omni settings
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-      \ 'tern#Complete',
-      \ 'jspc#omni',
-      \ 'rhubarb#omnifunc'
-      \]
+call deoplete#custom#source('omni', 'functions', {
+    \ 'javascript': ['tern#Complete', 'jspc#omni'],
+    \})
 
 " Deoplete python jedi settings
 let g:deoplete#sources#jedi#debug_server = 1
