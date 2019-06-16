@@ -10,9 +10,10 @@ WORKDIR /usr/src
 # Update and install
 RUN apt-get update && apt-get install -y \
   software-properties-common \
+  xclip \
   wget \
-  nodejs \
-  npm \
+  # nodejs \
+  # npm \
   curl \
   tmux \
   git \
@@ -21,14 +22,19 @@ RUN apt-get update && apt-get install -y \
   silversearcher-ag \
   zsh \
   && \
+  rm -rf /var/lib/apt/lists/* \
+  && \
+  # Install oh-my-zsh
+  wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true \
+  && \
+  chsh -s $(which zsh) \
+  && \
   # Install the powerline fonts
   git clone https://github.com/powerline/fonts.git --depth=1 \
   && \
   ./fonts/install.sh \
   && \
   rm -rf fonts \
-  && \
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" \
   && \
   # Download and install the Cobalt2 theme for zsh
   git clone https://github.com/wesbos/Cobalt2-iterm.git \
@@ -37,9 +43,12 @@ RUN apt-get update && apt-get install -y \
   && \
   rm -rf Cobalt2-iterm \
   && \
+  # Get dotfiles and symlink
   git clone https://github.com/Trulsaa/dotfiles.git \
   && \
-  ln -sf "$PWD"/bash/bash_profile ~/.bash_profile \
+  cd dotfiles \
+  && \
+  git checkout dockerEnv \
   && \
   ln -sf "$PWD"/git/gitconfig ~/.gitconfig \
   && \
@@ -51,8 +60,8 @@ RUN apt-get update && apt-get install -y \
   && \
   ln -sF "$PWD"/nvim/UltiSnips ~/.config/nvim/UltiSnips \
   && \
-  ln -sF "$PWD"/nvim/ftplugin ~/.config/nvim/ftplugin \
-  && \
+  # ln -sF "$PWD"/nvim/ftplugin ~/.config/nvim/ftplugin \
+  # && \
   ln -sf "$PWD"/nvim/init.vim ~/.config/nvim/init.vim \
   && \
   ln -sF "$PWD"/nvim/vimrc ~/.config/nvim/vimrc \
@@ -65,4 +74,4 @@ RUN apt-get update && apt-get install -y \
   && \
   ln -sf "$PWD"/zsh/zshrc ~/.zshrc
 
-CMD ["/bin/zsh"]
+CMD "zsh"
