@@ -38,6 +38,8 @@ brew install
 # QuickLook plugins
 brew cask install \
     iterm2 \
+    hub \
+    zaquestion/tap/lab \
     qlcolorcode \
     qlstephen \
     qlmarkdown \

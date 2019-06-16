@@ -59,7 +59,6 @@ source ~/.config/nvim/vimrc/hiddenfiles.vim
 source ~/.config/nvim/vimrc/keymappings.vim
 source ~/.config/nvim/vimrc/deopletesettings.vim
 source ~/.config/nvim/vimrc/pluginsettings.vim
-" source ~/.config/nvim/vimrc/goyosettings.vim
 source ~/.config/nvim/vimrc/qlnetrw.vim
 source ~/.config/nvim/vimrc/fzfsettings.vim
-" source ~/.config/nvim/vimrc/focus.vim
+source ~/.env
