@@ -87,6 +87,7 @@ rm -rf Cobalt2-iterm
 
 # Symlink dotfiles
 mkdir ~/.config
+ln -sf "$PWD"/bash/bashrc ~/.bashrc
 ln -sf "$PWD"/bash/bash_profile ~/.bash_profile
 ln -sf "$PWD"/git/gitconfig ~/.gitconfig
 ln -sf "$PWD"/git/global_ignore ~/.global_ignore
