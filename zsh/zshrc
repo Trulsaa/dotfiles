@@ -180,9 +180,8 @@ uninstall() {
     fi
 }
 
-# Shell in vim mode
+# Shell in vim mode with settings
 bindkey -v
-
 bindkey '^?' backward-delete-char
 export KEYTIMEOUT=1
 bindkey -M vicmd "k" history-beginning-search-backward
