@@ -23,14 +23,13 @@ filetype plugin on        " Enable use of filespesiffic settings files
 set foldmethod=indent     " Fold on indentations
 set foldlevel=99          " The level that is folded when opening files
 set diffopt=vertical      " Diff opens side by side
-set lazyredraw            " Don't bother updating screen during macro playback
+
+" set lazyredraw            " Don't bother updating screen during macro playback
+"
 set scrolloff=3           " Start scrolling 3 lines before edge of window
 set cursorline            " Highlights the line the cursor is on
 set shortmess+=A          " don't give the ATTENTION message when an existing swap file is found.
 set inccommand=split      " enables live preview of substitutions
-
-let g:python_host_prog = '/Users/t/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/t/.pyenv/versions/neovim3/bin/python'
 
 augroup general_autocmd
 

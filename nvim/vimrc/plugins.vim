@@ -1,13 +1,4 @@
 " Install Vim Plug if not installed
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  augroup install_plug
-    autocmd!
-    autocmd VimEnter * PlugInstall
-  augroup END
-endif
-
 call plug#begin()
 
 Plug 'christoomey/vim-sort-motion'             " Sort object
