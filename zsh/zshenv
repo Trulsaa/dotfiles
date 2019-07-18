@@ -16,3 +16,6 @@ gitstandup() {
 }
 
 alias gtsu='gitstandup'
+
+# Gives a menu of existing branches and deletes the selected one localy and remotly
+alias gtbd="git branch | fzf | xargs -I % sh -c 'git branch -D %; git push origin :%;'"
