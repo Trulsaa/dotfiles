@@ -215,4 +215,8 @@ export FZF_DEFAULT_OPS="--extended"
 export FZF_DEFAULT_COMMAND="fd --type f"
 export FZF_CTRL_T_COMMAND="$FZF_CTRL_T_COMMAND"
 
+# Go development
 export GOPATH=$HOME/Projects/go
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export GO111MODULE=on
