@@ -220,3 +220,14 @@ export GOPATH=$HOME/Projects/go
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 export GO111MODULE=on
+
+# Worktime
+alias wt='worktime-cli'
+
+function wtr() {
+  wt activities | fzf | awk -F" {2,100}" '{print $1,"\""$2"\""}' | xargs wt register -l
+}
+
+function wtd() {
+  wt logged | fzf | awk -F" {2,100}" '{print $1}' | xargs wt delete
+}
