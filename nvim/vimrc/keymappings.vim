@@ -43,12 +43,15 @@ map <Leader>a :A<cr>
 
 " ALE
 nmap <Leader>p <Plug>(ale_fix)
-nmap ]e <Plug>(ale_next_wrap) zz
-nmap [e <Plug>(ale_previous_wrap)
-nmap <Leader>e <Plug>(ale_detail)
+" nmap ]e <Plug>(ale_next_wrap) zz
+" nmap [e <Plug>(ale_previous_wrap)
+" nmap <Leader>e <Plug>(ale_detail)
 
 " Toggle Quickfix Window
 nmap <Leader>q <Plug>window:quickfix:toggle
+
+" Close Preview window
+nmap <silent><Leader>w :pclose<CR>
 
 " Search for selected text using git grep in current project
 vnoremap <Leader>s y:Ggrep "<c-r>""

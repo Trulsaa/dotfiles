@@ -10,11 +10,9 @@ endif
 
 call plug#begin()
 
-Plug 'christoomey/vim-sort-motion'             " Sort object
 Plug 'jiangmiao/auto-pairs'                    " Insert or delete brackets, parens, quotes in pair.
-Plug 'w0rp/ale'
+Plug 'w0rp/ale'                                " linting
 Plug 'tpope/vim-vinegar'                       " Add functionality to netrw
-Plug 'tmhedberg/SimpylFold'                    " Fold functions
 Plug 'tpope/vim-commentary'                    " Comment objects
 Plug 'tpope/vim-repeat'                        " Enable . repeating for more
 Plug 'tpope/vim-surround'                      " Surround objects with anything
@@ -31,11 +29,9 @@ Plug 'wincent/terminus'                        " Cursor shape change in insert a
 Plug 'vim-scripts/vim-auto-save'               " Enables auto save
 Plug 'ntpeters/vim-better-whitespace'          " Highlight trailing whitespace in red
 Plug 'editorconfig/editorconfig-vim'           " Makes use of editorconfig files
-Plug 'tpope/vim-eunuch'                        " UNIX shell commands for vim
 Plug 'tpope/vim-projectionist'                 " Projection and alternate navigation
 Plug 'machakann/vim-highlightedyank'           " Highlight yanked text
-Plug 'drmingdrmer/vim-toggle-quickfix'         " Toggle Quickfix Window
-Plug 'janko-m/vim-test'
+Plug 'janko-m/vim-test'                        " Context start tests
 
                                                " TEXTOBJECTS
 Plug 'kana/vim-textobj-indent'                 " Creates an object of the current indent level
@@ -58,11 +54,14 @@ Plug 'mxw/vim-jsx'                             " JSX Highlighting
 Plug 'Galooshi/vim-import-js'                  " Import dependencies
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 
-                                               " TYPESCRIPT
-                                               " Autocompletion
-Plug 'mhartington/nvim-typescript', { 'do': './install.sh' }
-Plug 'leafgarland/typescript-vim'              " Syntax highlighting
 
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+                                               " TYPESCRIPT
+Plug 'leafgarland/typescript-vim'              " Syntax highlighting
                                                " CSS
 Plug 'ap/vim-css-color',                       " color colornames and codes
             \ { 'for': 'css' }
@@ -73,9 +72,6 @@ Plug 'styled-components/vim-styled-components'," Syntax highlighting for css in 
 Plug 'plasticboy/vim-markdown',                " Markdown extras
             \ { 'for': 'markdown' }
 
-                                               " VIM
-Plug 'Shougo/neco-vim',                        " Completions for Vim commands
-            \ { 'for': 'vim' }
 
                                                " PYTHON
 Plug 'vim-scripts/indentpython.vim'            " Indentation
@@ -93,13 +89,7 @@ Plug 'zchee/deoplete-go'                       " Autocomplete
             \ { 'do': 'make'
             \ 'for': 'go'}
 
-                                               " GraphQL
-Plug 'jparise/vim-graphql'                     " Syntax highlighting
-
                                                " AUTOCOMPLETE
-Plug 'ternjs/tern_for_vim',                    " Tern server
-            \ { 'do': 'npm install',
-            \ 'for': ['javascript', 'javascript.jsx'] }
 Plug 'SirVer/ultisnips'                        " Snippet engine
 Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent tmux panes
 Plug 'Shougo/deoplete.nvim',                   " Autocomplete engine

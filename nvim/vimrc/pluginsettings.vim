@@ -47,9 +47,9 @@ let g:user_emmet_settings={
 let g:ale_linters_explicit = 1
 let g:ale_linters = {}
 let g:ale_linters['go'] = ['gofmt']
-let g:ale_linters['javascript'] = ['eslint']
-let g:ale_linters['python'] = ['pylint']
-let g:ale_linters['typescript'] = ['eslint']
+" let g:ale_linters['javascript'] = ['eslint']
+" let g:ale_linters['python'] = ['pylint']
+" let g:ale_linters['typescript'] = ['eslint']
 "
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
@@ -63,16 +63,131 @@ let g:ale_fixers['go'] = ['gofmt']
 let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_echo_msg_format = '%linter% - %severity% - %code: %%s'
 
-" nvim-typescript
-let g:nvim_typescript#max_completion_detail = 20
-let g:nvim_typescript#diagnostics_enable = 0
-
 " vim-go
 let g:go_fmt_autosave = 0
 let g:deoplete#sources#go#gocode_binary = '~/Projects/go/bin/gocode'
 let g:deoplete#sources#go#builtin_objects = 1
 let g:deoplete#sources#go#unimported_packages = 1
+let g:go_def_mapping_enabled = 0
 
 " vim-test
 let test#strategy = "neovim"
 let test#neovim#term_position = "vsplit"
+
+let g:LanguageClient_diagnosticsDisplay = {
+      \  1: {
+      \      "signText": "",
+      \      "virtualTexthl": "Todo",
+      \      "signTexthl": 'LineNr',
+      \  },
+      \  2: {
+      \      "name": "Warning",
+      \      "texthl": "ALEWarning",
+      \      "signText": "⚠",
+      \      "signTexthl": "ALEInfoSign",
+      \      "virtualTexthl": "Todo",
+      \  },
+      \  3: {
+      \      "name": "Information",
+      \      "texthl": "ALEInfo",
+      \      "signText": "ℹ",
+      \      "signTexthl": "ALEInfoSign",
+      \      "virtualTexthl": "Todo",
+      \  },
+      \  4: {
+      \      "name": "Hint",
+      \      "texthl": "ALEInfo",
+      \      "signText": "➤",
+      \      "signTexthl": "ALEInfoSign",
+      \      "virtualTexthl": "Todo",
+      \  },
+      \ }
+
+let g:LanguageClient_rootMarkers = {
+      \ 'javascript': ['tsconfig.json', 'package.json'],
+      \ 'typescript': ['tsconfig.json', 'package.json'],
+      \ 'go': ['main.go']
+      \ }
+
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'typescript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'go': ['gopls'],
+    \ 'sh': ['bash-language-server', 'start']
+    \ }
+
+let g:LanguageClient_diagnosticsList='Location'
+
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gt :call LanguageClient#textDocument_typeDefinition()<CR>
+nnoremap <silent> gi :call LanguageClient#textDocument_implementation()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+
+command Rename execute "call LanguageClient#textDocument_rename()"
+
+function! s:GetBufferList() 
+  redir =>buflist 
+  silent! ls 
+  redir END 
+  return buflist 
+endfunction
+
+function! ToggleLocationList()
+  let curbufnr = winbufnr(0)
+  for bufnum in map(filter(split(s:GetBufferList(), '\n'), 'v:val =~ "Location List"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if curbufnr == bufnum
+      lclose
+      return
+    endif
+  endfor
+
+  let winnr = winnr()
+  let prevwinnr = winnr("#")
+
+  let nextbufnr = winbufnr(winnr + 1)
+  try
+    lopen
+  catch /E776/
+      echohl ErrorMsg 
+      echo "Location List is Empty."
+      echohl None
+      return
+  endtry
+  if winbufnr(0) == nextbufnr
+    lclose
+    if prevwinnr > winnr
+      let prevwinnr-=1
+    endif
+  else
+    if prevwinnr > winnr
+      let prevwinnr+=1
+    endif
+  endif
+  " restore previous window
+  exec prevwinnr."wincmd w"
+  exec winnr."wincmd w"
+endfunction
+
+function! ToggleQuickfixList()
+  for bufnum in map(filter(split(s:GetBufferList(), '\n'), 'v:val =~ "Quickfix List"'), 'str2nr(matchstr(v:val, "\\d\\+"))') 
+    if bufwinnr(bufnum) != -1
+      cclose
+      return
+    endif
+  endfor
+  let winnr = winnr()
+  if exists("g:toggle_list_copen_command")
+    exec(g:toggle_list_copen_command)
+  else
+    copen
+  endif
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nmap <script> <silent> <leader>e :call ToggleLocationList()<CR>
+nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
