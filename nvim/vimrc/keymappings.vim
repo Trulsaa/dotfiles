@@ -32,11 +32,11 @@ command! SapUI5 :!open "https://sapui5.hana.ondemand.com"
 command! SapNaming :!oigc ~/Projects/sapui5/Zolid-Naming-Conventions/Naming_Conventions.md
 
 " GitGutter settings
-nmap <Leader>ca <Plug>GitGutterStageHunk <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
-nmap ]c <Plug>GitGutterNextHunk
-nmap <Leader>cu <Plug>GitGutterUndoHunk
-nmap <Leader>cp <Plug>GitGutterPreviewHunk
+nmap <Leader>ca <Plug>(GitGutterStageHunk) <Plug>(GitGutterNextHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
+nmap ]c <Plug>(GitGutterNextHunk)
+nmap <Leader>cu <Plug>(GitGutterUndoHunk)
+nmap <Leader>cp <Plug>(GitGutterPreviewHunk)
 
 " Projections alternate binding
 map <Leader>a :A<cr>
