@@ -64,6 +64,9 @@ pyenv activate neovim3
 pip install neovim
 source deactivate
 
+# js importer
+npm install -g import-js
+
 # Linters
 npm install -g jsonlint
 npm install -g csslint
