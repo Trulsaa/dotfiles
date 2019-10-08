@@ -68,8 +68,6 @@ Plug 'peitalin/vim-jsx-typescript'
                                                " CSS
 Plug 'ap/vim-css-color',                       " color colornames and codes
             \ { 'for': 'css' }
-Plug 'styled-components/vim-styled-components'," Syntax highlighting for css in styled components
-            \ { 'branch': 'main' }
 
                                                " MARKDOWN
 Plug 'plasticboy/vim-markdown',                " Markdown extras
