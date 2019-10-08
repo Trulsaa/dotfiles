@@ -9,6 +9,8 @@ brew install \
     tmux \
     hub \
     zaquestion/tap/lab \
+    docker-compose \
+    neovim \
     trash
 
 brew cask install \
@@ -18,13 +20,17 @@ brew cask install \
     dropbox \
     homebrew/cask-versions/firefox-developer-edition
     
-# Install the powerline fonts
-git clone https://github.com/powerline/fonts.git --depth=1
-./fonts/install.sh
-rm -rf fonts
-
-# Install Tmux plugin manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-# Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+# Symlink dotfiles
+mkdir ~/.config
+ln -sf "$PWD"/bash/bashrc ~/.bashrc
+ln -sf "$PWD"/bash/bash_profile ~/.bash_profile
+ln -sf "$PWD"/git/gitconfig ~/.gitconfig
+ln -sf "$PWD"/git/global_ignore ~/.global_ignore
+mkdir ~/.config/nvim
+ln -sf "$PWD"/nvim/baseinit.vim ~/.config/nvim/init.vim
+ln -sF "$PWD"/nvim/basevimrc ~/.config/nvim/vimrc
+ln -sf "$PWD"/oh-my-zsh/oh-my-zsh.sh ~/.oh-my-zsh.sh
+ln -sf "$PWD"/zsh/zshenv ~/.zshenv
+ln -sf "$PWD"/zsh/zshrc ~/.zshrc
