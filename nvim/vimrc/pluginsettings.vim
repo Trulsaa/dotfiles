@@ -113,7 +113,7 @@ let g:LanguageClient_serverCommands = {
     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'typescript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'typescript.tsx': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'go': ['gopls'],
     \ 'sh': ['bash-language-server', 'start']
     \ }
