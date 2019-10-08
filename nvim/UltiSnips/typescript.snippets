@@ -23,3 +23,10 @@ snippet dec "decorate"
 decorate($1, {
 });
 endsnippet
+
+snippet fac "factory"
+export const $1 = (state: IState) => {
+  const $2 = () => { }
+  return { $2 }
+};
+endsnippet
