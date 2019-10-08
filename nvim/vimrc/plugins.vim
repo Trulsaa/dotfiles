@@ -32,6 +32,7 @@ Plug 'editorconfig/editorconfig-vim'           " Makes use of editorconfig files
 Plug 'tpope/vim-projectionist'                 " Projection and alternate navigation
 Plug 'machakann/vim-highlightedyank'           " Highlight yanked text
 Plug 'janko-m/vim-test'                        " Context start tests
+Plug 'vim-scripts/ReplaceWithRegister'         " Replace with registery content
 
                                                " TEXTOBJECTS
 Plug 'kana/vim-textobj-indent'                 " Creates an object of the current indent level
