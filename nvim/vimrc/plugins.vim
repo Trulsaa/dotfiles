@@ -63,6 +63,8 @@ Plug 'autozimu/LanguageClient-neovim', {
 
                                                " TYPESCRIPT
 Plug 'leafgarland/typescript-vim'              " Syntax highlighting
+Plug 'peitalin/vim-jsx-typescript'
+
                                                " CSS
 Plug 'ap/vim-css-color',                       " color colornames and codes
             \ { 'for': 'css' }
