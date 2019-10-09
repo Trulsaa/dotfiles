@@ -46,7 +46,6 @@ RUN echo "clone vim plugins" && \
     git clone --depth=1 https://github.com/kana/vim-textobj-indent && \
     git clone --depth=1 https://github.com/kana/vim-textobj-line && \
     git clone --depth=1 https://github.com/kana/vim-textobj-user && \
-    git clone --depth=1 https://github.com/junegunn/fzf && \
     git clone --depth=1 https://github.com/junegunn/fzf.vim && \
     git clone --depth=1 https://github.com/airblade/vim-gitgutter && \
     git clone --depth=1 https://github.com/tpope/vim-fugitive && \
@@ -86,10 +85,10 @@ RUN git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm && \
 COPY gitconfig ${HOME}/.gitconfig
 
 # Entrypoint script creates a user called `me` and `chown`s everything
-# COPY entrypoint.sh /bin/entrypoint.sh
+COPY entrypoint.sh /bin/entrypoint.sh
 
 # Set working directory to /workspace
 WORKDIR /workspace
 
 # Default entrypoint, can be overridden
-CMD ["/bin/sh"]
+CMD ["/bin/entrypoint.sh"]
