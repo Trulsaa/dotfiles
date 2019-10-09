@@ -38,16 +38,6 @@ Plug 'kana/vim-textobj-indent'                 " Creates an object of the curren
 Plug 'kana/vim-textobj-line'                   " Creates the line object to exclude whitespace before the line start
 Plug 'kana/vim-textobj-user'                   " Enables the creation of new objects
 
-                                               " MARKDOWN
-Plug 'plasticboy/vim-markdown',                " Markdown extras
-            \ { 'for': 'markdown' }
-
-                                               " AUTOCOMPLETE
-Plug 'SirVer/ultisnips'                        " Snippet engine
-Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent tmux panes
-Plug 'Shougo/deoplete.nvim',                   " Autocomplete engine
-            \ { 'do': ':UpdateRemotePlugins' }       " Load last because of :UpdateReomotePlugins
-
                                                " FUZZY FILESEARCH
 Plug 'junegunn/fzf',
             \ { 'dir': '~/.fzf', 'do': './install --all' }
@@ -58,5 +48,11 @@ Plug 'airblade/vim-gitgutter'                  " Shows changed lines compared to
 Plug 'tpope/vim-fugitive'                      " Git wrapper
 Plug 'shumphrey/fugitive-gitlab.vim'           " GitLab fugitive handler
 Plug 'tpope/vim-rhubarb'                       " Github fugitive handler
+
+" THEME AND STATUSLINE
+Plug 'altercation/vim-colors-solarized'        " Solarized theme for vim
+Plug 'vim-airline/vim-airline'                 " Status line configuration
+Plug 'vim-airline/vim-airline-themes'          " Status line themes
+Plug 'edkolev/tmuxline.vim'                    " Makes tmux status line match vim status line
 
 call plug#end()

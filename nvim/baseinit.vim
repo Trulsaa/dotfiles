@@ -1,8 +1,12 @@
 " Source Plugins
 scriptencoding utf-8
+source ~/.config/nvim/vimrc/plugins.vim
 
 " Basic settings
 syntax enable             " enable syntax highlighting
+colorscheme solarized     " solarized colorscheme
+set background=dark       " solarized dark
+set termguicolors
 set expandtab             " to insert space characters whenever the tab key is pressed
 set shiftwidth=2          " number of spaces used when indenting
 set softtabstop=4         " number of spaces used when indenting using tab

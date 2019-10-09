@@ -14,7 +14,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Indentline settings
-let g:indentLine_fileTypeExclude = ['help', 'markdown', 'abap', 'vim', 'json', 'snippets']
+let g:indentLine_fileTypeExclude = ['help', 'markdown', 'abap', 'vim', 'json', 'snippets', 'fzf']
 let g:indentLine_char = '⎸▏'
 
 " vim-auto-save settins
@@ -33,11 +33,11 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 let test#strategy = "neovim"
 let test#neovim#term_position = "vsplit"
 
-function! s:GetBufferList() 
-  redir =>buflist 
-  silent! ls 
-  redir END 
-  return buflist 
+function! s:GetBufferList()
+  redir =>buflist
+  silent! ls
+  redir END
+  return buflist
 endfunction
 
 function! ToggleLocationList()

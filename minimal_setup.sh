@@ -11,6 +11,7 @@ brew install \
     zaquestion/tap/lab \
     docker-compose \
     neovim \
+    reattach-to-user-namespace \
     trash
 
 brew cask install \
@@ -19,7 +20,7 @@ brew cask install \
     google-chrome \
     dropbox \
     homebrew/cask-versions/firefox-developer-edition
-    
+
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Symlink dotfiles
@@ -31,6 +32,7 @@ ln -sf "$PWD"/git/global_ignore ~/.global_ignore
 mkdir ~/.config/nvim
 ln -sf "$PWD"/nvim/baseinit.vim ~/.config/nvim/init.vim
 ln -sF "$PWD"/nvim/basevimrc ~/.config/nvim/vimrc
+ln -sf "$PWD"/tmux/mac/tmux.conf ~/.tmux.conf
 ln -sf "$PWD"/oh-my-zsh/oh-my-zsh.sh ~/.oh-my-zsh.sh
 ln -sf "$PWD"/zsh/zshenv ~/.zshenv
 ln -sf "$PWD"/zsh/zshrc ~/.zshrc
