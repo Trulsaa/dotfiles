@@ -186,20 +186,9 @@ function wtd() {
   wt logged | fzf | awk -F" {2,100}" '{print $1}' | xargs wt delete
 }
 
-function ide() {
-  PROJECT_NAME=${PWD#"${PWD%/*/*}/"}
-  CONTAINER_NAME=${PROJECT_NAME//\//_}
+nvim() {
   docker run -it --rm \
   -v $PWD:/workspace \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v ~/.ssh:/.ssh \
-  -v ~/.tmux/ressurect/${PROJECT_NAME}:/.tmux/resurrect \
-  -e HOST_PATH=$PWD \
-  -e HOST_USER_ID=$(id -u $USER) \
-  -e HOST_GROUP_ID=$(id -g $USER) \
-  -e PROJECT_NAME=$PROJECT_NAME \
-  -e GIT_USER_NAME="Truls Aagaard" \
-  -e GIT_USER_EMAIL="truls.aa@gmail.com" \
-  --name $CONTAINER_NAME \
-  ide
+  -v ~/.config/nvim/tmp:/.config/nvim/tmp \
+  neovim
 }

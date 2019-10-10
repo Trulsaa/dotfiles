@@ -1,20 +1,14 @@
-FROM ls12styler/dind:19.03.1
+FROM alpine:3.10
 
-# Install basics (HAVE to install bash for tpm to work)
+# Install basics
 RUN apk update && apk add -U --no-cache \
-	bash zsh git git-perl neovim less curl bind-tools \
-	man build-base su-exec shadow openssh-client
-
-# Set Timezone
-RUN apk add tzdata && \
-    cp /usr/share/zoneinfo/Europe/Paris /etc/localtime && \
-    echo "Europe/Paris" > /etc/timezone && \
-    apk del tzdata
+    bash \
+    git \
+    neovim \
+    curl \
+    the_silver_searcher
 
 ENV HOME /
-
-# Install tmux
-COPY --from=ls12styler/tmux:latest /usr/local/bin/tmux /usr/local/bin/tmux
 
 # Configure text editor - neovim!
 RUN curl -fLo ${HOME}/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -56,39 +50,15 @@ RUN echo "clone vim plugins" && \
     git clone --depth=1 https://github.com/vim-airline/vim-airline-themes && \
     git clone --depth=1 https://github.com/edkolev/tmuxline.vim
 
-# In the entrypoint, we'll create a user called `me`
-WORKDIR ${HOME}
 
 # Install fzf
-RUN git clone --depth 1 https://github.com/junegunn/fzf.git /.fzf && /.fzf/install --all
-
-# Setup my $SHELL
-ENV SHELL /bin/zsh
-# Install oh-my-zsh
-RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
-RUN wget https://gist.githubusercontent.com/xfanwu/18fd7c24360c68bab884/raw/f09340ac2b0ca790b6059695de0873da8ca0c5e5/xxf.zsh-theme -O ${HOME}/.oh-my-zsh/custom/themes/xxf.zsh-theme
-
-# Install cobalt2 theme
-RUN git clone https://github.com/wesbos/Cobalt2-iterm.git && \
-      cp Cobalt2-iterm/cobalt2.zsh-theme ~/.oh-my-zsh/themes/ && \
-      rm -rf Cobalt2-iterm
-
-# Copy ZSh config
-COPY zshrc ${HOME}/.zshrc
-
-# Install TMUX
-COPY tmux.conf ${HOME}/.tmux.conf
-RUN git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm && \
-    ${HOME}/.tmux/plugins/tpm/bin/install_plugins
+RUN git clone --depth 1 https://github.com/junegunn/fzf.git ${HOME}/.fzf && ${HOME}/.fzf/install --all
 
 # Copy git config over
 COPY gitconfig ${HOME}/.gitconfig
-
-# Entrypoint script creates a user called `me` and `chown`s everything
-COPY entrypoint.sh /bin/entrypoint.sh
 
 # Set working directory to /workspace
 WORKDIR /workspace
 
 # Default entrypoint, can be overridden
-CMD ["/bin/entrypoint.sh"]
+CMD ["nvim"]
