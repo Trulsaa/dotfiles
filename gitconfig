@@ -1,6 +1,3 @@
-[user]
-	name = Truls Aagaard
-	email = truls.aa@gmail.com
 [credential]
   helper = osxkeychain
 [filter "lfs"]
