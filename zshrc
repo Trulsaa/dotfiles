@@ -185,3 +185,10 @@ function wtr() {
 function wtd() {
   wt logged | fzf | awk -F" {2,100}" '{print $1}' | xargs wt delete
 }
+
+nvim() {
+  docker run -it --rm \
+  -v $PWD:/workspace \
+  -v ~/.config/nvim/tmp:/.config/nvim/tmp \
+  neovim
+}
