@@ -12,9 +12,6 @@ ZSH_THEME="cobalt2"
 # disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
 
-# enable command auto-correction.
-ENABLE_CORRECTION="true"
-
 # display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
@@ -173,17 +170,9 @@ export FZF_CTRL_T_COMMAND="$FZF_CTRL_T_COMMAND"
 # Worktime
 alias wt='worktime-cli'
 
-function wtr() {
-  wt activities | fzf | awk -F" {2,100}" '{print $1,"\""$2"\""}' | xargs wt register -l
-}
-
-function wtd() {
-  wt logged | fzf | awk -F" {2,100}" '{print $1}' | xargs wt delete
-}
-
 nvim() {
   docker run -it --rm \
   -v $PWD:/workspace \
   -v ~/.config/nvim/tmp:/.config/nvim/tmp \
-  neovim
+  trulsaa/docker-neovim
 }
