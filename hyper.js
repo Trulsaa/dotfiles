@@ -146,8 +146,8 @@ module.exports = {
   // examples:
   //   `hyperpower`
   //   `@company/project`
-  //   `project#1.0.1`
-  plugins: ['hyperterm-cobalt2-theme', "hyperminimal"],
+  //   `proje:qict#1.0.1`
+  plugins: ['hyper-solarized-dark', "hyperminimal"],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
