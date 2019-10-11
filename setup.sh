@@ -10,6 +10,7 @@ brew install \
     hub \
     zaquestion/tap/lab \
     docker-compose \
+    # Enables clipboard sync between tmux an Mac Os
     reattach-to-user-namespace
 
 brew cask install \
@@ -22,9 +23,8 @@ brew cask install \
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # Symlink dotfiles
-mkdir ~/.config
 ln -sf "$PWD"/gitconfig ~/.gitconfig
-mkdir ~/.config/nvim
 ln -sf "$PWD"/tmux.conf ~/.tmux.conf
 ln -sf "$PWD"/oh-my-zsh.sh ~/.oh-my-zsh.sh
 ln -sf "$PWD"/zshrc ~/.zshrc
+ln -sf "$PWD"/hyper.js ~/.hyper.js
