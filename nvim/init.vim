@@ -1,6 +1,109 @@
 " Source Plugins
 scriptencoding utf-8
-source ~/.config/nvim/vimrc/plugins.vim
+
+" Install Vim Plug if not installed
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  augroup install_plug
+    autocmd!
+    autocmd VimEnter * PlugInstall
+  augroup END
+endif
+
+call plug#begin()
+
+Plug 'jiangmiao/auto-pairs'                    " Insert or delete brackets, parens, quotes in pair.
+Plug 'tpope/vim-vinegar'                       " Add functionality to netrw
+Plug 'tpope/vim-commentary'                    " Comment objects
+Plug 'tpope/vim-repeat'                        " Enable . repeating for more
+Plug 'tpope/vim-surround'                      " Surround objects with anything
+Plug 'yuttie/comfortable-motion.vim'           " Physics-based smooth scrolling
+Plug 'christoomey/vim-tmux-navigator'          " Navigate seamlessly between vim and tmux
+Plug 'sickill/vim-pasta'                       " Context aware pasting
+Plug 'Yggdroot/indentLine'                     " Vertical indent guide lines
+Plug 'wincent/loupe'                           " More resonable search settings
+" Plug 'mattn/webapi-vim'                        " Interface to WEB APIs
+Plug 'wincent/terminus'                        " Cursor shape change in insert and replace mode
+                                               " Improved mouse support
+                                               " Focus reporting (Reload buffer on focus if it has been changed externally )
+                                               " Bracketed Paste mode
+Plug 'vim-scripts/vim-auto-save'               " Enables auto save
+Plug 'ntpeters/vim-better-whitespace'          " Highlight trailing whitespace in red
+Plug 'editorconfig/editorconfig-vim'           " Makes use of editorconfig files
+Plug 'tpope/vim-projectionist'                 " Projection and alternate navigation
+Plug 'machakann/vim-highlightedyank'           " Highlight yanked text
+Plug 'vim-scripts/ReplaceWithRegister'         " Replace with registery content
+
+                                               " TEXTOBJECTS
+Plug 'kana/vim-textobj-indent'                 " Creates an object of the current indent level
+Plug 'kana/vim-textobj-line'                   " Creates the line object to exclude whitespace before the line start
+Plug 'kana/vim-textobj-user'                   " Enables the creation of new objects
+
+                                               " HTML / JSX
+Plug 'mattn/emmet-vim'                         " Autocompletion for html
+
+                                               " JAVASCRIPT
+Plug 'pangloss/vim-javascript',                " JavaScript highlighting
+            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
+Plug 'othree/jspc.vim',                        " JavaScript Parameter Complete
+            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx'                             " JSX Highlighting
+            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
+Plug 'Galooshi/vim-import-js'                  " Import dependencies
+            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
+
+
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh'
+    \ }
+
+                                               " TYPESCRIPT
+Plug 'leafgarland/typescript-vim'              " Syntax highlighting
+Plug 'peitalin/vim-jsx-typescript'
+
+                                               " CSS
+Plug 'ap/vim-css-color',                       " color colornames and codes
+            \ { 'for': 'css' }
+
+                                               " MARKDOWN
+Plug 'plasticboy/vim-markdown',                " Markdown extras
+            \ { 'for': 'markdown' }
+
+
+                                               " GO
+Plug 'fatih/vim-go'                            " Div Go comands
+            \ { 'do': ':GoUpdateBinaries',
+            \ 'for': 'go'}
+Plug 'zchee/deoplete-go'                       " Autocomplete
+            \ { 'do': 'make',
+            \ 'for': 'go'}
+
+                                               " AUTOCOMPLETE
+Plug 'SirVer/ultisnips'                        " Snippet engine
+Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent tmux panes
+Plug 'Shougo/deoplete.nvim',                   " Autocomplete engine
+            \ { 'do': ':UpdateRemotePlugins' }       " Load last because of :UpdateReomotePlugins
+
+                                               " FUZZY FILESEARCH
+Plug 'junegunn/fzf',
+            \ { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+                                               " THEME AND STATUSLINE
+Plug 'altercation/vim-colors-solarized'        " Solarized theme for vim
+Plug 'vim-airline/vim-airline'                 " Status line configuration
+Plug 'vim-airline/vim-airline-themes'          " Status line themes
+Plug 'edkolev/tmuxline.vim'                    " Makes tmux status line match vim status line
+
+                                               " GIT PLUGINS
+Plug 'airblade/vim-gitgutter'                  " Shows changed lines compared to last git commit
+Plug 'tpope/vim-fugitive'                      " Git wrapper
+Plug 'shumphrey/fugitive-gitlab.vim'           " GitLab fugitive handler
+Plug 'tpope/vim-rhubarb'                       " Github fugitive handler
+
+call plug#end()
 
 " Basic settings
 syntax enable             " enable syntax highlighting
@@ -28,9 +131,8 @@ set scrolloff=3           " Start scrolling 3 lines before edge of window
 set cursorline            " Highlights the line the cursor is on
 set shortmess+=A          " don't give the ATTENTION message when an existing swap file is found.
 set inccommand=split      " enables live preview of substitutions
+set noshowmode            " Disable showing of mode in command line
 
-let g:python_host_prog = '/Users/t/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/t/.pyenv/versions/neovim3/bin/python'
 
 augroup general_autocmd
 
@@ -54,11 +156,304 @@ highlight clear LineNr
 " set color for the terminal cursor in terminal mode
 hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
 
-" SOURCES
-source ~/.config/nvim/vimrc/hiddenfiles.vim
-source ~/.config/nvim/vimrc/keymappings.vim
-source ~/.config/nvim/vimrc/deopletesettings.vim
-source ~/.config/nvim/vimrc/pluginsettings.vim
-source ~/.config/nvim/vimrc/qlnetrw.vim
-source ~/.config/nvim/vimrc/fzfsettings.vim
-source ~/.env
+" KEYMAPPINGS
+"===========
+" Leader
+nnoremap <SPACE> <Nop>
+let g:mapleader = ' '
+
+" Runs current line as a command in zsh and outputs stdout to file
+noremap Q !!zsh<CR>
+
+"To map <Esc> to exit terminal-mode:
+tnoremap <Esc> <C-\><C-n>
+
+" Remap visual block
+nnoremap <Leader>v <c-v>
+
+" Remap H L
+nnoremap H 5H
+nnoremap L 5L
+
+" H in commandlinemode now runs Helptags
+command! H Helptags
+
+" GitGutter settings
+nmap <Leader>ca <Plug>(GitGutterStageHunk) <Plug>(GitGutterNextHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
+nmap ]c <Plug>(GitGutterNextHunk)
+nmap <Leader>cu <Plug>(GitGutterUndoHunk)
+nmap <Leader>cp <Plug>(GitGutterPreviewHunk)
+
+" Projections alternate binding
+map <Leader>a :A<cr>
+
+" Toggle Quickfix Window
+nmap <Leader>q <Plug>window:quickfix:toggle
+
+" Close Preview window
+nmap <silent><Leader>w :pclose<CR>
+
+" Search for selected text using git grep in current project
+vnoremap <Leader>s y:Ggrep "<c-r>""
+
+" Deoplete settings
+set completeopt=longest,menuone,preview
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#enable_camel_case = 1
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#max_abbr_width = 0
+let g:deoplete#max_menu_width = 0
+let g:deoplete#max_list = 20
+" close the preview window when you're not using it
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+" auto-pairs settings
+let g:AutoPairsShortcutFastWrap='<C-e>'
+
+" Ultisnips settings
+let g:UltiSnipsExpandTrigger='<C-Space>'
+let g:UltiSnipsJumpForwardTrigger='<C-Space>'
+inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" vim-easy-align mappings
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Indentline settings
+let g:indentLine_fileTypeExclude = ['help', 'markdown', 'abap', 'vim', 'json', 'snippets', 'fzf']
+let g:indentLine_char = '⎸▏'
+
+" Limelight settings
+let g:limelight_conceal_ctermfg = 240  " Solarized Base1
+
+" vim-auto-save settins
+let g:auto_save = 1  " enable AutoSave on Vim startup
+let g:auto_save_in_insert_mode = 0  " do not save while in insert mode
+let g:auto_save_silent = 1  " do not display the auto-save notification
+
+" fugitive-gitlab.vim settings
+let g:fugitive_gitlab_domains = ['https://innersourcs', 'https://innersource.soprasteria.com']
+
+" EditorConfig settings
+" To ensure that this plugin works well with Tim Pope's fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" Emmet
+let g:user_emmet_settings={
+            \'javascript.jsx': {
+            \      'extends':'jsx',
+            \  },
+            \}
+
+" vim-go
+let g:go_fmt_autosave = 0
+let g:deoplete#sources#go#gocode_binary = '~/Projects/go/bin/gocode'
+let g:deoplete#sources#go#builtin_objects = 1
+let g:deoplete#sources#go#unimported_packages = 1
+let g:go_def_mapping_enabled = 0
+
+let g:LanguageClient_diagnosticsDisplay = {
+      \  1: {
+      \      "signText": "",
+      \      "virtualTexthl": "Todo",
+      \      "signTexthl": 'LineNr',
+      \  },
+      \  2: {
+      \      "name": "Warning",
+      \      "texthl": "ALEWarning",
+      \      "signText": "⚠",
+      \      "signTexthl": "ALEInfoSign",
+      \      "virtualTexthl": "Todo",
+      \  },
+      \  3: {
+      \      "name": "Information",
+      \      "texthl": "ALEInfo",
+      \      "signText": "ℹ",
+      \      "signTexthl": "ALEInfoSign",
+      \      "virtualTexthl": "Todo",
+      \  },
+      \  4: {
+      \      "name": "Hint",
+      \      "texthl": "ALEInfo",
+      \      "signText": "➤",
+      \      "signTexthl": "ALEInfoSign",
+      \      "virtualTexthl": "Todo",
+      \  },
+      \ }
+
+let g:LanguageClient_rootMarkers = {
+      \ 'javascript': ['tsconfig.json', 'package.json'],
+      \ 'typescript': ['tsconfig.json', 'package.json'],
+      \ }
+
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'typescript.tsx': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'go': ['gopls'],
+    \ 'sh': ['bash-language-server', 'start']
+    \ }
+
+let g:LanguageClient_diagnosticsList='Location'
+
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gt :call LanguageClient#textDocument_typeDefinition()<CR>
+nnoremap <silent> gi :call LanguageClient#textDocument_implementation()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+
+command Rename execute "call LanguageClient#textDocument_rename()"
+
+function! s:GetBufferList() 
+  redir =>buflist 
+  silent! ls 
+  redir END 
+  return buflist 
+endfunction
+
+function! ToggleLocationList()
+  let curbufnr = winbufnr(0)
+  for bufnum in map(filter(split(s:GetBufferList(), '\n'), 'v:val =~ "Location List"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if curbufnr == bufnum
+      lclose
+      return
+    endif
+  endfor
+
+  let winnr = winnr()
+  let prevwinnr = winnr("#")
+
+  let nextbufnr = winbufnr(winnr + 1)
+  try
+    lopen
+  catch /E776/
+      echohl ErrorMsg 
+      echo "Location List is Empty."
+      echohl None
+      return
+  endtry
+  if winbufnr(0) == nextbufnr
+    lclose
+    if prevwinnr > winnr
+      let prevwinnr-=1
+    endif
+  else
+    if prevwinnr > winnr
+      let prevwinnr+=1
+    endif
+  endif
+  " restore previous window
+  exec prevwinnr."wincmd w"
+  exec winnr."wincmd w"
+endfunction
+
+function! ToggleQuickfixList()
+  for bufnum in map(filter(split(s:GetBufferList(), '\n'), 'v:val =~ "Quickfix List"'), 'str2nr(matchstr(v:val, "\\d\\+"))') 
+    if bufwinnr(bufnum) != -1
+      cclose
+      return
+    endif
+  endfor
+  let winnr = winnr()
+  if exists("g:toggle_list_copen_command")
+    exec(g:toggle_list_copen_command)
+  else
+    copen
+  endif
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nmap <script> <silent> <leader>e :call ToggleLocationList()<CR>
+nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
+
+" ESC to close fzf buffer
+augroup fzf_esc_close
+  autocmd!
+  autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
+augroup END
+
+map <expr> <Leader>f system('git rev-parse --is-inside-work-tree') =~ 'true' ? ':GitLsFiles<cr>' : ':Files<cr>'
+map <Leader>F :Files
+map <Leader>b :Buffers<cr>
+map <Leader>l :Ag<cr>
+map <Leader>H :Helptags<cr>
+map <Leader>m :Marks<cr>
+map <Leader>g :GFiles?<cr>
+
+" Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" Augmenting Ag command using fzf#vim#with_preview function
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+" Created new GitLsFiles that does the same as GFiles with a preview
+command! -bang -nargs=0 -complete=dir GitLsFiles
+  \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+
+" HIDDEN FILES CONFIG
+if !isdirectory($HOME.'/.config/nvim/tmp')
+    call mkdir($HOME.'/.config/nvim/tmp', '', 0700)
+endif
+if !isdirectory($HOME.'/.config/nvim/tmp/backup')
+    call mkdir($HOME.'/.config/nvim/tmp/backup', '', 0700)
+endif
+if exists('$SUDO_USER')
+  set nobackup                               " don't create root-owned files
+  set nowritebackup                          " don't create root-owned files
+else
+  set backupdir+=~/.config/nvim/tmp/backup   " keep backup files out of the way
+  set backupdir+=.
+endif
+
+if !isdirectory($HOME.'/.config/nvim/tmp/swap')
+    call mkdir($HOME.'/.config/nvim/tmp/swap', '', 0700)
+endif
+if exists('$SUDO_USER')
+  set noswapfile                             " don't create root-owned files
+else
+  set directory+=~/.config/nvim/tmp/swap//   " keep swap files out of the way
+  set directory+=.
+endif
+
+if !isdirectory($HOME.'/.config/nvim/tmp/undo')
+    call mkdir($HOME.'/.config/nvim/tmp/undo', '', 0700)
+endif
+if exists('$SUDO_USER')
+  set noundofile                             " don't create root-owned files
+else
+  set undodir+=~/.config/nvim/tmp/undo       " keep undo files out of the way
+  set undodir+=.
+  set undofile                               " actually use undo files
+endif
+
+if !isdirectory($HOME.'/.config/nvim/tmp/viminfo')
+    call mkdir($HOME.'/.config/nvim/tmp/viminfo', '', 0700)
+endif
+if has('viminfo')
+  if exists('$SUDO_USER')
+    set viminfo=                             " don't create root-owned files
+  else
+    set viminfo+=n~/.config/nvim/tmp/viminfo " override ~/.viminfo default
+    if !empty(glob('~/.config/nvim/tmp/viminfo'))
+      if !filereadable(expand('~/.config/nvim/tmp/viminfo'))
+        echoerr 'warning: ~/.config/nvim/tmp/viminfo exists but is not readable'
+      endif
+    endif
+  endif
+endif
