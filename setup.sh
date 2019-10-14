@@ -48,9 +48,12 @@ cp Cobalt2-iterm/cobalt2.zsh-theme ~/.oh-my-zsh/themes/
 rm -rf Cobalt2-iterm
 
 # Symlink dotfiles
-mkdir ~/.config
 ln -sf "$PWD"/gitconfig ~/.gitconfig
-ln -sf "$PWD"/nvim ~/.config/nvim
+mkdir ~/.config
+mkdir ~/.config/nvim
+ln -sf "$PWD"/nvim/UltiSnips ~/.config/nvim/UltiSnips
+ln -sf "$PWD"/nvim/ftplugin ~/.config/nvim/ftplugin
+ln -sf "$PWD"/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf "$PWD"/oh-my-zsh.sh ~/.oh-my-zsh.sh
 ln -sf "$PWD"/tmux.conf ~/.tmux.conf
 ln -sf "$PWD"/zshrc ~/.zshrc

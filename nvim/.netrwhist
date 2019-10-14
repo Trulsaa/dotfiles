@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/Users/t/Projects/dotfiles/nvim'
+let g:netrw_dirhist_9='/Users/t/Projects/dotfiles/nvim/UltiSnips'
+let g:netrw_dirhist_8='/Users/t/Projects/dotfiles/nvim'
+let g:netrw_dirhist_7='/Users/t/Projects/dotfiles/nvim/autoload'
+let g:netrw_dirhist_6='/Users/t/Projects/dotfiles/nvim'
+let g:netrw_dirhist_5='/Users/t/Projects/dotfiles/nvim/ftplugin'
+let g:netrw_dirhist_4='/Users/t/Projects/dotfiles/nvim'
+let g:netrw_dirhist_3='/Users/t/Projects/dotfiles/nvim/plugged'
+let g:netrw_dirhist_2='/Users/t/Projects/dotfiles/nvim'
+let g:netrw_dirhist_1='/Users/t/Projects/dotfiles'
