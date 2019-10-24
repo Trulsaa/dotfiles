@@ -17,7 +17,6 @@ brew install \
     zaquestion/tap/lab \
     wget \
     tmux \
-    go \
     node \
     neovim \
     tree \
