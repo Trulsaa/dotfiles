@@ -59,6 +59,8 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh'
     \ }
 
+Plug 'w0rp/ale'                                " Async lint engine
+
                                                " TYPESCRIPT
 Plug 'leafgarland/typescript-vim'              " Syntax highlighting
 Plug 'peitalin/vim-jsx-typescript'
@@ -309,6 +311,24 @@ nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 
 command Rename execute "call LanguageClient#textDocument_rename()"
+
+" Ale options
+let g:ale_linters_explicit = 1
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'jsx': ['prettier'],
+\   'json': ['prettier'],
+\   'html': ['prettier'],
+\   'markdown': ['prettier'],
+\   'css': ['prettier'],
+\   'go': ['gofmt'],
+\}
+
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_echo_msg_format = '%linter% - %severity% - %code: %%s'
+
+nmap <silent> <Leader>p <Plug>(ale_fix)
 
 function! s:GetBufferList() 
   redir =>buflist 
