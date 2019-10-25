@@ -132,6 +132,6 @@ export FZF_CTRL_T_COMMAND="$FZF_CTRL_T_COMMAND"
 alias wt='worktime-cli'
 
 # Path needed by vim-go
-if [[ ! "$PATH" == */Users/t/go/bin* ]]; then
-  export PATH="${PATH:+${PATH}:}/Users/t/go/bin"
+if [[ ! "$PATH" == "*$HOME/go/bin*" ]]; then
+  export PATH="${PATH:+${PATH}:}$HOME/go/bin"
 fi
