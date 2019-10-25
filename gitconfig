@@ -25,3 +25,5 @@
   co = checkout
   cm = commit -am
   lg = log --oneline --reverse -20
+[user]
+	useConfigOnly = true
