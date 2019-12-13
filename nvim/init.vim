@@ -69,11 +69,6 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'ap/vim-css-color',                       " color colornames and codes
             \ { 'for': 'css' }
 
-                                               " MARKDOWN
-Plug 'plasticboy/vim-markdown',                " Markdown extras
-            \ { 'for': 'markdown' }
-
-
                                                " GO
 Plug 'fatih/vim-go'                            " Div Go comands
             \ { 'do': ':GoUpdateBinaries',
