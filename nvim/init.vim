@@ -248,6 +248,7 @@ let g:user_emmet_settings={
             \}
 
 " vim-go
+let g:go_template_autocreate = 0
 let g:go_fmt_autosave = 0
 let g:deoplete#sources#go#gocode_binary = '~/Projects/go/bin/gocode'
 let g:deoplete#sources#go#builtin_objects = 1
