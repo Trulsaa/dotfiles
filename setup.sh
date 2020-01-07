@@ -55,7 +55,6 @@ ln -sf "$PWD"/nvim/ftplugin ~/.config/nvim/ftplugin
 ln -sf "$PWD"/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf "$PWD"/oh-my-zsh.sh ~/.oh-my-zsh.sh
 ln -sf "$PWD"/tmux.conf ~/.tmux.conf
-ln -sf "$PWD"/zshrc ~/.zshrc
 
 # Install Tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -63,3 +62,5 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
+cp "$PWD"/cobalt2.zsh-theme ~/.oh-my-zsh/themes
+ln -sf "$PWD"/zshrc ~/.zshrc
