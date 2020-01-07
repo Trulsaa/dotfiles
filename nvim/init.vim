@@ -287,6 +287,7 @@ let g:LanguageClient_diagnosticsDisplay = {
 let g:LanguageClient_rootMarkers = {
       \ 'javascript': ['tsconfig.json', 'package.json'],
       \ 'typescript': ['tsconfig.json', 'package.json'],
+      \ 'vue': ['package.json'],
       \ }
 
 let g:LanguageClient_serverCommands = {
@@ -295,7 +296,8 @@ let g:LanguageClient_serverCommands = {
     \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'typescript.tsx': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'go': ['gopls'],
-    \ 'sh': ['bash-language-server', 'start']
+    \ 'sh': ['bash-language-server', 'start'],
+    \ 'vue': ['vls']
     \ }
 
 let g:LanguageClient_diagnosticsList='Location'
@@ -318,6 +320,7 @@ let g:ale_fixers = {
 \   'html': ['prettier'],
 \   'markdown': ['prettier'],
 \   'css': ['prettier'],
+\   'vue': ['prettier'],
 \   'go': ['gofmt'],
 \}
 
