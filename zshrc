@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
@@ -132,6 +132,6 @@ export FZF_CTRL_T_COMMAND="$FZF_CTRL_T_COMMAND"
 alias wt='worktime-cli'
 
 # Path needed by vim-go
-if [[ ! "$PATH" == "*$HOME/go/bin*" ]]; then
+if [[ ! ":$PATH:" == *":$HOME/go/bin:"* ]]; then
   export PATH="${PATH:+${PATH}:}$HOME/go/bin"
 fi
