@@ -53,11 +53,7 @@ Plug 'mxw/vim-jsx'                             " JSX Highlighting
 Plug 'Galooshi/vim-import-js'                  " Import dependencies
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 
-
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh'
-    \ }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'w0rp/ale'                                " Async lint engine
 
@@ -73,15 +69,9 @@ Plug 'ap/vim-css-color',                       " color colornames and codes
 Plug 'fatih/vim-go'                            " Div Go comands
             \ { 'do': ':GoUpdateBinaries',
             \ 'for': 'go'}
-Plug 'zchee/deoplete-go'                       " Autocomplete
-            \ { 'do': 'make',
-            \ 'for': 'go'}
 
                                                " AUTOCOMPLETE
 Plug 'SirVer/ultisnips'                        " Snippet engine
-Plug 'wellle/tmux-complete.vim'                " Completion of words in adjacent tmux panes
-Plug 'Shougo/deoplete.nvim',                   " Autocomplete engine
-            \ { 'do': ':UpdateRemotePlugins' }       " Load last because of :UpdateReomotePlugins
 
                                                " FUZZY FILESEARCH
 Plug 'junegunn/fzf',
@@ -130,6 +120,9 @@ set shortmess+=A          " don't give the ATTENTION message when an existing sw
 set inccommand=split      " enables live preview of substitutions
 set noshowmode            " Disable showing of mode in command line
 
+" Some coc servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
 
 augroup general_autocmd
 
@@ -194,16 +187,41 @@ nmap <silent><Leader>w :pclose<CR>
 " Search for selected text using git grep in current project
 vnoremap <Leader>s y:Ggrep "<c-r>""
 
-" Deoplete settings
-set completeopt=longest,menuone,preview
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#max_abbr_width = 0
-let g:deoplete#max_menu_width = 0
-let g:deoplete#max_list = 20
+" COC
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 " close the preview window when you're not using it
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
@@ -250,65 +268,7 @@ let g:user_emmet_settings={
 " vim-go
 let g:go_template_autocreate = 0
 let g:go_fmt_autosave = 0
-let g:deoplete#sources#go#gocode_binary = '~/Projects/go/bin/gocode'
-let g:deoplete#sources#go#builtin_objects = 1
-let g:deoplete#sources#go#unimported_packages = 1
 let g:go_def_mapping_enabled = 0
-
-let g:LanguageClient_diagnosticsDisplay = {
-      \  1: {
-      \      "signText": "",
-      \      "virtualTexthl": "Todo",
-      \      "signTexthl": 'LineNr',
-      \  },
-      \  2: {
-      \      "name": "Warning",
-      \      "texthl": "ALEWarning",
-      \      "signText": "⚠",
-      \      "signTexthl": "ALEInfoSign",
-      \      "virtualTexthl": "Todo",
-      \  },
-      \  3: {
-      \      "name": "Information",
-      \      "texthl": "ALEInfo",
-      \      "signText": "ℹ",
-      \      "signTexthl": "ALEInfoSign",
-      \      "virtualTexthl": "Todo",
-      \  },
-      \  4: {
-      \      "name": "Hint",
-      \      "texthl": "ALEInfo",
-      \      "signText": "➤",
-      \      "signTexthl": "ALEInfoSign",
-      \      "virtualTexthl": "Todo",
-      \  },
-      \ }
-
-let g:LanguageClient_rootMarkers = {
-      \ 'javascript': ['tsconfig.json', 'package.json'],
-      \ 'typescript': ['tsconfig.json', 'package.json'],
-      \ 'vue': ['package.json'],
-      \ }
-
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'typescript.tsx': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'go': ['gopls'],
-    \ 'sh': ['bash-language-server', 'start'],
-    \ 'vue': ['vls']
-    \ }
-
-let g:LanguageClient_diagnosticsList='Location'
-
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> gt :call LanguageClient#textDocument_typeDefinition()<CR>
-nnoremap <silent> gi :call LanguageClient#textDocument_implementation()<CR>
-nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-
-command Rename execute "call LanguageClient#textDocument_rename()"
 
 " Ale options
 let g:ale_linters_explicit = 1
