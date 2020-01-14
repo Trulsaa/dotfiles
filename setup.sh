@@ -14,7 +14,8 @@ brew install \
     git \
     git-lfs \
     hub \
-    fd \ # fzf needs it
+    # fzf needs fd
+    fd \
     zaquestion/tap/lab \
     wget \
     tmux \
