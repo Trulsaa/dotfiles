@@ -1,0 +1,22 @@
+{
+  "snippets": {
+    "extends": {
+      "javascriptreact": ["javascript"],
+      "typescript": ["javascript"],
+      "vue": ["javascript"]
+    }
+  },
+  "java.format.settings.url": "/Users/t/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
+  "xml": {
+    "format": {
+      "splitAttributes": true
+    }
+  },
+  "java": {
+    "configuration": {
+      "maven": {
+        "userSettings": "/Users/t/.m2/settings.xml"
+      }
+    }
+  }
+}
