@@ -66,14 +66,6 @@ Plug 'posva/vim-vue'
 Plug 'ap/vim-css-color',                       " color colornames and codes
             \ { 'for': 'css' }
 
-                                               " GO
-Plug 'fatih/vim-go'                            " Div Go comands
-            \ { 'do': ':GoUpdateBinaries',
-            \ 'for': 'go'}
-
-                                               " AUTOCOMPLETE
-Plug 'SirVer/ultisnips'                        " Snippet engine
-
                                                " FUZZY FILESEARCH
 Plug 'junegunn/fzf',
             \ { 'dir': '~/.fzf', 'do': './install --all' }
@@ -265,11 +257,6 @@ let g:user_emmet_settings={
             \      'extends':'jsx',
             \  },
             \}
-
-" vim-go
-let g:go_template_autocreate = 0
-let g:go_fmt_autosave = 0
-let g:go_def_mapping_enabled = 0
 
 " Ale options
 let g:ale_linters_explicit = 1
