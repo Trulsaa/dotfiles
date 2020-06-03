@@ -61,6 +61,7 @@ Plug 'w0rp/ale'                                " Async lint engine
 Plug 'leafgarland/typescript-vim'              " Syntax highlighting
 Plug 'peitalin/vim-jsx-typescript'
 
+Plug 'posva/vim-vue'
                                                " CSS
 Plug 'ap/vim-css-color',                       " color colornames and codes
             \ { 'for': 'css' }
