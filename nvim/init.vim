@@ -222,11 +222,6 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " auto-pairs settings
 let g:AutoPairsShortcutFastWrap='<C-e>'
 
-" Ultisnips settings
-let g:UltiSnipsExpandTrigger='<C-Space>'
-let g:UltiSnipsJumpForwardTrigger='<C-Space>'
-inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
 " vim-easy-align mappings
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
