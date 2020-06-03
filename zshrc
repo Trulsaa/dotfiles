@@ -136,3 +136,5 @@ alias wt='worktime-cli'
 if [[ ! ":$PATH:" == *":$HOME/go/bin:"* ]]; then
   export PATH="${PATH:+${PATH}:}$HOME/go/bin"
 fi
+
+export JAVA_HOME=$(/usr/libexec/java_home)
