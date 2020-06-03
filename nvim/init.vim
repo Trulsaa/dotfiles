@@ -42,22 +42,18 @@ Plug 'kana/vim-textobj-user'                   " Enables the creation of new obj
                                                " HTML / JSX
 Plug 'mattn/emmet-vim'                         " Autocompletion for html
 
-                                               " JAVASCRIPT
+                                               " HIGHLIGHTING
 Plug 'pangloss/vim-javascript',                " JavaScript highlighting
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx'                             " JSX Highlighting
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
+Plug 'leafgarland/typescript-vim'              " Typescript syntax highlighting
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'posva/vim-vue'                           " vue.js syntax highlighting
+Plug 'ap/vim-css-color',                       " CSS syntax highlighting color colornames and codes
+            \ { 'for': 'css' }
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-                                               " TYPESCRIPT
-Plug 'leafgarland/typescript-vim'              " Syntax highlighting
-Plug 'peitalin/vim-jsx-typescript'
-
-Plug 'posva/vim-vue'
-                                               " CSS
-Plug 'ap/vim-css-color',                       " color colornames and codes
-            \ { 'for': 'css' }
 
                                                " FUZZY FILESEARCH
 Plug 'junegunn/fzf',
