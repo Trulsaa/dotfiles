@@ -55,8 +55,6 @@ Plug 'Galooshi/vim-import-js'                  " Import dependencies
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-Plug 'w0rp/ale'                                " Async lint engine
-
                                                " TYPESCRIPT
 Plug 'leafgarland/typescript-vim'              " Syntax highlighting
 Plug 'peitalin/vim-jsx-typescript'
@@ -253,25 +251,6 @@ let g:user_emmet_settings={
             \      'extends':'jsx',
             \  },
             \}
-
-" Ale options
-let g:ale_linters_explicit = 1
-let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'typescript': ['prettier'],
-\   'jsx': ['prettier'],
-\   'json': ['prettier'],
-\   'html': ['prettier'],
-\   'markdown': ['prettier'],
-\   'css': ['prettier'],
-\   'vue': ['prettier'],
-\   'go': ['gofmt'],
-\}
-
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_echo_msg_format = '%linter% - %severity% - %code: %%s'
-
-nmap <silent> <Leader>p <Plug>(ale_fix)
 
 function! s:GetBufferList() 
   redir =>buflist 
