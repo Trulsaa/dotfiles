@@ -15,7 +15,7 @@ call plug#begin()
 
 Plug 'jiangmiao/auto-pairs'                    " Insert or delete brackets, parens, quotes in pair.
 Plug 'tpope/vim-vinegar'                       " Add functionality to netrw
-Plug 'tpope/vim-commentary'                    " Comment objects
+Plug 'tomtom/tcomment_vim'                     " Comment objects
 Plug 'tpope/vim-repeat'                        " Enable . repeating for more
 Plug 'tpope/vim-surround'                      " Surround objects with anything
 Plug 'yuttie/comfortable-motion.vim'           " Physics-based smooth scrolling
