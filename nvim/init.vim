@@ -135,6 +135,7 @@ hi MatchParen cterm=underline ctermbg=none
 
 " THEME SETTINGS
 " SingColumn color and LineNr cleared
+highlight! link SignColumn LineNr
 highlight clear LineNr
 " set color for the terminal cursor in terminal mode
 hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
