@@ -49,8 +49,6 @@ Plug 'othree/jspc.vim',                        " JavaScript Parameter Complete
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx'                             " JSX Highlighting
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
-Plug 'Galooshi/vim-import-js'                  " Import dependencies
-            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
