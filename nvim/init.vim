@@ -45,8 +45,6 @@ Plug 'mattn/emmet-vim'                         " Autocompletion for html
                                                " JAVASCRIPT
 Plug 'pangloss/vim-javascript',                " JavaScript highlighting
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
-Plug 'othree/jspc.vim',                        " JavaScript Parameter Complete
-            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx'                             " JSX Highlighting
             \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
 
