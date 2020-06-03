@@ -69,8 +69,6 @@ Plug 'edkolev/tmuxline.vim'                    " Makes tmux status line match vi
                                                " GIT PLUGINS
 Plug 'airblade/vim-gitgutter'                  " Shows changed lines compared to last git commit
 Plug 'tpope/vim-fugitive'                      " Git wrapper
-Plug 'shumphrey/fugitive-gitlab.vim'           " GitLab fugitive handler
-Plug 'tpope/vim-rhubarb'                       " Github fugitive handler
 
 call plug#end()
 
