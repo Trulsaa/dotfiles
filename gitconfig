@@ -27,3 +27,5 @@
   lg = log --oneline --reverse -20
 [user]
 	useConfigOnly = true
+	email = truls@aagaard.io
+	name = Truls Aagaard
