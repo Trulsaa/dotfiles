@@ -23,7 +23,8 @@ brew install \
     neovim \
     tree \
     reattach-to-user-namespace \
-    the_silver_searcher
+    the_silver_searcher \
+    tldr
 
 brew cask install \
     iterm2 \
