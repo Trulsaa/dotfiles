@@ -6,17 +6,16 @@
       "vue": ["javascript"]
     }
   },
-  "java.format.settings.url": "/Users/t/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml",
   "xml": {
     "format": {
       "splitAttributes": true
     }
   },
   "java": {
-    "configuration": {
-      "maven": {
-        "userSettings": "/Users/t/.m2/settings.xml"
-      }
-    }
+    "configuration.maven.userSettings": "/Users/t/.m2/settings.xml",
+    "format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
+  },
+  "typescript": {
+    "format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true
   }
 }
