@@ -193,8 +193,8 @@ inoremap <silent><expr> <C-Space> pumvisible() ? coc#_select_confirm() :
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [e <Plug>(coc-diagnostic-prev)
+nmap <silent> ]e <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
