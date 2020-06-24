@@ -365,6 +365,16 @@ let g:fzf_action = {
   \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+" Overwrite <c-l> in netrw buffers to enable TmuxNavigateRight from
+" vim-tmux-navigator
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
+
+function! NetrwMapping()
+  nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
+endfunction
 
 " HIDDEN FILES CONFIG
 if !isdirectory($HOME.'/.config/nvim/tmp')
