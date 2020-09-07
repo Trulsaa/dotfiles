@@ -141,8 +141,8 @@ let g:mapleader = ' '
 " Runs current line as a command in zsh and outputs stdout to file
 noremap Q !!zsh<CR>
 
-"To map <Esc> to exit terminal-mode:
-tnoremap <Esc> <C-\><C-n>
+"Map <C-w>N to exit terminal-mode:
+tnoremap <C-W>N <C-\><C-n>
 
 " Remap visual block
 nnoremap <Leader>v <c-v>
