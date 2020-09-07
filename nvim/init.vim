@@ -151,6 +151,11 @@ nnoremap <Leader>v <c-v>
 nnoremap H 5H
 nnoremap L 5L
 
+" Todo file
+command! Todo :vsplit ~/Desktop/Todo.md
+" Daybook file
+command! Day :vsplit ~/Desktop/Daybook.md
+
 " H in commandlinemode now runs Helptags
 command! H Helptags
 
