@@ -13,8 +13,23 @@
     }
   },
   "java": {
-    "configuration.maven.userSettings": "/Users/t/.m2/settings.xml",
-    "format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
+    "configuration": {
+      "maven": { "userSettings": "/Users/t/.m2/settings.xml" }
+    },
+    "format": {
+      "settings": {
+        "url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
+      }
+    }
+  },
+  "typescript": {
+    "format": { "insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true }
+  },
+  "javascript": {
+    "format": { "insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true }
+  },
+  "yaml": {
+    "schemaStore": { "enable": true }
   },
   "languageserver": {
     "terraform": {
