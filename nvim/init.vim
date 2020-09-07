@@ -351,7 +351,7 @@ augroup fzf_esc_close
 augroup END
 
 map <expr> <Leader>f system('git rev-parse --is-inside-work-tree') =~ 'true' ? ':GitLsFiles<cr>' : ':Files<cr>'
-map <Leader>F :Files
+map <Leader>F :Files 
 map <Leader>b :Buffers<cr>
 map <Leader>l :Ag<cr>
 map <Leader>H :Helptags<cr>
