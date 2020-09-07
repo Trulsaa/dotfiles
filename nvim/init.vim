@@ -52,6 +52,7 @@ Plug 'peitalin/vim-jsx-typescript'
 Plug 'posva/vim-vue'                           " vue.js syntax highlighting
 Plug 'ap/vim-css-color',                       " CSS syntax highlighting color colornames and codes
             \ { 'for': 'css' }
+Plug 'hashivim/vim-terraform'                  " Terraform
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
