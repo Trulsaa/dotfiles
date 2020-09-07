@@ -129,8 +129,7 @@ export FZF_DEFAULT_OPS="--extended"
 export FZF_DEFAULT_COMMAND="fd --type f"
 export FZF_CTRL_T_COMMAND="$FZF_CTRL_T_COMMAND"
 
-# Worktime
-alias wt='worktime-cli'
+alias tab-rename="pwd | awk -F/ '{print \$NF}' | xargs tmux rename-window"
 
 # Path needed by vim-go
 if [[ ! ":$PATH:" == *":$HOME/go/bin:"* ]]; then
