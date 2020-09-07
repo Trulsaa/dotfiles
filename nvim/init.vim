@@ -353,7 +353,7 @@ augroup END
 map <expr> <Leader>f system('git rev-parse --is-inside-work-tree') =~ 'true' ? ':GitLsFiles<cr>' : ':Files<cr>'
 map <Leader>F :Files 
 map <Leader>b :Buffers<cr>
-map <Leader>l :Ag<cr>
+map <Leader>l :Rg<cr>
 map <Leader>H :Helptags<cr>
 map <Leader>m :Marks<cr>
 map <Leader>g :GFiles?<cr>
@@ -369,6 +369,11 @@ command! -bang -nargs=* Ag
 " Created new GitLsFiles that does the same as GFiles with a preview
 command! -bang -nargs=0 -complete=dir GitLsFiles
   \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --smart-case --hidden --glob "!.git" -- '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
