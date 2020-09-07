@@ -4,7 +4,8 @@
       "javascriptreact": ["javascript"],
       "typescript": ["javascript"],
       "vue": ["javascript"]
-    }
+    },
+    "userSnippetsDirectory": "~/.config/nvim/UltiSnips"
   },
   "xml": {
     "format": {
