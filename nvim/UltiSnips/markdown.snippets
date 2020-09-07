@@ -3,12 +3,8 @@ priority -50
 ###########################
 # Div                     #
 ###########################
-snippet "-\s" "Checkbox" r
+snippet "ch" "Checkbox" r
 - [ ] ${1:TODO item}
-endsnippet
-
-snippet "\*\s" "Checkbox" r
-* [ ] ${1:TODO item}
 endsnippet
 
 snippet cb "Codeblock" b
@@ -16,4 +12,8 @@ snippet cb "Codeblock" b
 $2
 \`\`\`
 $0
+endsnippet
+
+snippet date "Date" br
+## `date "+%A %Y-%m-%d"`
 endsnippet
