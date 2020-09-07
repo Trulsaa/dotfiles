@@ -127,6 +127,11 @@ highlight clear LineNr
 " set color for the terminal cursor in terminal mode
 hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
 
+" GitGutter colors
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=1
+
 " KEYMAPPINGS
 "===========
 " Leader
