@@ -359,6 +359,12 @@ map <Leader>H :Helptags<cr>
 map <Leader>m :Marks<cr>
 map <Leader>g :GFiles?<cr>
 
+let g:fzf_layout = { 'window': {
+      \ 'width': 0.9,
+      \ 'height': 0.6,
+      \ 'yoffset': 0.1
+      \ } }
+
 " Files command with preview window
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
