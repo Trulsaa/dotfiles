@@ -71,6 +71,8 @@ Plug 'edkolev/tmuxline.vim'                    " Makes tmux status line match vi
 Plug 'airblade/vim-gitgutter'                  " Shows changed lines compared to last git commit
 Plug 'tpope/vim-fugitive'                      " Git wrapper
 
+Plug 'airblade/vim-rooter'
+
 call plug#end()
 
 " Basic settings
@@ -352,18 +354,14 @@ augroup fzf_esc_close
 augroup END
 
 map <expr> <Leader>f system('git rev-parse --is-inside-work-tree') =~ 'true' ? ':GitLsFiles<cr>' : ':Files<cr>'
-map <Leader>F :Files 
+map <Leader>F :Files ~/Projects/
 map <Leader>b :Buffers<cr>
 map <Leader>l :Rg<cr>
 map <Leader>H :Helptags<cr>
 map <Leader>m :Marks<cr>
 map <Leader>g :GFiles?<cr>
 
-let g:fzf_layout = { 'window': {
-      \ 'width': 0.9,
-      \ 'height': 0.6,
-      \ 'yoffset': 0.1
-      \ } }
+let g:fzf_layout = { 'up': '~40%' }
 
 " Files command with preview window
 command! -bang -nargs=? -complete=dir Files
