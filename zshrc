@@ -76,10 +76,10 @@ install() {
         echo "(I)nstall or open the (h)omepage of $token"
         read input
         if [ $input = "i" ] || [ $input = "I" ]; then
-            brew cask install $token
+            brew install --cask $token
         fi
         if [ $input = "h" ] || [ $input = "H" ]; then
-            brew cask home $token
+            brew home $token
         fi
     fi
 }
@@ -97,10 +97,10 @@ uninstall() {
         echo "(U)ninstall or open the (h)omepage of $token"
         read input
         if [ $input = "u" ] || [ $input = "U" ]; then
-            brew cask uninstall $token
+            brew uninstall --cask $token
         fi
         if [ $input = "h" ] || [ $token = "H" ]; then
-            brew cask home $token
+            brew home $token
         fi
     fi
 }
