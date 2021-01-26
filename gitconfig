@@ -30,4 +30,4 @@
 	email = truls@aagaard.io
 	name = Truls Aagaard
 [pull]
-	rebase = true
+	rebase = false
