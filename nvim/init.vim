@@ -248,6 +248,8 @@ command! -nargs=0 JestCurrent :call  CocAction('runCommand', 'jest.fileTest', ['
 " Coc-jest Run jest for current test
 autocmd FileType typescript nmap <leader>t :call CocAction('runCommand', 'jest.fileTest', ['%'])<cr>
 
+command! -nargs=1 NameTerm execute "keepalt file <args>"
+
 " auto-pairs settings
 let g:AutoPairsShortcutFastWrap='<C-e>'
 
