@@ -126,7 +126,7 @@ zle -N zle-keymap-select
 set -o vi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPS="--extended"
-export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_CTRL_T_COMMAND"
 
 alias tab-rename="pwd | awk -F/ '{print \$NF}' | xargs tmux rename-window"
