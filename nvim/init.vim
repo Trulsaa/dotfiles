@@ -30,6 +30,7 @@ Plug 'wincent/terminus'                        " Cursor shape change in insert a
 Plug 'vim-scripts/vim-auto-save'               " Enables auto save
 Plug 'ntpeters/vim-better-whitespace'          " Highlight trailing whitespace in red
 Plug 'editorconfig/editorconfig-vim'           " Makes use of editorconfig files
+Plug 'tpope/vim-projectionist'                 " Projection and alternate navigation
 Plug 'machakann/vim-highlightedyank'           " Highlight yanked text
 Plug 'vim-scripts/ReplaceWithRegister'         " Replace with registery content
 Plug 'mbbill/undotree'                         " Undo history visualisation
@@ -168,6 +169,9 @@ nmap [c <Plug>(GitGutterPrevHunk)
 nmap ]c <Plug>(GitGutterNextHunk)
 nmap <Leader>cu <Plug>(GitGutterUndoHunk)
 nmap <Leader>cp <Plug>(GitGutterPreviewHunk)
+
+" Projections alternate binding
+map <Leader>a :A<cr>
 
 " Toggle Quickfix Window
 nmap <Leader>q <Plug>window:quickfix:toggle
