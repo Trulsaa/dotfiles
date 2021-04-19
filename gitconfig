@@ -31,3 +31,5 @@
 	name = Truls Aagaard
 [pull]
 	rebase = false
+[init]
+	defaultBranch = master
