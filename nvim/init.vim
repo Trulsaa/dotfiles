@@ -35,6 +35,7 @@ Plug 'tpope/vim-projectionist'                 " Projection and alternate naviga
 Plug 'machakann/vim-highlightedyank'           " Highlight yanked text
 Plug 'vim-scripts/ReplaceWithRegister'         " Replace with registery content
 Plug 'mbbill/undotree'                         " Undo history visualisation
+Plug 'AGhost-7/critiq.vim'                     " Github pr review
 
                                                " TEXTOBJECTS
 Plug 'kana/vim-textobj-indent'                 " Creates an object of the current indent level
