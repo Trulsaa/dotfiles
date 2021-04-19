@@ -197,3 +197,48 @@ function changeDirectoryToGitRoot() {
     (cd "$ROOT" && eval "$@")
   fi
 }
+
+function alvtime() {
+  ALVTIME_TOKEN=$(awk 'NR==1{ print $1 }' ~/.alvtime)
+  local ALVTIME_TOKEN_EXPIRY="$(awk 'NR==1{ print $2 }' ~/.alvtime)"
+
+  datetest "$(date +'%Y-%m-%d')" --gt "$ALVTIME_TOKEN_EXPIRY" \
+    && echo "Alvtime token has expired"
+
+  if [ "$#" -eq 0 ]; then
+    echo "register syk 3.5            : Registers 3.5 hours to task id 14 today"
+    echo "week ferie 7.5              : Register 7.5 hours to task 14 every working day this week"
+    echo "multiregister data.txt      : Takes a file name or stdin of line with 'date taskid hours'"
+    echo "hours 2021-01-02 2021-01-09 : Prints the registerd hours between the two dates"
+    echo "tasks                       : Prints all tasks"
+  fi
+
+  # If $2 is not a number replace it with the matching number from config
+  if [ "$1" = week ] || [ "$1" = register ]; then
+    RE='^[0-9]+$'
+    if ! [[ "$2" =~ $RE ]] ; then
+      local ID="$(grep -i "${2}$" ~/.alvtime | awk '{print $1}')"
+      set -- "$1" "$ID" "$3"
+    fi
+  fi
+
+  if [ "$1" = week ]; then
+    alvtimeWeek "$@"
+  else
+    source ~/Projects/alvtime/packages/shell/alvtime.sh "$@"
+  fi
+
+  return 0
+}
+
+function alvtimeWeek() {
+  shift
+  MON="$(date -v -Mon +'%Y-%m-%d')"
+  FRI="$(dateadd "$MON" +4d)"
+  dateseq "$MON" "$FRI" \
+    | awk -v id="$1" -v hours="$2" '{print $0 " " id " " hours}' \
+    | ~/Projects/alvtime/packages/shell/alvtime.sh multiregister
+}
+
+export KUBE_CONFIG_PATH=~/.kube/config
+source ~/.config/critiq/credentials
