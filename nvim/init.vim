@@ -226,8 +226,8 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction
-xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+xmap <silent> <leader>A :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>A :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
