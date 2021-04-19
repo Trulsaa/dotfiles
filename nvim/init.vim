@@ -18,6 +18,7 @@ Plug 'tpope/vim-vinegar'                       " Add functionality to netrw
 Plug 'tomtom/tcomment_vim'                     " Comment objects
 Plug 'tpope/vim-repeat'                        " Enable . repeating for more
 Plug 'tpope/vim-surround'                      " Surround objects with anything
+Plug 'tpope/vim-unimpaired'                    " Tpope navigation mapppings
 Plug 'yuttie/comfortable-motion.vim'           " Physics-based smooth scrolling
 Plug 'christoomey/vim-tmux-navigator'          " Navigate seamlessly between vim and tmux
 Plug 'sickill/vim-pasta'                       " Context aware pasting
