@@ -90,7 +90,7 @@ brewinstall() {
 # and display a info quickview window for the currently marked application
 brewuninstall() {
     local token
-    token=$(brew list --cask | fzf-tmux --query="$1" +m --preview 'brew cask info {}')
+    token=$(brew list --cask | fzf-tmux --query="$1" +m --preview 'brew info --cask {}')
 
     if [ "x$token" != "x" ]
     then
