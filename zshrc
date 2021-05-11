@@ -199,18 +199,30 @@ function changeDirectoryToGitRoot() {
 }
 
 function alvtime() {
-  ALVTIME_TOKEN=$(awk 'NR==1{ print $1 }' ~/.alvtime)
+  export ALVTIME_TOKEN="$(awk 'NR==1{ print $1 }' ~/.alvtime)"
   local ALVTIME_TOKEN_EXPIRY="$(awk 'NR==1{ print $2 }' ~/.alvtime)"
 
   datetest "$(date +'%Y-%m-%d')" --gt "$ALVTIME_TOKEN_EXPIRY" \
-    && echo "Alvtime token has expired"
+    && echo "Alvtime token has expired" \
+    && exit 1
 
   if [ "$#" -eq 0 ]; then
-    echo "register syk 3.5            : Registers 3.5 hours to task id 14 today"
-    echo "week ferie 7.5              : Register 7.5 hours to task 14 every working day this week"
-    echo "multiregister data.txt      : Takes a file name or stdin of line with 'date taskid hours'"
-    echo "hours 2021-01-02 2021-01-09 : Prints the registerd hours between the two dates"
-    echo "tasks                       : Prints all tasks"
+    echo "
+Alvtime CLI wrapper
+
+register syk 3.5                : Registers 3.5 hours to task id 14 today
+week ferie 7.5                  : Register 7.5 hours to task 14 every working day this week
+multiregister data.txt          : Takes a file name or stdin of line with 'date taskid hours'
+hours [yyyy-mm-dd [yyyy-mm-dd]] : Prints the registerd hours between the two dates.
+                                  Dates default to monday and sunday in the current week
+tasks                           : Prints all tasks
+profile                         : Fetch user profile
+availableHours
+flexedHours
+payouts
+holidays [year]                 : Returns the alv holidays in a year. Defaults to current year
+ping                            : Check if the api is alive
+"
   fi
 
   # If $2 is not a number replace it with the matching number from config
@@ -218,14 +230,18 @@ function alvtime() {
     RE='^[0-9]+$'
     if ! [[ "$2" =~ $RE ]] ; then
       local ID="$(grep -i "${2}$" ~/.alvtime | awk '{print $1}')"
-      set -- "$1" "$ID" "$3"
+      set -- "$1" "$ID" "$3" "$4"
     fi
   fi
 
   if [ "$1" = week ]; then
     alvtimeWeek "$@"
+  elif [ "$1" = hours ]; then
+    alvtimeHours "$@"
+  elif [ "$1" = tasks ]; then
+    alvtimeTasks "$@"
   else
-    source ~/Projects/alvtime/packages/shell/alvtime.sh "$@"
+    ~/Projects/alvtime/packages/shell/alvtime.sh "$@"
   fi
 
   return 0
@@ -233,12 +249,44 @@ function alvtime() {
 
 function alvtimeWeek() {
   shift
-  MON="$(date -v -Mon +'%Y-%m-%d')"
-  FRI="$(dateadd "$MON" +4d)"
+  MON=$(date -v -Mon +'%Y-%m-%d')
+  FRI=$(dateadd "$MON" +4d)
   dateseq "$MON" "$FRI" \
     | awk -v id="$1" -v hours="$2" '{print $0 " " id " " hours}' \
     | ~/Projects/alvtime/packages/shell/alvtime.sh multiregister
 }
 
+function alvtimeHours() {
+  shift
+  MON=$(date -v -Mon +'%Y-%m-%d')
+  SUN=$(dateadd "$MON" +6d)
+  FROM_DATE_INCLUSIVE="${1:-$MON}"
+  TO_DATE_INCLUSIVE="${2:-$SUN}"
+  ~/Projects/alvtime/packages/shell/alvtime.sh hours "$FROM_DATE_INCLUSIVE" "$TO_DATE_INCLUSIVE" \
+    | ~/Projects/dotfiles/alvtime/hours.js
+}
+
+function alvtimeTasks() {
+  shift
+  local TASK=$(~/Projects/alvtime/packages/shell/alvtime.sh tasks \
+    | jq -r '.[] | "\(.id) \(.project.customer.name) \(.project.name) \(.name)"' \
+    | fzf-tmux +m)
+
+  local ID=$(echo $TASK | awk '{print $1}')
+  echo "Write ref name to save the task to favorites. Leave blank to to not save:"
+  read INPUT
+  test -n "$INPUT" \
+    && echo "$ID $INPUT" \
+    && echo "$ID $INPUT" >> ~/.alvtime || true
+}
+
 export KUBE_CONFIG_PATH=~/.kube/config
 source ~/.config/critiq/credentials
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/t/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/t/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/t/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/t/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+export GOOGLE_CLOUD_PROJECT=aize-twin-explorer-dev
