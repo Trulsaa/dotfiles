@@ -25,6 +25,8 @@ Plug 'sickill/vim-pasta'                       " Context aware pasting
 Plug 'Yggdroot/indentLine'                     " Vertical indent guide lines
 Plug 'wincent/loupe'                           " More resonable search settings
 Plug 'wincent/terminus'                        " Cursor shape change in insert and replace mode
+Plug 'iamcco/markdown-preview.nvim',
+             \ { 'do': 'cd app && yarn install'  }
                                                " Improved mouse support
                                                " Focus reporting (Reload buffer on focus if it has been changed externally )
                                                " Bracketed Paste mode
