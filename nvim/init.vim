@@ -125,6 +125,9 @@ augroup general_autocmd
 
 augroup END
 
+" Add current working directory in front of the current file in airline section c
+let g:airline_section_c = "%{substitute(getcwd(), '^.*/', '', '')} %<%f%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#"
+
 " Underline matching bracket and remove background color
 hi MatchParen cterm=underline ctermbg=none
 
