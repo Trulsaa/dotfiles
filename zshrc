@@ -240,8 +240,11 @@ ping                            : Check if the api is alive
     alvtimeHours "$@"
   elif [ "$1" = tasks ]; then
     alvtimeTasks "$@"
+  elif [ "$1" = register ]; then
+    ~/Projects/alv/alvtime/packages/shell/alvtime.sh "$@" > /dev/null
+    alvtime hours
   else
-    ~/Projects/alvtime/packages/shell/alvtime.sh "$@"
+    ~/Projects/alv/alvtime/packages/shell/alvtime.sh "$@"
   fi
 
   return 0
@@ -249,11 +252,16 @@ ping                            : Check if the api is alive
 
 function alvtimeWeek() {
   shift
+  HOLIDAYS_TEMPFILE="$(mktemp)"
+  trap "rm $HOLIDAYS_TEMPFILE" EXIT
+  ~/Projects/alv/alvtime/packages/shell/alvtime.sh holidays | jq -r '.[]' > $HOLIDAYS_TEMPFILE
   MON=$(date -v -Mon +'%Y-%m-%d')
   FRI=$(dateadd "$MON" +4d)
   dateseq "$MON" "$FRI" \
+    | grep -v -x -F -f "$HOLIDAYS_TEMPFILE" \
     | awk -v id="$1" -v hours="$2" '{print $0 " " id " " hours}' \
-    | ~/Projects/alvtime/packages/shell/alvtime.sh multiregister
+    | ~/Projects/alv/alvtime/packages/shell/alvtime.sh multiregister > /dev/null
+  alvtime hours
 }
 
 function alvtimeHours() {
@@ -262,13 +270,13 @@ function alvtimeHours() {
   SUN=$(dateadd "$MON" +6d)
   FROM_DATE_INCLUSIVE="${1:-$MON}"
   TO_DATE_INCLUSIVE="${2:-$SUN}"
-  ~/Projects/alvtime/packages/shell/alvtime.sh hours "$FROM_DATE_INCLUSIVE" "$TO_DATE_INCLUSIVE" \
+  ~/Projects/alv/alvtime/packages/shell/alvtime.sh hours "$FROM_DATE_INCLUSIVE" "$TO_DATE_INCLUSIVE" \
     | ~/Projects/dotfiles/alvtime/hours.js
 }
 
 function alvtimeTasks() {
   shift
-  local TASK=$(~/Projects/alvtime/packages/shell/alvtime.sh tasks \
+  local TASK=$(~/Projects/alv/alvtime/packages/shell/alvtime.sh tasks \
     | jq -r '.[] | "\(.id) \(.project.customer.name) \(.project.name) \(.name)"' \
     | fzf-tmux +m)
 
