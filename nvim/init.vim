@@ -44,6 +44,9 @@ Plug 'kana/vim-textobj-indent'                 " Creates an object of the curren
 Plug 'kana/vim-textobj-line'                   " Creates the line object to exclude whitespace before the line start
 Plug 'kana/vim-textobj-user'                   " Enables the creation of new objects
 
+Plug 'neovim/nvim-lspconfig'                   " LSP
+Plug 'hrsh7th/nvim-compe'
+
                                                " HTML / JSX
 Plug 'mattn/emmet-vim'                         " Autocompletion for html
 
@@ -121,6 +124,48 @@ augroup END
 
 " Add current working directory in front of the current file in airline section c
 let g:airline_section_c = "%{substitute(getcwd(), '^.*/', '', '')} %<%f%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#"
+
+lua << EOF
+local nvim_lsp = require('lspconfig')
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+
+end
+
+nvim_lsp.tsserver.setup{
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  },
+}
+
+require'compe'.setup({
+  enabled = true,
+  source = {
+    path = true,
+    buffer = true,
+    nvim_lsp = true,
+    nvim_lua = true,
+    ultisnips = true,
+  },
+})
+vim.o.completeopt = "menuone,noselect"
+EOF
 
 " Underline matching bracket and remove background color
 hi MatchParen cterm=underline ctermbg=none
