@@ -51,15 +51,9 @@ Plug 'hrsh7th/nvim-compe'
 Plug 'mattn/emmet-vim'                         " Autocompletion for html
 
                                                " HIGHLIGHTING
-Plug 'pangloss/vim-javascript',                " JavaScript highlighting
-            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
-Plug 'mxw/vim-jsx'                             " JSX Highlighting
-            \ { 'for': ['javascript', 'jsx', 'javascript.jsx'] }
-Plug 'leafgarland/typescript-vim'              " Typescript syntax highlighting
-Plug 'peitalin/vim-jsx-typescript'
-Plug 'posva/vim-vue'                           " vue.js syntax highlighting
-Plug 'ap/vim-css-color',                       " CSS syntax highlighting color colornames and codes
-            \ { 'for': 'css' }
+Plug 'nvim-treesitter/nvim-treesitter',
+      \ {'do': ':TSUpdate'}  " Update the parsers
+
 Plug 'hashivim/vim-terraform'                  " Terraform
 
                                                " FUZZY FILESEARCH
