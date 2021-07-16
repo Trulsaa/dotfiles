@@ -157,12 +157,55 @@ local on_attach = function(client, bufnr)
 
 end
 
-nvim_lsp.tsserver.setup{
+local project_library_path = "/usr/local/lib/node_modules"
+local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
+nvim_lsp.angularls.setup{
   on_attach = on_attach,
   flags = {
     debounce_text_changes = 150,
   },
+  cmd = cmd,
+  on_new_config = function(new_config,new_root_dir)
+    new_config.cmd = cmd
+  end,
+  filetypes = { "typescript", "html" }
 }
+nvim_lsp.jsonls.setup {
+  commands = {
+    Format = {
+      function()
+        vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+      end
+    }
+  },
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  }
+}
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = {
+  "tsserver",
+  "vimls",
+  "bashls",
+  "dockerls",
+  "gopls",
+  "graphql",
+  "html",
+  "terraformls",
+  "tflint",
+  "vuels"
+}
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
 
 require'compe'.setup({
   enabled = true,
