@@ -74,7 +74,8 @@ Plug 'vim-airline/vim-airline-themes'          " Status line themes
 Plug 'edkolev/tmuxline.vim'                    " Makes tmux status line match vim status line
 
                                                " GIT PLUGINS
-Plug 'airblade/vim-gitgutter'                  " Shows changed lines compared to last git commit
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'tpope/vim-fugitive'                      " Git wrapper
 
 Plug 'airblade/vim-rooter'
@@ -97,7 +98,6 @@ set linebreak             " brake lines at words
 set hidden                " bufferswitching without having to save first.
 set splitbelow            " Creates new splits below
 set splitright            " Creates new splits to the right
-set updatetime=250        " Time in milliseconds between saving of the swap-file, also uppdates gitgutter
 filetype plugin on        " Enable use of filespesiffic settings files
 set foldmethod=indent     " Fold on indentations
 set foldlevel=99          " The level that is folded when opening files
@@ -218,6 +218,8 @@ require'compe'.setup({
   },
 })
 vim.o.completeopt = "menuone,noselect"
+
+require('gitsigns').setup()
 EOF
 
 " Underline matching bracket and remove background color
@@ -229,11 +231,6 @@ highlight! link SignColumn LineNr
 highlight clear LineNr
 " set color for the terminal cursor in terminal mode
 hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
-
-" GitGutter colors
-highlight GitGutterAdd    guifg=#009900 ctermfg=2
-highlight GitGutterChange guifg=#bbbb00 ctermfg=3
-highlight GitGutterDelete guifg=#ff2222 ctermfg=1
 
 " KEYMAPPINGS
 "===========
@@ -261,13 +258,6 @@ command! Day :vsplit ~/Desktop/Daybook.md
 
 " H in commandlinemode now runs Helptags
 command! H Helptags
-
-" GitGutter settings
-nmap <Leader>ca <Plug>(GitGutterStageHunk) <Plug>(GitGutterNextHunk)
-nmap [c <Plug>(GitGutterPrevHunk)
-nmap ]c <Plug>(GitGutterNextHunk)
-nmap <Leader>cu <Plug>(GitGutterUndoHunk)
-nmap <Leader>cp <Plug>(GitGutterPreviewHunk)
 
 " Projections alternate binding
 map <Leader>a :A<cr>
