@@ -46,6 +46,7 @@ Plug 'kana/vim-textobj-user'                   " Enables the creation of new obj
 
 Plug 'neovim/nvim-lspconfig'                   " LSP
 Plug 'hrsh7th/nvim-compe'
+Plug 'SirVer/ultisnips'
 
                                                " HTML / JSX
 Plug 'mattn/emmet-vim'                         " Autocompletion for html
