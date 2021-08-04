@@ -57,9 +57,9 @@ Plug 'nvim-treesitter/nvim-treesitter',
 Plug 'hashivim/vim-terraform'                  " Terraform
 
                                                " FUZZY FILESEARCH
-Plug 'junegunn/fzf',
-            \ { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
                                                " THEME AND STATUSLINE
 Plug 'altercation/vim-colors-solarized'        " Solarized theme for vim
@@ -73,6 +73,7 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'tpope/vim-fugitive'                      " Git wrapper
 
 Plug 'airblade/vim-rooter'
+Plug 'kyazdani42/nvim-web-devicons'
 
 call plug#end()
 
@@ -136,14 +137,16 @@ local on_attach = function(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'gd', "<cmd>lua require('telescope.builtin').lsp_definitions()<cr>", opts)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', 'gi', "<cmd>lua require('telescope.builtin').lsp_implementations()<cr>", opts)
+  buf_set_keymap('n', 'gR', "<cmd>lua require('telescope.builtin').lsp_references()<cr>", opts)
   buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>A', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '<space>A', "<cmd>lua require('telescope.builtin').lsp_code_actions()<cr>", opts)
+  buf_set_keymap('v', '<space>A', "<cmd>lua require('telescope.builtin').lsp_range_code_actions()<cr>", opts)
+  buf_set_keymap('n', '<space>s', "<cmd>lua require('telescope.builtin').lsp_workspace_symbols()<cr>", opts)
+  buf_set_keymap('n', '<space>e', "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>", opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
@@ -214,8 +217,25 @@ require'compe'.setup({
 vim.o.completeopt = "menuone,noselect"
 
 require('gitsigns').setup()
+
+-- Global mappings
+-- ===============
+local map = vim.api.nvim_set_keymap
+
+-- map the leader key
+map('n', '<Space>', '', {})
+vim.g.mapleader = ' '  -- 'vim.g' sets global variables
+
+map('n', '<leader>p', "<cmd>lua require('telescope.builtin').find_files()<cr>", { noremap = true })
+map('n', '<leader>P', "<cmd>lua require('telescope.builtin').file_browser({ cwd = '~/Projects' })<cr>", { noremap = true })
+map('n', '<leader>l', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { noremap = true })
+map('n', '<leader>g', "<cmd>lua require('telescope.builtin').git_status()<cr>", { noremap = true })
+map('n', '<leader>b', "<cmd>lua require('telescope.builtin').buffers()<cr>", { noremap = true })
+map('n', '<leader>H', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { noremap = true })
 EOF
 
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 " Underline matching bracket and remove background color
 hi MatchParen cterm=underline ctermbg=none
 
@@ -225,12 +245,6 @@ highlight! link SignColumn LineNr
 highlight clear LineNr
 " set color for the terminal cursor in terminal mode
 hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
-
-" KEYMAPPINGS
-"===========
-" Leader
-nnoremap <SPACE> <Nop>
-let g:mapleader = ' '
 
 " Runs current line as a command in zsh and outputs stdout to file
 noremap Q !!zsh<CR>
@@ -275,7 +289,7 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Indentline settings
-let g:indentLine_fileTypeExclude = ['help', 'markdown', 'abap', 'vim', 'json', 'snippets', 'fzf']
+let g:indentLine_fileTypeExclude = ['help', 'markdown', 'abap', 'vim', 'json', 'snippets']
 let g:indentLine_char = '⎸▏'
 
 " Limelight settings
@@ -363,52 +377,6 @@ endfunction
 
 nmap <script> <silent> <leader>e :call ToggleLocationList()<CR>
 nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
-
-" ESC to close fzf buffer
-augroup fzf_esc_close
-  autocmd!
-  autocmd! FileType fzf tnoremap <buffer> <esc> <c-c>
-augroup END
-
-map <expr> <Leader>f system('git rev-parse --is-inside-work-tree') =~ 'true' ? ':GitLsFiles<cr>' : ':Files<cr>'
-map <Leader>F :Files ~/Projects/
-map <Leader>b :Buffers<cr>
-map <Leader>l :Rg<cr>
-map <Leader>H :Helptags<cr>
-map <Leader>m :Marks<cr>
-map <Leader>g :GFiles?<cr>
-
-let g:fzf_layout = { 'up': '~40%' }
-
-" Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-" Augmenting Ag command using fzf#vim#with_preview function
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-" Created new GitLsFiles that does the same as GFiles with a preview
-command! -bang -nargs=0 -complete=dir GitLsFiles
-  \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --smart-case --hidden --glob "!.git" -- '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
-
-" An action can be a reference to a function that processes selected lines
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-  copen
-  cc
-endfunction
-
-let g:fzf_action = {
-      \ 'ctrl-s': function('s:build_quickfix_list'),
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit' }
 
 " Overwrite <c-l> in netrw buffers to enable TmuxNavigateRight from
 " vim-tmux-navigator
