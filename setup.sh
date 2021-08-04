@@ -54,6 +54,7 @@ ln -sf "$PWD"/gitconfig ~/.gitconfig
 mkdir ~/.config
 mkdir ~/.config/nvim
 ln -sf "$PWD"/nvim/UltiSnips ~/.config/nvim/UltiSnips
+ln -sf "$PWD"/nvim/lua ~/.config/nvim/lua
 ln -sf "$PWD"/nvim/after/ftplugin ~/.config/nvim/after/ftplugin
 ln -sf "$PWD"/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf "$PWD"/oh-my-zsh.sh ~/.oh-my-zsh.sh
