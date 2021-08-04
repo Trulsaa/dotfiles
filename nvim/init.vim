@@ -155,6 +155,25 @@ local on_attach = function(client, bufnr)
 
 end
 
+local formatters = {
+    prettier = {command = "prettier", args = {"--stdin-filepath", "%filepath"}}
+}
+local formatFiletypes = {
+    typescript = "prettier",
+    typescriptreact = "prettier",
+    vue = "prettier",
+    json = "prettier",
+    markdown = "prettier"
+}
+nvim_lsp.diagnosticls.setup {
+    on_attach = on_attach,
+    filetypes = vim.tbl_keys(formatFiletypes),
+    init_options = {
+        formatters = formatters,
+        formatFiletypes = formatFiletypes
+    }
+}
+
 local project_library_path = "/usr/local/lib/node_modules"
 local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
 nvim_lsp.angularls.setup{
@@ -169,14 +188,32 @@ nvim_lsp.angularls.setup{
   filetypes = { "typescript", "html" }
 }
 nvim_lsp.jsonls.setup {
-  commands = {
-    Format = {
-      function()
-        vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-      end
-    }
-  },
-  on_attach = on_attach,
+  on_attach = function(client, bufnr)
+    -- Disable document_formatting from lsp
+    client.resolved_capabilities.document_formatting = false
+    on_attach(client, bufnr)
+  end,
+  flags = {
+    debounce_text_changes = 150,
+  }
+}
+
+nvim_lsp.tsserver.setup {
+  on_attach = function(client, bufnr)
+    -- Disable document_formatting from lsp
+    client.resolved_capabilities.document_formatting = false
+    on_attach(client, bufnr)
+  end,
+  flags = {
+    debounce_text_changes = 150,
+  }
+}
+nvim_lsp.vuels.setup {
+  on_attach = function(client)
+    -- Disable document_formatting from lsp
+    client.resolved_capabilities.document_formatting = false
+    on_attach(client, bufnr)
+  end,
   flags = {
     debounce_text_changes = 150,
   }
@@ -185,7 +222,6 @@ nvim_lsp.jsonls.setup {
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = {
-  "tsserver",
   "vimls",
   "bashls",
   "dockerls",
@@ -194,7 +230,6 @@ local servers = {
   "html",
   "terraformls",
   "tflint",
-  "vuels"
 }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
