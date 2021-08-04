@@ -198,10 +198,20 @@ nvim_lsp.jsonls.setup {
   }
 }
 
+_G.lsp_organize_imports = function()
+    local params = {
+        command = "_typescript.organizeImports",
+        arguments = {vim.api.nvim_buf_get_name(0)},
+        title = ""
+    }
+    vim.lsp.buf.execute_command(params)
+end
+
 nvim_lsp.tsserver.setup {
   on_attach = function(client, bufnr)
     -- Disable document_formatting from lsp
     client.resolved_capabilities.document_formatting = false
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>i", "<cmd>lua lsp_organize_imports()<CR>", { noremap=true, silent=true })
     on_attach(client, bufnr)
   end,
   flags = {
