@@ -35,6 +35,7 @@ local formatters = {
     prettier = {command = "prettier", args = {"--stdin-filepath", "%filepath"}}
 }
 local formatFiletypes = {
+    javascript = "prettier",
     typescript = "prettier",
     typescriptreact = "prettier",
     vue = "prettier",
@@ -141,6 +142,21 @@ vim.o.completeopt = "menuone,noselect"
 
 require('gitsigns').setup()
 
+require('telescope').setup({
+  defaults = {
+    layout_config = {
+      height = 0.95,
+      width = 0.95
+    }
+  }
+})
+
+_G.project_files = function()
+  local opts = {} -- define here if you want to define something
+  local ok = pcall(require'telescope.builtin'.git_files, opts)
+  if not ok then require'telescope.builtin'.find_files(opts) end
+end
+
 -- Global mappings
 -- ===============
 local map = vim.api.nvim_set_keymap
@@ -149,7 +165,7 @@ local map = vim.api.nvim_set_keymap
 map('n', '<Space>', '', {})
 vim.g.mapleader = ' '  -- 'vim.g' sets global variables
 
-map('n', '<leader>p', "<cmd>lua require('telescope.builtin').find_files()<cr>", { noremap = true })
+map('n', '<leader>p', "<cmd>lua project_files()<cr>", { noremap = true })
 map('n', '<leader>P', "<cmd>lua require('telescope.builtin').file_browser({ cwd = '~/Projects' })<cr>", { noremap = true })
 map('n', '<leader>l', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { noremap = true })
 map('n', '<leader>g', "<cmd>lua require('telescope.builtin').git_status()<cr>", { noremap = true })
