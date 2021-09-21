@@ -204,7 +204,7 @@ function alvtime() {
 
   datetest "$(date +'%Y-%m-%d')" --gt "$ALVTIME_TOKEN_EXPIRY" \
     && echo "Alvtime token has expired" \
-    && exit 1
+    && return 1
 
   if [ "$#" -eq 0 ]; then
     echo "
