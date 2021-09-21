@@ -75,9 +75,6 @@ command! Todo :vsplit ~/Desktop/Todo.md
 " Daybook file
 command! Day :vsplit ~/Desktop/Daybook.md
 
-" H in commandlinemode now runs Helptags
-command! H Helptags
-
 " Projections alternate binding
 map <Leader>a :A<cr>
 
