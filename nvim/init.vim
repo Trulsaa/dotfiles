@@ -46,6 +46,9 @@ augroup END
 " Add current working directory in front of the current file in airline section c
 let g:airline_section_c = "%{substitute(getcwd(), '^.*/', '', '')} %<%f%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#"
 
+lua require("lspsetup")
+lua require("compesetup")
+lua require("telescopesetup")
 lua require("vimrc")
 
 inoremap <silent><expr> <C-Space> compe#complete()
