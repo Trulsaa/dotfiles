@@ -298,3 +298,4 @@ if [ -f '/Users/t/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/t/D
 if [ -f '/Users/t/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/t/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 export GOOGLE_CLOUD_PROJECT=aize-twin-explorer-dev
+export JDTLS_HOME="$HOME/Projects/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository"
