@@ -66,9 +66,6 @@ noremap Q !!zsh<CR>
 "Map <C-w>N to exit terminal-mode:
 tnoremap <C-W>N <C-\><C-n>
 
-" Remap visual block
-nnoremap <Leader>v <c-v>
-
 " Remap H L
 nnoremap H 5H
 nnoremap L 5L
