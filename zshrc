@@ -24,7 +24,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git extract osx docker docker-compose terraform kubectl yarn npm)
+plugins=(git macos docker docker-compose terraform kubectl yarn npm helm ng yarn)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -150,13 +150,19 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 function git() {
   if [ $# -eq 0 ]; then
     command git status
-  elif [ "$1" = root ]; then
+  elif [ "$1" = 'root' ]; then
     changeDirectoryToGitRoot "$@"
-  elif [ "$1" = tree ]; then
+  elif [ "$1" = 'tree' ]; then
     logGitTree "$@"
+  elif [ "$1" = 'prune-branches' ]; then
+    pruneBranches
   else
     command git "$@"
   fi
+}
+
+function pruneBranches() {
+  git branch | grep -v '^*' | xargs git branch -D && git remote prune origin
 }
 
 function logGitTree() {
@@ -289,7 +295,6 @@ function alvtimeTasks() {
 }
 
 export KUBE_CONFIG_PATH=~/.kube/config
-source ~/.config/critiq/credentials
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/t/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/t/Downloads/google-cloud-sdk/path.zsh.inc'; fi

@@ -9,7 +9,10 @@ require("telescope").setup({
       "--column",
       "--smart-case",
       "--hidden",
+      "--glob",
+      "!.git",
     },
+    layout_strategy = "vertical",
     layout_config = {
       height = 0.95,
       width = 0.95,
@@ -33,34 +36,35 @@ _G.select_layout = function(builtin, opts)
     opts = {}
   end
 
-  opts.layout_strategy = "flex"
+  opts.layout_strategy = "vertical"
 
-  opts.path_display = function(opts, path)
-    local cwd = vim.fn.getcwd()
-    if string.find(cwd .. path, "aize/vcp") ~= nil then
-      local shortApplications = string.gsub(path, "applications", "a")
-      local transformed_path = string.gsub(shortApplications, "java/io/aize/vcp/clientapi", "...")
-      return transformed_path
-    else
-      return path
-    end
+  opts.path_display = function(_, path)
+    return require("path").format(path)
   end
   builtin(opts)
+end
+
+local find_files = function(opts)
+  if not opts then
+    opts = {}
+  end
+
+  opts.find_command = { "rg", "--files", "--hidden", "--glob", "!.git" }
+  select_layout(require("telescope.builtin").find_files, opts)
 end
 
 _G.project_files = function()
   local ok = pcall(select_layout, require("telescope.builtin").git_files)
   if not ok then
-    select_layout(require("telescope.builtin").find_files)
+    find_files()
   end
 end
 
 _G.all_project_files = function()
   local opts = {
     cwd = "/Users/t/Projects",
-    hidden = true,
   }
-  select_layout(require("telescope.builtin").find_files, opts)
+  find_files(opts)
 end
 
 _G.buffers = function()
@@ -71,3 +75,10 @@ _G.buffers = function()
   select_layout(require("telescope.builtin").buffers, opts)
 end
 
+local map = vim.api.nvim_set_keymap
+map("n", "<leader>p", "<cmd>lua project_files()<cr>", { noremap = true })
+map("n", "<leader>P", "<cmd>lua all_project_files()<cr>", { noremap = true })
+map("n", "<leader>l", "<cmd>lua select_layout(require('telescope.builtin').live_grep)<cr>", { noremap = true })
+map("n", "<leader>g", "<cmd>lua select_layout(require('telescope.builtin').git_status)<cr>", { noremap = true })
+map("n", "<leader>b", "<cmd>lua buffers()<cr>", { noremap = true })
+map("n", "<leader>H", "<cmd>lua select_layout(require('telescope.builtin').help_tags)<cr>", { noremap = true })

@@ -11,43 +11,22 @@ fi
 
 # Have brew install many things
 brew install \
-    git \
-    git-lfs \
-    hub \
-    # fzf needs fd
-    fd \
-    zaquestion/tap/lab \
-    wget \
-    tmux \
-    node \
-    neovim \
-    tree \
-    reattach-to-user-namespace \
-    the_silver_searcher \
-    tldr
+  git \
+  git-lfs \
+  hub \
+  fd \
+  tmux \
+  node \
+  neovim \
+  tree \
+  reattach-to-user-namespace \
+  tldr \
+  ripgrep \
+  alacritty
 
-brew cask install \
-    iterm2 \
-    google-chrome \
-    dropbox
 
-# Implement support for python plugins in Nvim
-pip3 install pynvim
-
-# js importer
-npm install -g import-js
-
-npm i -g @elastic/javascript-typescript-langserver
-
-# Install the powerline fonts
-git clone https://github.com/powerline/fonts.git --depth=1
-./fonts/install.sh
-rm -rf fonts
-
-# Download and install the Cobalt2 theme for zsh
-git clone https://github.com/wesbos/Cobalt2-iterm.git
-cp Cobalt2-iterm/cobalt2.zsh-theme ~/.oh-my-zsh/themes/
-rm -rf Cobalt2-iterm
+brew install --cask \
+  font-fira-code-nerd-font
 
 # Symlink dotfiles
 ln -sf "$PWD"/gitconfig ~/.gitconfig
@@ -56,9 +35,11 @@ mkdir ~/.config/nvim
 ln -sf "$PWD"/nvim/UltiSnips ~/.config/nvim/UltiSnips
 ln -sf "$PWD"/nvim/lua ~/.config/nvim/lua
 ln -sf "$PWD"/nvim/after/ftplugin ~/.config/nvim/after/ftplugin
-ln -sf "$PWD"/nvim/init.vim ~/.config/nvim/init.vim
+ln -sf "$PWD"/nvim/init.lua ~/.config/nvim/init.lua
 ln -sf "$PWD"/oh-my-zsh.sh ~/.oh-my-zsh.sh
 ln -sf "$PWD"/tmux.conf ~/.tmux.conf
+mkdir ~/.config/alacritty
+ln -sf "$PWD"/alacritty.yml ~/.config/alacritty/alacritty.yml
 
 # Install Tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
