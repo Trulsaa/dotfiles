@@ -23,7 +23,7 @@ local function dump(o)
   end
 end
 
-function table_to_string(tbl)
+local function table_to_string(tbl)
   local result = "{"
   for k, v in pairs(tbl) do
     -- Check the key type (ignore any numerical keys - assume its an array)
@@ -188,6 +188,7 @@ local formatFiletypes = {
 
 local filetypes = {
   typescript = "eslint",
+  sh = "shellcheck",
 }
 
 local linters = {
@@ -207,6 +208,28 @@ local linters = {
       security = "severity",
     },
     securities = { [2] = "error", [1] = "warning" },
+  },
+  shellcheck = {
+    sourceName = "shellcheck",
+    command = "shellcheck",
+    debounce = 100,
+    args = { "--format", "json1", "--exclude=SC1091", "-" },
+    parseJson = {
+      errorsRoot = "comments",
+      sourceName = "file",
+      line = "line",
+      column = "column",
+      endLine = "endLine",
+      endColumn = "endColumn",
+      security = "level",
+      message = "[shellcheck] ${message} [SC${code}]",
+    },
+    securities = {
+      error = "error",
+      warning = "warning",
+      info = "info",
+      style = "hint",
+    },
   },
 }
 

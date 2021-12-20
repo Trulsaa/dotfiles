@@ -89,7 +89,8 @@ return require("packer").startup(function(use)
 
     brew install \
     stylua \
-    terraform-ls
+    terraform-ls \
+    shellcheck \
     ]],
   }) -- LSP
   use("b0o/schemastore.nvim")
