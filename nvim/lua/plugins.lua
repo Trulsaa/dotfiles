@@ -114,7 +114,6 @@ return require("packer").startup(function(use)
     end,
   }) -- inline dropdown with completions
 
-  use("ray-x/lsp_signature.nvim") -- Show function signature when you type
   use("SirVer/ultisnips")
 
   -- HTML / JSX
