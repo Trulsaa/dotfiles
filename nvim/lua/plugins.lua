@@ -91,6 +91,7 @@ return require("packer").startup(function(use)
     stylua \
     terraform-ls \
     shellcheck \
+    lua-language-server
     ]],
   }) -- LSP
   use("b0o/schemastore.nvim")
