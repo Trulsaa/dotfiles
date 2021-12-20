@@ -1,4 +1,5 @@
 local nvim_lsp = require("lspconfig")
+local nvim_cmp_capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Set color for error message
 vim.cmd("hi LspDiagnosticsDefaultError ctermfg=Red")
@@ -235,6 +236,7 @@ local linters = {
 
 nvim_lsp.diagnosticls.setup({
   on_attach = on_attach,
+  capabilities = nvim_cmp_capabilities,
   filetypes = vim.tbl_keys(formatFiletypes),
   init_options = {
     filetypes = filetypes,
@@ -255,6 +257,7 @@ local cmd = {
 }
 nvim_lsp.angularls.setup({
   on_attach = on_attach,
+  capabilities = nvim_cmp_capabilities,
   flags = {
     debounce_text_changes = 150,
   },
@@ -270,6 +273,7 @@ nvim_lsp.jsonls.setup({
       schemas = require("schemastore").json.schemas(),
     },
   },
+  capabilities = nvim_cmp_capabilities,
   on_attach = function(client, bufnr)
     -- Disable document_formatting from lsp
     client.resolved_capabilities.document_formatting = false
@@ -290,6 +294,7 @@ _G.lsp_organize_imports = function()
 end
 
 nvim_lsp.tsserver.setup({
+  capabilities = nvim_cmp_capabilities,
   on_attach = function(client, bufnr)
     -- Disable document_formatting from lsp
     client.resolved_capabilities.document_formatting = false
@@ -304,6 +309,7 @@ nvim_lsp.tsserver.setup({
   },
 })
 nvim_lsp.vuels.setup({
+  capabilities = nvim_cmp_capabilities,
   on_attach = function(client, bufnr)
     -- Disable document_formatting from lsp
     client.resolved_capabilities.document_formatting = false
@@ -314,6 +320,7 @@ nvim_lsp.vuels.setup({
   },
 })
 nvim_lsp.omnisharp.setup({
+  capabilities = nvim_cmp_capabilities,
   on_attach = on_attach,
   cmd = {
     "/Users/t/bin/omnisharp-osx/run",
@@ -327,6 +334,7 @@ local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 require("lspconfig").sumneko_lua.setup({
+  capabilities = nvim_cmp_capabilities,
   on_attach = on_attach,
   settings = {
     Lua = {
@@ -368,6 +376,7 @@ local servers = {
 }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup({
+    capabilities = nvim_cmp_capabilities,
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,

@@ -96,27 +96,13 @@ return require("packer").startup(function(use)
   }) -- LSP
   use("b0o/schemastore.nvim")
 
-  use({
-    "hrsh7th/nvim-compe",
-    config = function()
-      require("compe").setup({
-        enabled = true,
-        source = {
-          path = true,
-          buffer = true,
-          nvim_lsp = true,
-          nvim_lua = true,
-          ultisnips = true,
-        },
-      })
-      vim.o.completeopt = "menuone,noselect"
-      local map = vim.api.nvim_set_keymap
-      map("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
-      map("i", "<CR>", "compe#confirm('<CR>')", { noremap = true, silent = true, expr = true })
-    end,
-  }) -- inline dropdown with completions
-
-  use("SirVer/ultisnips")
+  use("hrsh7th/nvim-cmp")
+  use("hrsh7th/cmp-nvim-lsp")
+  use("hrsh7th/cmp-buffer")
+  use("hrsh7th/cmp-path")
+  use("hrsh7th/cmp-cmdline")
+  use("L3MON4D3/LuaSnip")
+  use("saadparwaiz1/cmp_luasnip")
 
   -- HTML / JSX
   use("mattn/emmet-vim") -- Autocompletion for html

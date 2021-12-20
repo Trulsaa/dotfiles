@@ -112,4 +112,5 @@ require("telescopesetup")
 require("hiddenfilessetup")
 require("lspsetup")
 require('lualineconfig')
+require('completion')
 
