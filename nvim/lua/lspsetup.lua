@@ -140,12 +140,7 @@ local on_attach = function(_, bufnr)
     "<cmd>lua select_layout(require('telescope.builtin').lsp_workspace_symbols)<cr>",
     opts
   )
-  buf_set_keymap(
-    "n",
-    "<space>E",
-    "<cmd>lua select_layout(require('telescope.builtin').diagnostics)<cr>",
-    opts
-  )
+  buf_set_keymap("n", "<space>E", "<cmd>lua select_layout(require('telescope.builtin').diagnostics)<cr>", opts)
   buf_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
   buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
   buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
@@ -188,60 +183,11 @@ local formatFiletypes = {
   lua = "stylua",
 }
 
-local filetypes = {
-  typescript = "eslint",
-  sh = "shellcheck",
-}
-
-local linters = {
-  eslint = {
-    sourceName = "eslint",
-    command = "eslint_d",
-    rootPatterns = { ".eslintrc.js", "package.json" },
-    debounce = 100,
-    args = { "--stdin", "--stdin-filename", "%filepath", "--format", "json" },
-    parseJson = {
-      errorsRoot = "[0].messages",
-      line = "line",
-      column = "column",
-      endLine = "endLine",
-      endColumn = "endColumn",
-      message = "${message} [${ruleId}]",
-      security = "severity",
-    },
-    securities = { [2] = "error", [1] = "warning" },
-  },
-  shellcheck = {
-    sourceName = "shellcheck",
-    command = "shellcheck",
-    debounce = 100,
-    args = { "--format", "json1", "--exclude=SC1091", "-" },
-    parseJson = {
-      errorsRoot = "comments",
-      sourceName = "file",
-      line = "line",
-      column = "column",
-      endLine = "endLine",
-      endColumn = "endColumn",
-      security = "level",
-      message = "[shellcheck] ${message} [SC${code}]",
-    },
-    securities = {
-      error = "error",
-      warning = "warning",
-      info = "info",
-      style = "hint",
-    },
-  },
-}
-
 nvim_lsp.diagnosticls.setup({
   on_attach = on_attach,
   capabilities = nvim_cmp_capabilities,
   filetypes = vim.tbl_keys(formatFiletypes),
   init_options = {
-    filetypes = filetypes,
-    linters = linters,
     formatters = formatters,
     formatFiletypes = formatFiletypes,
   },

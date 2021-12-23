@@ -53,6 +53,7 @@ return require("packer").startup(function(use)
   use("ntpeters/vim-better-whitespace") -- Highlight trailing whitespace in red
   use("editorconfig/editorconfig-vim") -- Makes use of editorconfig files
   use("tpope/vim-projectionist") -- Projection and alternate navigation
+  use("tpope/vim-dispatch")
   use("machakann/vim-highlightedyank") -- Highlight yanked text
   use("vim-scripts/ReplaceWithRegister") -- Replace with registery content
   use({
@@ -119,6 +120,38 @@ return require("packer").startup(function(use)
     end,
   })
 
+  use({
+    "mfussenegger/nvim-lint",
+    config = function()
+      require("lint").linters_by_ft = {
+        sh = { "shellcheck" },
+        typescript = { "eslint_d" },
+        lua = { "luacheck" },
+      }
+      local pattern = [[%s*(%d+):(%d+)%s+(%w+)%s+(.+%S)%s+(%S+)]]
+      local groups = { "lnum", "col", "severity", "message", "code" }
+      local severity_map = {
+        ["error"] = vim.diagnostic.severity.ERROR,
+        ["warn"] = vim.diagnostic.severity.WARN,
+        ["warning"] = vim.diagnostic.severity.WARN,
+      }
+
+      require("lint").linters.eslint_d = {
+        cmd = "eslint_d",
+        args = {},
+        stdin = false,
+        stream = "stdout",
+        ignore_exitcode = true,
+        parser = require("lint.parser").from_pattern(pattern, groups, severity_map, { ["source"] = "eslint_d" }),
+      }
+      vim.cmd("autocmd BufWritePost * lua require('lint').try_lint()")
+    end,
+    run = [[
+      luarocks install luacheck
+    ]],
+  })
+
+  require("lint").try_lint()
   -- HTML / JSX
   use("mattn/emmet-vim") -- Autocompletion for html
 
