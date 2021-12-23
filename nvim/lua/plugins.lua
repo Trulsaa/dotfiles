@@ -97,12 +97,27 @@ return require("packer").startup(function(use)
   use("b0o/schemastore.nvim")
 
   use("hrsh7th/nvim-cmp")
+  use("onsails/lspkind-nvim")
   use("hrsh7th/cmp-nvim-lsp")
   use("hrsh7th/cmp-buffer")
   use("hrsh7th/cmp-path")
   use("hrsh7th/cmp-cmdline")
-  use("L3MON4D3/LuaSnip")
+  use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
+  use("ray-x/cmp-treesitter")
+  use("hrsh7th/cmp-nvim-lua")
+  use("andersevenrud/cmp-tmux")
   use("saadparwaiz1/cmp_luasnip")
+  use("f3fora/cmp-spell")
+  use("hrsh7th/cmp-calc")
+  use("hrsh7th/cmp-emoji")
+  use("dmitmel/cmp-cmdline-history")
+  use({
+    "L3MON4D3/LuaSnip",
+    after = "nvim-cmp",
+    config = function()
+      require("snippets")
+    end,
+  })
 
   -- HTML / JSX
   use("mattn/emmet-vim") -- Autocompletion for html
