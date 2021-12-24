@@ -145,53 +145,7 @@ local on_attach = function(_, bufnr)
   buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
   buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
   buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
-
-local formatters = {
-  prettier = {
-    command = "prettier",
-    args = { "--stdin-filepath", "%filepath" },
-  },
-  stylua = {
-    command = "stylua",
-    args = { "--indent-width", 2, "--indent-type", "Spaces", "%file" },
-    doesWriteToFile = true,
-  },
-  luaformat = {
-    command = "lua-format",
-    args = {
-      "-in-place",
-      "--no-keep-simple-function-one-line",
-      "--no-break-after-operator",
-      "--column-limit=80",
-      "--break-after-table-lb",
-    },
-  },
-}
-
-local formatFiletypes = {
-  javascript = "prettier",
-  typescript = "prettier",
-  typescriptreact = "prettier",
-  vue = "prettier",
-  json = "prettier",
-  markdown = "prettier",
-  html = "prettier",
-  yaml = "prettier",
-  sh = "prettier",
-  lua = "stylua",
-}
-
-nvim_lsp.diagnosticls.setup({
-  on_attach = on_attach,
-  capabilities = nvim_cmp_capabilities,
-  filetypes = vim.tbl_keys(formatFiletypes),
-  init_options = {
-    formatters = formatters,
-    formatFiletypes = formatFiletypes,
-  },
-})
 
 local project_library_path = "/usr/local/lib/node_modules"
 local cmd = {

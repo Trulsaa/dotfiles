@@ -75,13 +75,9 @@ return require("packer").startup(function(use)
     bash-language-server \
     diagnostic-languageserver \
     dockerfile-language-server-nodejs \
-    eslint \
-    eslint_d \
     graphql \
     graphql-language-service-cli \
     tslib \
-    prettier \
-    prettier-plugin-sh \
     typescript-language-server \
     vim-language-server \
     vls \
@@ -91,7 +87,6 @@ return require("packer").startup(function(use)
     brew install \
     stylua \
     terraform-ls \
-    shellcheck \
     lua-language-server
     ]],
   }) -- LSP
@@ -148,10 +143,75 @@ return require("packer").startup(function(use)
     end,
     run = [[
       luarocks install luacheck
+
+      npm install -g \
+      eslint \
+      eslint_d
+
+      brew install shellcheck
     ]],
   })
 
-  require("lint").try_lint()
+  use({
+    "mhartington/formatter.nvim",
+    config = function()
+      local function prettier()
+        return {
+          exe = "prettier",
+          args = { "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote" },
+          stdin = true,
+        }
+      end
+
+      require("formatter").setup({
+        filetype = {
+          javascript = { prettier },
+          typescript = { prettier },
+          typescriptreact = { prettier },
+          vue = { prettier },
+          json = { prettier },
+          markdown = { prettier },
+          html = { prettier },
+          yaml = { prettier },
+          lua = {
+            function()
+                return {
+                exe = "luafmt",
+                args = {"--indent-count", 2, "--stdin"},
+                stdin = true
+              }
+            end
+          },
+          terraform = {
+            function()
+              return {
+                exe = "terraform",
+                args = { "fmt", "-" },
+                stdin = true,
+              }
+            end,
+          },
+          sh = {
+            -- Shell Script Formatter
+            function()
+              return {
+                exe = "shfmt",
+                args = { "-i", 2 },
+                stdin = true,
+              }
+            end,
+          },
+        },
+      })
+
+      vim.cmd("nnoremap <silent> <leader>f :Format<CR>")
+    end,
+    run = [[
+        brew install shfmt
+        npm install -g prettier luafmt
+      ]]
+  })
+
   -- HTML / JSX
   use("mattn/emmet-vim") -- Autocompletion for html
 
