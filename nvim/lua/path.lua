@@ -56,4 +56,4 @@ local function format(path)
   return editedPath
 end
 
-return { format = format }
+return {format = format}

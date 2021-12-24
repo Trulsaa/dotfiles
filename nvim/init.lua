@@ -25,12 +25,13 @@ opt.diffopt = "vertical" -- Diff opens side by side
 opt.lazyredraw = true -- Don't bother updating screen during macro playback
 opt.scrolloff = 3 -- Start scrolling 3 lines before edge of window
 opt.cursorline = true -- Highlights the line the cursor is on
-opt.shortmess:append({ A = true }) -- don't give the ATTENTION message when an existing swap file is found.
+opt.shortmess:append({A = true}) -- don't give the ATTENTION message when an existing swap file is found.
 opt.inccommand = "split" -- enables live preview of substitutions
 opt.showmode = false -- Disable showing of mode in command line
 opt.mouse = "a" -- scroll with mouse
 
-cmd([[
+cmd(
+  [[
 augroup general_autocmd
 
   " Open files with cursor at last known position
@@ -40,21 +41,22 @@ augroup general_autocmd
   autocmd FileType gitcommit startinsert
 
 augroup END
-]])
+]]
+)
 
 -- Truncate branch name in airline to max 20 chars
 g["airline#extensions#branch#displayed_head_limit"] = 20
 
 -- Add current working directory in front of the current file in airline section c
 -- g.airline_section_c =
-  -- "%{substitute(getcwd(), '^.*/', '', '')} %<%f%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#"
+-- "%{substitute(getcwd(), '^.*/', '', '')} %<%f%m %#__accent_red#%{airline#util#wrap(airline#parts#readonly(),0)}%#__restore__#"
 
 -- EditorConfig settings
 -- To ensure that this plugin works well with Tim Pope's fugitive
-g.EditorConfig_exclude_patterns = { "fugitive://.*" }
+g.EditorConfig_exclude_patterns = {"fugitive://.*"}
 
 -- Emmet
-g.user_emmet_settings = { ["javascript.jsx"] = { ["extends"] = "jsx" } }
+g.user_emmet_settings = {["javascript.jsx"] = {["extends"] = "jsx"}}
 
 -- Underline matching bracket and remove background color
 cmd("hi MatchParen cterm=underline ctermbg=none")
@@ -64,12 +66,12 @@ cmd("hi MatchParen cterm=underline ctermbg=none")
 --   highlight! link SignColumn LineNr
 --   highlight clear LineNr
 -- ]])
-cmd('highlight clear SignColumn')
-
+cmd("highlight clear SignColumn")
 
 -- Overwrite <c-l> in netrw buffers to enable TmuxNavigateRight from
 -- vim-tmux-navigator
-cmd([[
+cmd(
+  [[
   augroup netrw_mapping
     autocmd!
     autocmd filetype netrw call NetrwMapping()
@@ -78,7 +80,8 @@ cmd([[
   function! NetrwMapping()
     nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
   endfunction
-]])
+]]
+)
 
 -- Todo file and Daybook file
 cmd([[
@@ -95,22 +98,21 @@ map("n", "<Space>", "", {})
 g.mapleader = " "
 
 -- Runs current line as a command in zsh and outputs stdout to file
-map("n", "Q", "!!zsh<CR>", { noremap = true })
+map("n", "Q", "!!zsh<CR>", {noremap = true})
 
 -- Map <C-w>N to exit terminal-mode:
-map("t", "<C-W>N", "<C-\\><C-n>", { noremap = true })
+map("t", "<C-W>N", "<C-\\><C-n>", {noremap = true})
 
 -- Remap H L
-map("n", "H", "5H", { noremap = true })
-map("n", "L", "5L", { noremap = true })
+map("n", "H", "5H", {noremap = true})
+map("n", "L", "5L", {noremap = true})
 
 -- Projections alternate binding
-map("n", "<Leader>a", ":A<cr>", { noremap = true })
+map("n", "<Leader>a", ":A<cr>", {noremap = true})
 
 require("plugins")
 require("telescopesetup")
 require("hiddenfilessetup")
 require("lspsetup")
-require('lualineconfig')
-require('completion')
-
+require("lualineconfig")
+require("completion")

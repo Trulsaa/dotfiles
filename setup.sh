@@ -24,7 +24,6 @@ brew install \
   ripgrep \
   alacritty
 
-
 brew install --cask \
   font-fira-code-nerd-font
 

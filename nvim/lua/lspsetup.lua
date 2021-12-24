@@ -51,7 +51,7 @@ end
 
 _G.references = function(opts)
   local params = vim.lsp.util.make_position_params()
-  params.context = { includeDeclaration = true }
+  params.context = {includeDeclaration = true}
 
   local results_lsp, err = vim.lsp.buf_request_sync(0, "textDocument/references", params, opts.timeout or 10000)
   if err then
@@ -84,15 +84,20 @@ _G.references = function(opts)
     return
   end
 
-  pickers.new(opts, {
-    prompt_title = "LSP References",
-    finder = finders.new_table({
-      results = locations,
-      entry_maker = opts.entry_maker or make_entry.gen_from_quickfix(opts),
-    }),
-    previewer = conf.qflist_previewer(opts),
-    sorter = conf.generic_sorter(opts),
-  }):find()
+  pickers.new(
+    opts,
+    {
+      prompt_title = "LSP References",
+      finder = finders.new_table(
+        {
+          results = locations,
+          entry_maker = opts.entry_maker or make_entry.gen_from_quickfix(opts)
+        }
+      ),
+      previewer = conf.qflist_previewer(opts),
+      sorter = conf.generic_sorter(opts)
+    }
+  ):find()
 end
 
 -- Use an on_attach function to only map the following keys
@@ -111,7 +116,7 @@ local on_attach = function(_, bufnr)
   -- Mappings.
   local opts = {
     noremap = true,
-    silent = true,
+    silent = true
   }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -154,112 +159,130 @@ local cmd = {
   "--tsProbeLocations",
   project_library_path,
   "--ngProbeLocations",
-  project_library_path,
+  project_library_path
 }
-nvim_lsp.angularls.setup({
-  on_attach = on_attach,
-  capabilities = nvim_cmp_capabilities,
-  flags = {
-    debounce_text_changes = 150,
-  },
-  cmd = cmd,
-  on_new_config = function(new_config)
-    new_config.cmd = cmd
-  end,
-  filetypes = { "typescript", "html" },
-})
-nvim_lsp.jsonls.setup({
-  settings = {
-    json = {
-      schemas = require("schemastore").json.schemas(),
+nvim_lsp.angularls.setup(
+  {
+    on_attach = on_attach,
+    capabilities = nvim_cmp_capabilities,
+    flags = {
+      debounce_text_changes = 150
     },
-  },
-  capabilities = nvim_cmp_capabilities,
-  on_attach = function(client, bufnr)
-    -- Disable document_formatting from lsp
-    client.resolved_capabilities.document_formatting = false
-    on_attach(client, bufnr)
-  end,
-  flags = {
-    debounce_text_changes = 150,
-  },
-})
+    cmd = cmd,
+    on_new_config = function(new_config)
+      new_config.cmd = cmd
+    end,
+    filetypes = {"typescript", "html"}
+  }
+)
+nvim_lsp.jsonls.setup(
+  {
+    settings = {
+      json = {
+        schemas = require("schemastore").json.schemas()
+      }
+    },
+    capabilities = nvim_cmp_capabilities,
+    on_attach = function(client, bufnr)
+      -- Disable document_formatting from lsp
+      client.resolved_capabilities.document_formatting = false
+      on_attach(client, bufnr)
+    end,
+    flags = {
+      debounce_text_changes = 150
+    }
+  }
+)
 
 _G.lsp_organize_imports = function()
   local params = {
     command = "_typescript.organizeImports",
-    arguments = { vim.api.nvim_buf_get_name(0) },
-    title = "",
+    arguments = {vim.api.nvim_buf_get_name(0)},
+    title = ""
   }
   vim.lsp.buf.execute_command(params)
 end
 
-nvim_lsp.tsserver.setup({
-  capabilities = nvim_cmp_capabilities,
-  on_attach = function(client, bufnr)
-    -- Disable document_formatting from lsp
-    client.resolved_capabilities.document_formatting = false
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<space>i", "<cmd>lua lsp_organize_imports()<CR>", {
-      noremap = true,
-      silent = true,
-    })
-    on_attach(client, bufnr)
-  end,
-  flags = {
-    debounce_text_changes = 150,
-  },
-})
-nvim_lsp.vuels.setup({
-  capabilities = nvim_cmp_capabilities,
-  on_attach = function(client, bufnr)
-    -- Disable document_formatting from lsp
-    client.resolved_capabilities.document_formatting = false
-    on_attach(client, bufnr)
-  end,
-  flags = {
-    debounce_text_changes = 150,
-  },
-})
-nvim_lsp.omnisharp.setup({
-  capabilities = nvim_cmp_capabilities,
-  on_attach = on_attach,
-  cmd = {
-    "/Users/t/bin/omnisharp-osx/run",
-    "--languageserver",
-    "--hostPID",
-    tostring(vim.fn.getpid()),
-  },
-})
+nvim_lsp.tsserver.setup(
+  {
+    capabilities = nvim_cmp_capabilities,
+    on_attach = function(client, bufnr)
+      -- Disable document_formatting from lsp
+      client.resolved_capabilities.document_formatting = false
+      vim.api.nvim_buf_set_keymap(
+        bufnr,
+        "n",
+        "<space>i",
+        "<cmd>lua lsp_organize_imports()<CR>",
+        {
+          noremap = true,
+          silent = true
+        }
+      )
+      on_attach(client, bufnr)
+    end,
+    flags = {
+      debounce_text_changes = 150
+    }
+  }
+)
+nvim_lsp.vuels.setup(
+  {
+    capabilities = nvim_cmp_capabilities,
+    on_attach = function(client, bufnr)
+      -- Disable document_formatting from lsp
+      client.resolved_capabilities.document_formatting = false
+      on_attach(client, bufnr)
+    end,
+    flags = {
+      debounce_text_changes = 150
+    }
+  }
+)
+nvim_lsp.omnisharp.setup(
+  {
+    capabilities = nvim_cmp_capabilities,
+    on_attach = on_attach,
+    cmd = {
+      "/Users/t/bin/omnisharp-osx/run",
+      "--languageserver",
+      "--hostPID",
+      tostring(vim.fn.getpid())
+    }
+  }
+)
 
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-require("lspconfig").sumneko_lua.setup({
-  capabilities = nvim_cmp_capabilities,
-  on_attach = on_attach,
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT",
-        -- Setup your lua path
-        path = runtime_path,
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { "vim" },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
-})
+require("lspconfig").sumneko_lua.setup(
+  {
+    capabilities = nvim_cmp_capabilities,
+    on_attach = on_attach,
+    settings = {
+      Lua = {
+        runtime = {
+          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+          version = "LuaJIT",
+          -- Setup your lua path
+          path = runtime_path
+        },
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {"vim"}
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          library = vim.api.nvim_get_runtime_file("", true)
+        },
+        -- Do not send telemetry data containing a randomized but unique identifier
+        telemetry = {
+          enable = false
+        }
+      }
+    }
+  }
+)
 
 -- /Users/t/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/bin/macOS/lua-language-server -E /Users/t/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/main.lua
 -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -273,14 +296,16 @@ local servers = {
   "html",
   "terraformls",
   "tflint",
-  "jdtls",
+  "jdtls"
 }
 for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup({
-    capabilities = nvim_cmp_capabilities,
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-  })
+  nvim_lsp[lsp].setup(
+    {
+      capabilities = nvim_cmp_capabilities,
+      on_attach = on_attach,
+      flags = {
+        debounce_text_changes = 150
+      }
+    }
+  )
 end

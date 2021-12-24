@@ -1,7 +1,8 @@
 local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
 
 -- HIDDEN FILES CONFIG
-cmd([[
+cmd(
+  [[
 if !isdirectory($HOME.'/.config/nvim/tmp')
     call mkdir($HOME.'/.config/nvim/tmp', '', 0700)
 endif
@@ -52,4 +53,5 @@ if has('viminfo')
     endif
   endif
 endif
-]])
+]]
+)
