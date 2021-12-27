@@ -96,7 +96,8 @@ return require("packer").startup(
     vim-language-server \
     vls \
     vscode-langservers-extracted \
-    vue-language-server
+    vue-language-server \
+    yaml-language-server
 
     brew install \
     stylua \
@@ -178,7 +179,7 @@ return require("packer").startup(
           local function prettier()
             return {
               exe = "prettier",
-              args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
+              args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
               stdin = true
             }
           end

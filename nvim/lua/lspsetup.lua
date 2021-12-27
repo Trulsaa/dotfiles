@@ -194,6 +194,16 @@ nvim_lsp.jsonls.setup(
   }
 )
 
+nvim_lsp.yamlls.setup {
+  settings = {
+    on_attach = on_attach,
+    capabilities = nvim_cmp_capabilities,
+    yaml = {
+      schemas = require("schemastore").json.schemas()
+    }
+  }
+}
+
 _G.lsp_organize_imports = function()
   local params = {
     command = "_typescript.organizeImports",
