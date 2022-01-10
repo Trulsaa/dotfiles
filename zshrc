@@ -296,11 +296,4 @@ function alvtimeTasks() {
 
 export KUBE_CONFIG_PATH=~/.kube/config
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/t/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/t/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/t/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/t/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
-export GOOGLE_CLOUD_PROJECT=aize-twin-explorer-dev
 export JDTLS_HOME="$HOME/Projects/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository"
