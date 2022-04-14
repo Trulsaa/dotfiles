@@ -296,4 +296,8 @@ function alvtimeTasks() {
 
 export KUBE_CONFIG_PATH=~/.kube/config
 
-export JDTLS_HOME="$HOME/Projects/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository"
+export JDTLS_HOME="$HOME/bin/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository"
+
+if [[ ! ":$PATH:" == *":$HOME/go/bin:"* ]]; then
+  export PATH="${PATH:+${PATH}:}$HOME/go/bin"
+fi

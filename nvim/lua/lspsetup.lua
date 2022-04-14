@@ -8,6 +8,8 @@ local conf = require("telescope.config").values
 local finders = require("telescope.finders")
 local make_entry = require("telescope.make_entry")
 local pickers = require("telescope.pickers")
+local sorters = require("telescope.sorters")
+local actions = require("telescope.actions.state")
 
 local function dump(o)
   if type(o) == "table" then
@@ -305,8 +307,7 @@ local servers = {
   "graphql",
   "html",
   "terraformls",
-  "tflint",
-  "jdtls"
+  "tflint"
 }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup(
@@ -319,3 +320,112 @@ for _, lsp in ipairs(servers) do
     }
   )
 end
+
+_G.jdtls_setup = function()
+  local jdtls_on_attach = function(_, bufnr)
+    on_attach(_, bufnr)
+
+    local function buf_set_keymap(...)
+      vim.api.nvim_buf_set_keymap(bufnr, ...)
+    end
+
+    local opts = {
+      noremap = true,
+      silent = true
+    }
+
+    -- Java specific
+    buf_set_keymap("n", "<space>i", "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
+    buf_set_keymap("n", "<space>dt", "<Cmd>lua require'jdtls'.test_class()<CR>", opts)
+    buf_set_keymap("n", "<space>dn", "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", opts)
+    buf_set_keymap("v", "<space>de", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
+    buf_set_keymap("n", "<space>de", "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
+    buf_set_keymap("v", "<space>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
+  end
+
+  local root_markers = {"gradlew", "pom.xml"}
+  local root_dir = require("jdtls.setup").find_root(root_markers)
+  local home = os.getenv("HOME")
+  local workspace_folder = home .. "/.workspace" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
+  local config = {
+    flags = {
+      allow_incremental_sync = true
+    },
+    capabilities = nvim_cmp_capabilities,
+    on_attach = jdtls_on_attach,
+    cmd = {
+      "java",
+      "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+      "-Dosgi.bundles.defaultStartLevel=4",
+      "-Declipse.product=org.eclipse.jdt.ls.core.product",
+      "-Dlog.protocol=true",
+      "-Dlog.level=ALL",
+      "-Xms1g",
+      "--add-modules=ALL-SYSTEM",
+      "--add-opens",
+      "java.base/java.util=ALL-UNNAMED",
+      "--add-opens",
+      "java.base/java.lang=ALL-UNNAMED",
+      "-jar",
+      "/Users/t/bin/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
+      "-configuration",
+      "/Users/t/bin/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository/config_mac",
+      "-data",
+      workspace_folder
+    },
+    on_init = function(client, _)
+      client.notify("workspace/didChangeConfiguration", {settings = config.settings})
+    end
+  }
+
+  local extendedClientCapabilities = require "jdtls".extendedClientCapabilities
+  extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+  config.init_options = {
+    -- bundles = bundles;
+    extendedClientCapabilities = extendedClientCapabilities
+  }
+
+  -- UI
+  require("jdtls.ui").pick_one_async = function(items, prompt, label_fn, cb)
+    local opts = {}
+    pickers.new(
+      opts,
+      {
+        prompt_title = prompt,
+        finder = finders.new_table {
+          results = items,
+          entry_maker = function(entry)
+            return {
+              value = entry,
+              display = label_fn(entry),
+              ordinal = label_fn(entry)
+            }
+          end
+        },
+        sorter = sorters.get_generic_fuzzy_sorter(),
+        attach_mappings = function(prompt_bufnr)
+          actions.goto_file_selection_edit:replace(
+            function()
+              local selection = actions.get_selected_entry()
+              actions.close(prompt_bufnr)
+
+              cb(selection.value)
+            end
+          )
+
+          return true
+        end
+      }
+    ):find()
+  end
+
+  -- Server
+  require("jdtls").start_or_attach(config)
+end
+
+vim.cmd([[
+augroup jdtls_lsp
+    autocmd!
+    autocmd FileType java lua jdtls_setup()
+augroup end
+]])

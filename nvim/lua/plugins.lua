@@ -106,6 +106,7 @@ return require("packer").startup(
     ]]
       }
     ) -- LSP
+    use("mfussenegger/nvim-jdtls")
     use("b0o/schemastore.nvim")
 
     use("hrsh7th/nvim-cmp")
