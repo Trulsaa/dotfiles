@@ -128,7 +128,7 @@ local on_attach = function(_, bufnr)
   buf_set_keymap("n", "gi", "<cmd>lua select_layout(require('telescope.builtin').lsp_implementations)<cr>", opts)
   buf_set_keymap("n", "gR", "<cmd>lua select_layout(references)<cr>", opts)
   buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-  -- buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+  buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   buf_set_keymap(
     "n",
     "<space>A",
