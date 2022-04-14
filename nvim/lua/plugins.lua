@@ -87,7 +87,6 @@ return require("packer").startup(
     @angular/language-server \
     @angular/language-service \
     bash-language-server \
-    diagnostic-languageserver \
     dockerfile-language-server-nodejs \
     graphql \
     graphql-language-service-cli \
@@ -100,7 +99,6 @@ return require("packer").startup(
     yaml-language-server
 
     brew install \
-    stylua \
     terraform-ls \
     lua-language-server
     ]]
@@ -196,30 +194,27 @@ return require("packer").startup(
                 yaml = {prettier},
                 lua = {
                   function()
-                    return {
-                      exe = "luafmt",
-                      args = {"--indent-count", 2, "--stdin"},
-                      stdin = true
-                    }
+                    return {exe = "luafmt", args = {"--indent-count", 2, "--stdin"}, stdin = true}
                   end
                 },
                 terraform = {
                   function()
-                    return {
-                      exe = "terraform",
-                      args = {"fmt", "-"},
-                      stdin = true
-                    }
+                    return {exe = "terraform", args = {"fmt", "-"}, stdin = true}
                   end
                 },
                 sh = {
-                  -- Shell Script Formatter
                   function()
-                    return {
-                      exe = "shfmt",
-                      args = {"-i", 2},
-                      stdin = true
-                    }
+                    return {exe = "shfmt", args = {"-i", 2}, stdin = true}
+                  end
+                },
+                go = {
+                  function()
+                    return {exe = "gofmt", stdin = true}
+                  end
+                },
+                java = {
+                  function()
+                    return {exe = "google-java-format", args = {"-"}, stdin = true}
                   end
                 }
               }
@@ -229,8 +224,8 @@ return require("packer").startup(
           vim.cmd("nnoremap <silent> <leader>f :Format<CR>")
         end,
         run = [[
-        brew install shfmt
-        npm install -g prettier luafmt
+        brew install shfmt google-java-format
+        npm install -g prettier lua-fmt
       ]]
       }
     )
