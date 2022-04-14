@@ -44,15 +44,12 @@ cmp.setup(
 cmp.setup.cmdline(
   ":",
   {
-    sources = cmp.config.sources(
-      {
-        {name = "path"},
-        {name = "cmdline_history", max_item_count = 20}
-      },
-      {
-        {name = "cmdline"}
-      }
-    )
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      {name = "path", max_item_count = 5},
+      {name = "cmdline_history", max_item_count = 5},
+      {name = "cmdline", max_item_count = 5}
+    }
   }
 )
 
@@ -60,9 +57,10 @@ cmp.setup.cmdline(
 cmp.setup.cmdline(
   "/",
   {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
-      {name = "buffer"},
-      {name = "cmdline_history", max_item_count = 20}
+      {name = "buffer", max_item_count = 5},
+      {name = "cmdline_history", max_item_count = 5}
     }
   }
 )
@@ -70,9 +68,10 @@ cmp.setup.cmdline(
 cmp.setup.cmdline(
   "?",
   {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
-      {name = "buffer"},
-      {name = "cmdline_history", max_item_count = 20}
+      {name = "buffer", max_item_count = 5},
+      {name = "cmdline_history", max_item_count = 5}
     }
   }
 )
