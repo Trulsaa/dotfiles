@@ -84,10 +84,12 @@ cmd(
 )
 
 -- Todo file and Daybook file
-cmd([[
-  command! Todo :vsplit ~/Desktop/Todo.md
-  command! Day :vsplit ~/Desktop/Daybook.md
-]])
+cmd(
+  [[
+  command! Todo :!tmux split-window -h "joplin edit 'TODO' && tmux new -dssync 'joplin sync'"
+  command! Day :!tmux split-window -h "joplin edit 'Daybook' && tmux new -dssync 'joplin sync'"
+]]
+)
 
 -- Global mappings
 -- ===============
