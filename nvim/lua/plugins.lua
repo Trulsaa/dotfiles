@@ -107,6 +107,8 @@ return require("packer").startup(
     use("mfussenegger/nvim-jdtls")
     use("b0o/schemastore.nvim")
 
+    use("github/copilot.vim")
+
     use("hrsh7th/nvim-cmp")
     use("hrsh7th/cmp-nvim-lsp")
     use("hrsh7th/cmp-buffer")
