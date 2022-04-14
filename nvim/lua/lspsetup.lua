@@ -264,6 +264,14 @@ nvim_lsp.omnisharp.setup(
   }
 )
 
+nvim_lsp.lemminx.setup(
+  {
+    capabilities = nvim_cmp_capabilities,
+    on_attach = on_attach,
+    cmd = {"/Users/t/bin/lemminx-osx-x86_64"}
+  }
+)
+
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
