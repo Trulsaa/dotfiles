@@ -132,45 +132,6 @@ return require("packer").startup(
 
     use(
       {
-        "mfussenegger/nvim-lint",
-        config = function()
-          require("lint").linters_by_ft = {
-            sh = {"shellcheck"},
-            typescript = {"eslint_d"},
-            lua = {"luacheck"}
-          }
-          local pattern = [[%s*(%d+):(%d+)%s+(%w+)%s+(.+%S)%s+(%S+)]]
-          local groups = {"lnum", "col", "severity", "message", "code"}
-          local severity_map = {
-            ["error"] = vim.diagnostic.severity.ERROR,
-            ["warn"] = vim.diagnostic.severity.WARN,
-            ["warning"] = vim.diagnostic.severity.WARN
-          }
-
-          require("lint").linters.eslint_d = {
-            cmd = "eslint_d",
-            args = {},
-            stdin = false,
-            stream = "stdout",
-            ignore_exitcode = true,
-            parser = require("lint.parser").from_pattern(pattern, groups, severity_map, {["source"] = "eslint_d"})
-          }
-          vim.cmd("autocmd BufWritePost * lua require('lint').try_lint()")
-        end,
-        run = [[
-      luarocks install luacheck
-
-      npm install -g \
-      eslint \
-      eslint_d
-
-      brew install shellcheck
-    ]]
-      }
-    )
-
-    use(
-      {
         "mhartington/formatter.nvim",
         config = function()
           local function prettier()
