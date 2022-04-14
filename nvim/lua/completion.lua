@@ -1,6 +1,4 @@
 local cmp = require("cmp")
-local lspkind = require("lspkind")
-lspkind.init()
 
 cmp.setup(
   {
@@ -37,25 +35,6 @@ cmp.setup(
         {name = "buffer", keyword_length = 5}
       }
     ),
-    formatting = {
-      format = lspkind.cmp_format(
-        {
-          with_text = true,
-          menu = {
-            buffer = "[buf]",
-            nvim_lsp = "[LSP]",
-            nvim_lua = "[api]",
-            path = "[path]",
-            luasnip = "[snip]",
-            cmp_tabnine = "[TabNine]",
-            treesitter = "[tree]",
-            tmux = "[tmux]",
-            calc = "[calc]",
-            emoji = "[emoji]"
-          }
-        }
-      )
-    },
     experimental = {
       ghost_text = true
     }

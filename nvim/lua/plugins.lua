@@ -109,7 +109,6 @@ return require("packer").startup(
     use("b0o/schemastore.nvim")
 
     use("hrsh7th/nvim-cmp")
-    use("onsails/lspkind-nvim")
     use("hrsh7th/cmp-nvim-lsp")
     use("hrsh7th/cmp-buffer")
     use("hrsh7th/cmp-path")
