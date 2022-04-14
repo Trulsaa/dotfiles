@@ -131,11 +131,6 @@ export FZF_CTRL_T_COMMAND="$FZF_CTRL_T_COMMAND"
 
 alias tab-rename="pwd | awk -F/ '{print \$NF}' | xargs tmux rename-window"
 
-# Path needed by vim-go
-if [[ ! ":$PATH:" == *":$HOME/go/bin:"* ]]; then
-  export PATH="${PATH:+${PATH}:}$HOME/go/bin"
-fi
-
 export JAVA_HOME=$(/usr/libexec/java_home)
 
 # `git` wrapper:
