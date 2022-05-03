@@ -301,9 +301,10 @@ return require("packer").startup(
     -- THEME AND STATUSLINE
     use(
       {
-        "morhetz/gruvbox",
+        "luisiacc/gruvbox-baby",
+        branch = "main",
         config = function()
-          vim.cmd("autocmd vimenter * ++nested colorscheme gruvbox")
+          vim.cmd([[colorscheme gruvbox-baby]])
         end
       }
     ) -- Gruvbox theme for vim
@@ -312,6 +313,11 @@ return require("packer").startup(
         "nvim-lualine/lualine.nvim",
         extensions = {"quickfix", "fugitive"},
         config = function()
+          require("lualine").setup {
+            options = {
+              theme = "gruvbox-baby"
+            }
+          }
         end
       }
     )
