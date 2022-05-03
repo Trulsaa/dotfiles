@@ -87,8 +87,8 @@ vim.api.nvim_create_autocmd(
 -- Todo file and Daybook file
 cmd(
   [[
-  command! Todo :!tmux split-window -h "joplin edit 'TODO' && tmux new -dssync 'joplin sync'"
-  command! Day :!tmux split-window -h "joplin edit 'Daybook' && tmux new -dssync 'joplin sync'"
+  command! Todo :!tmux split-window -h "joplin sync && joplin edit 'TODO' && tmux new -dssync 'joplin sync'"
+  command! Day :!tmux split-window -h "joplin sync && joplin edit 'Daybook' && tmux new -dssync 'joplin sync'"
 ]]
 )
 
