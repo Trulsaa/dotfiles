@@ -1,3 +1,5 @@
+vim.opt.completeopt = {"menu", "menuone", "noselect"}
+
 local cmp = require("cmp")
 
 cmp.setup(
@@ -21,24 +23,21 @@ cmp.setup(
       ),
       -- Accept currently selected item. If none selected, `select` first item.
       -- Set `select` to `false` to only confirm explicitly selected items.
-      ["<CR>"] = cmp.mapping.confirm({select = true})
+      ["<CR>"] = cmp.mapping.confirm({select = false})
     },
     sources = cmp.config.sources(
       {
         {name = "calc"},
         {name = "luasnip"},
         {name = "nvim_lua"},
-        {name = "nvim_lsp"},
+        {name = "nvim_lsp"}
       },
       {
         {name = "treesitter"},
         {name = "tmux"},
         {name = "buffer", keyword_length = 5}
       }
-    ),
-    experimental = {
-      ghost_text = true
-    }
+    )
   }
 )
 
