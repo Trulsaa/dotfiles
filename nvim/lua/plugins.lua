@@ -234,6 +234,21 @@ return require("packer").startup(
         run = [[ brew install ripgrep ]]
       }
     )
+    use(
+      {
+        "nvim-telescope/telescope-ui-select.nvim",
+        config = function()
+          require("telescope").setup {
+            extensions = {
+              ["ui-select"] = {
+                require("telescope.themes").get_cursor {}
+              }
+            }
+          }
+          require("telescope").load_extension("ui-select")
+        end
+      }
+    )
 
     use(
       {
