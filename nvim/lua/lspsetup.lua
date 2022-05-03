@@ -1,5 +1,6 @@
 local nvim_lsp = require("lspconfig")
 local nvim_cmp_capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local select_layout = require("telescopesetup").select_layout
 
 -- Set color for error message
 vim.cmd("hi LspDiagnosticsDefaultError ctermfg=Red")
@@ -10,21 +11,6 @@ local make_entry = require("telescope.make_entry")
 local pickers = require("telescope.pickers")
 local sorters = require("telescope.sorters")
 local actions = require("telescope.actions.state")
-
-local function dump(o)
-  if type(o) == "table" then
-    local s = "{ "
-    for k, v in pairs(o) do
-      if type(k) ~= "number" then
-        k = '"' .. k .. '"'
-      end
-      s = s .. "[" .. k .. "] = " .. dump(v) .. ","
-    end
-    return s .. "} "
-  else
-    return tostring(o)
-  end
-end
 
 local function table_to_string(tbl)
   local result = "{"
@@ -51,7 +37,7 @@ local function table_to_string(tbl)
   return result .. "}"
 end
 
-_G.references = function(opts)
+local references = function(opts)
   local params = vim.lsp.util.make_position_params()
   params.context = {includeDeclaration = true}
 
@@ -105,8 +91,10 @@ end
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(_, bufnr)
-  local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
+  local function map(mode, l, r, opts)
+    opts = opts or {}
+    opts.buffer = bufnr
+    vim.keymap.set(mode, l, r, opts)
   end
   local function buf_set_option(...)
     vim.api.nvim_buf_set_option(bufnr, ...)
@@ -115,43 +103,22 @@ local on_attach = function(_, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  -- Mappings.
-  local opts = {
-    noremap = true,
-    silent = true
-  }
-
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  buf_set_keymap("n", "gd", "<cmd>lua select_layout(require('telescope.builtin').lsp_definitions)<cr>", opts)
-  buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  buf_set_keymap("n", "gi", "<cmd>lua select_layout(require('telescope.builtin').lsp_implementations)<cr>", opts)
-  buf_set_keymap("n", "gR", "<cmd>lua select_layout(references)<cr>", opts)
-  buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-  buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  buf_set_keymap(
-    "n",
-    "<space>A",
-    "<cmd>lua require('telescope.builtin').lsp_code_actions(require('telescope.themes').get_cursor())<cr>",
-    opts
-  )
-  buf_set_keymap(
-    "v",
-    "<space>A",
-    "<cmd>lua require('telescope.builtin').lsp_range_code_actions(require('telescope.themes').get_cursor())<cr>",
-    opts
-  )
-  buf_set_keymap(
-    "n",
-    "<space>s",
-    "<cmd>lua select_layout(require('telescope.builtin').lsp_workspace_symbols)<cr>",
-    opts
-  )
-  buf_set_keymap("n", "<space>E", "<cmd>lua select_layout(require('telescope.builtin').diagnostics)<cr>", opts)
-  buf_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<cr>", opts)
-  buf_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-  buf_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-  buf_set_keymap("n", "<space>q", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
+  map("n", "gD", vim.lsp.buf.declaration)
+  map("n", "gd", select_layout(require("telescope.builtin").lsp_definitions))
+  map("n", "K", vim.lsp.buf.hover)
+  map("n", "gi", select_layout(require("telescope.builtin").lsp_implementations))
+  map("n", "gR", select_layout(references))
+  map("n", "<space>D", vim.lsp.buf.type_definition)
+  map("n", "<space>rn", vim.lsp.buf.rename)
+  map("n", "<space>A", vim.lsp.buf.code_action)
+  map("v", "<space>A", vim.lsp.buf.range_code_action)
+  map("n", "<space>s", select_layout(require("telescope.builtin").lsp_workspace_symbols))
+  map("n", "<space>E", select_layout(require("telescope.builtin").diagnostics))
+  map("n", "<space>e", vim.diagnostic.open_float)
+  map("n", "[d", vim.diagnostic.goto_prev)
+  map("n", "]d", vim.diagnostic.goto_next)
+  map("n", "<space>q", vim.lsp.diagnostic.set_loclist)
 end
 
 local project_library_path = "/usr/local/lib/node_modules"
@@ -206,7 +173,7 @@ nvim_lsp.yamlls.setup {
   }
 }
 
-_G.lsp_organize_imports = function()
+local lsp_organize_imports = function()
   local params = {
     command = "_typescript.organizeImports",
     arguments = {vim.api.nvim_buf_get_name(0)},
@@ -221,14 +188,13 @@ nvim_lsp.tsserver.setup(
     on_attach = function(client, bufnr)
       -- Disable document_formatting from lsp
       client.resolved_capabilities.document_formatting = false
-      vim.api.nvim_buf_set_keymap(
-        bufnr,
+      vim.keymap.set(
         "n",
         "<space>i",
-        "<cmd>lua lsp_organize_imports()<CR>",
+        lsp_organize_imports,
         {
-          noremap = true,
-          silent = true
+          silent = true,
+          buffer = bufnr
         }
       )
       on_attach(client, bufnr)
@@ -329,30 +295,29 @@ for _, lsp in ipairs(servers) do
   )
 end
 
-_G.jdtls_setup = function()
+local jdtls_setup = function()
+  local jdtls = require("jdtls")
   local jdtls_on_attach = function(_, bufnr)
     on_attach(_, bufnr)
 
-    local function buf_set_keymap(...)
-      vim.api.nvim_buf_set_keymap(bufnr, ...)
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
     end
 
-    local opts = {
-      noremap = true,
-      silent = true
-    }
-
     -- Java specific
-    buf_set_keymap("n", "<space>i", "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
-    buf_set_keymap("n", "<space>dt", "<Cmd>lua require'jdtls'.test_class()<CR>", opts)
-    buf_set_keymap("n", "<space>dn", "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", opts)
-    buf_set_keymap("v", "<space>de", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", opts)
-    buf_set_keymap("n", "<space>de", "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
-    buf_set_keymap("v", "<space>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
+    map("n", "<space>i", jdtls.organize_imports)
+    map("n", "<space>dt", jdtls.test_class)
+    map("n", "<space>dn", jdtls.test_nearest_method)
+    map("n", "<space>de", jdtls.extract_variable)
+
+    map("v", "<space>de", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>")
+    map("v", "<space>dm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>")
   end
 
   local root_markers = {"gradlew", "pom.xml"}
-  local root_dir = require("jdtls.setup").find_root(root_markers)
+  local root_dir = jdtls.setup.find_root(root_markers)
   local home = os.getenv("HOME")
   local workspace_folder = home .. "/.workspace" .. vim.fn.fnamemodify(root_dir, ":p:h:t")
   local config = {
@@ -386,7 +351,7 @@ _G.jdtls_setup = function()
     end
   }
 
-  local extendedClientCapabilities = require "jdtls".extendedClientCapabilities
+  local extendedClientCapabilities = jdtls.extendedClientCapabilities
   extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
   config.init_options = {
     -- bundles = bundles;
@@ -428,12 +393,16 @@ _G.jdtls_setup = function()
   end
 
   -- Server
-  require("jdtls").start_or_attach(config)
+  jdtls.start_or_attach(config)
 end
 
-vim.cmd([[
-augroup jdtls_lsp
-    autocmd!
-    autocmd FileType java lua jdtls_setup()
-augroup end
-]])
+local jdtls_setup_group_id = vim.api.nvim_create_augroup("jdtls_setup_group", {clear = true})
+vim.api.nvim_create_autocmd(
+  "FileType",
+  {
+    pattern = "java",
+    desc = "Setup jdtls",
+    group = jdtls_setup_group_id,
+    callback = jdtls_setup
+  }
+)

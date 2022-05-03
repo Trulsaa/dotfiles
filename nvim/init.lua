@@ -29,19 +29,24 @@ opt.shortmess:append({A = true}) -- don't give the ATTENTION message when an exi
 opt.inccommand = "split" -- enables live preview of substitutions
 opt.showmode = false -- Disable showing of mode in command line
 opt.mouse = "a" -- scroll with mouse
+opt.laststatus = 3 -- show only one statusbar
 
-cmd(
-  [[
-augroup general_autocmd
+vim.api.nvim_create_autocmd(
+  "BufReadPost",
+  {
+    desc = "Open files with cursor at last known position",
+    pattern = "*",
+    command = [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
+  }
+)
 
-  " Open files with cursor at last known position
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-
-  " Start git commit editing in insert mode
-  autocmd FileType gitcommit startinsert
-
-augroup END
-]]
+vim.api.nvim_create_autocmd(
+  "FileType",
+  {
+    desc = "Start git commit editing in insert mode",
+    pattern = "gitcommit",
+    command = "startinsert"
+  }
 )
 
 -- Truncate branch name in airline to max 20 chars
@@ -68,19 +73,15 @@ cmd("hi MatchParen cterm=underline ctermbg=none")
 -- ]])
 cmd("highlight clear SignColumn")
 
--- Overwrite <c-l> in netrw buffers to enable TmuxNavigateRight from
--- vim-tmux-navigator
-cmd(
-  [[
-  augroup netrw_mapping
-    autocmd!
-    autocmd filetype netrw call NetrwMapping()
-  augroup END
-
-  function! NetrwMapping()
-    nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>
-  endfunction
-]]
+local netrw_mapping_id = vim.api.nvim_create_augroup("netrw_mapping", {clear = true})
+vim.api.nvim_create_autocmd(
+  "FileType",
+  {
+    pattern = "netrw",
+    desc = "vim-tmux-navigator: Overwrite <c-l> in netrw buffers to enable TmuxNavigateRight from",
+    group = netrw_mapping_id,
+    command = "nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>"
+  }
 )
 
 -- Todo file and Daybook file
@@ -93,24 +94,24 @@ cmd(
 
 -- Global mappings
 -- ===============
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 
 -- map the leader key
-map("n", "<Space>", "", {})
+map("n", "<Space>", "")
 g.mapleader = " "
 
 -- Runs current line as a command in zsh and outputs stdout to file
-map("n", "Q", "!!zsh<CR>", {noremap = true})
+map("n", "Q", "!!zsh<CR>")
 
 -- Map <C-w>N to exit terminal-mode:
-map("t", "<C-W>N", "<C-\\><C-n>", {noremap = true})
+map("t", "<C-W>N", "<C-\\><C-n>")
 
 -- Remap H L
-map("n", "H", "5H", {noremap = true})
-map("n", "L", "5L", {noremap = true})
+map("n", "H", "5H")
+map("n", "L", "5L")
 
 -- Projections alternate binding
-map("n", "<Leader>a", ":A<cr>", {noremap = true})
+map("n", "<Leader>a", ":A<cr>")
 
 require("plugins")
 require("telescopesetup")

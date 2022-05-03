@@ -184,7 +184,7 @@ return require("packer").startup(
             }
           )
 
-          vim.cmd("nnoremap <silent> <leader>f :Format<CR>")
+          vim.keymap.set("n", "<leader>f", ":Format<CR>", {silent = true})
         end,
         run = [[
         brew install shfmt google-java-format
@@ -235,6 +235,54 @@ return require("packer").startup(
       }
     )
 
+    use(
+      {
+        "mfussenegger/nvim-lint",
+        config = function()
+          local nvim_lint = require("lint")
+          nvim_lint.linters_by_ft = {
+            sh = {"shellcheck"},
+            typescript = {"eslint_d"},
+            lua = {"luacheck"}
+          }
+          local pattern = [[%s*(%d+):(%d+)%s+(%w+)%s+(.+%S)%s+(%S+)]]
+          local groups = {"lnum", "col", "severity", "message", "code"}
+          local severity_map = {
+            ["error"] = vim.diagnostic.severity.ERROR,
+            ["warn"] = vim.diagnostic.severity.WARN,
+            ["warning"] = vim.diagnostic.severity.WARN
+          }
+
+          nvim_lint.linters.eslint_d = {
+            cmd = "eslint_d",
+            args = {},
+            stdin = false,
+            stream = "stdout",
+            ignore_exitcode = true,
+            parser = require("lint.parser").from_pattern(pattern, groups, severity_map, {["source"] = "eslint_d"})
+          }
+
+          vim.api.nvim_create_autocmd(
+            "BufWritePost",
+            {
+              pattern = "*",
+              desc = "Lint on save",
+              callback = nvim_lint.try_lint
+            }
+          )
+        end,
+        run = [[
+          luarocks install luacheck
+
+          npm install -g \
+          eslint \
+          eslint_d
+
+          brew install shellcheck
+        ]]
+      }
+    )
+
     -- THEME AND STATUSLINE
     use(
       {
@@ -268,27 +316,64 @@ return require("packer").startup(
                 changedelete = {show_count = true}
               },
               on_attach = function(bufnr)
-                local function map(mode, lhs, rhs, opts)
-                  opts = vim.tbl_extend("force", {noremap = true, silent = true}, opts or {})
-                  vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, opts)
+                local function map(mode, l, r, opts)
+                  opts = opts or {}
+                  opts.buffer = bufnr
+                  vim.keymap.set(mode, l, r, opts)
                 end
 
+                local gs = package.loaded.gitsigns
+
                 -- Navigation
-                map("n", "]c", "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr = true})
-                map("n", "[c", "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr = true})
+                map(
+                  "n",
+                  "]c",
+                  function()
+                    if vim.wo.diff then
+                      return "]c"
+                    end
+                    vim.schedule(
+                      function()
+                        gs.next_hunk()
+                      end
+                    )
+                    return "<Ignore>"
+                  end,
+                  {expr = true}
+                )
+
+                map(
+                  "n",
+                  "[c",
+                  function()
+                    if vim.wo.diff then
+                      return "[c"
+                    end
+                    vim.schedule(
+                      function()
+                        gs.prev_hunk()
+                      end
+                    )
+                    return "<Ignore>"
+                  end,
+                  {expr = true}
+                )
 
                 -- Actions
-                map("n", "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>")
-                map("v", "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>")
-                map("n", "<leader>hr", "<cmd>Gitsigns reset_hunk<CR>")
-                map("v", "<leader>hr", "<cmd>Gitsigns reset_hunk<CR>")
-                map("n", "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>")
-                map("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<CR>")
-                map("n", "<leader>hb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
+                map({"n", "v"}, "<leader>hs", gs.stage_hunk)
+                map({"n", "v"}, "<leader>hr", gs.reset_hunk)
+                map("n", "<leader>hu", gs.undo_stage_hunk)
+                map("n", "<leader>hp", gs.preview_hunk)
+                map(
+                  "n",
+                  "<leader>hb",
+                  function()
+                    gs.blame_line({full = true})
+                  end
+                )
 
                 -- Text object
-                map("o", "ih", ":<C-U>Gitsigns select_hunk<CR>")
-                map("x", "ih", ":<C-U>Gitsigns select_hunk<CR>")
+                map({"o", "x"}, "ih", gs.select_hunk)
               end
             }
           )

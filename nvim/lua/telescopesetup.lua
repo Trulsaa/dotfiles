@@ -33,7 +33,7 @@ require("telescope").setup(
   }
 )
 
-_G.select_layout = function(builtin, opts)
+local select_layout = function(builtin, opts)
   if not opts then
     opts = {}
   end
@@ -43,7 +43,10 @@ _G.select_layout = function(builtin, opts)
   opts.path_display = function(_, path)
     return require("path").format(path)
   end
-  builtin(opts)
+
+  return function()
+    builtin(opts)
+  end
 end
 
 local find_files = function(opts)
@@ -52,36 +55,38 @@ local find_files = function(opts)
   end
 
   opts.find_command = {"rg", "--files", "--hidden", "--glob", "!.git"}
-  select_layout(require("telescope.builtin").find_files, opts)
+  select_layout(require("telescope.builtin").find_files, opts)()
 end
 
-_G.project_files = function()
-  local ok = pcall(select_layout, require("telescope.builtin").git_files)
+local project_files = function()
+  local ok = pcall(select_layout(require("telescope.builtin").git_files))
   if not ok then
     find_files()
   end
 end
 
-_G.all_project_files = function()
+local all_project_files = function()
   local opts = {
     cwd = "/Users/t/Projects"
   }
   find_files(opts)
 end
 
-_G.buffers = function()
+local buffers = function()
   local opts = {
     ignore_current_buffer = true,
     sort_mru = true
   }
-  select_layout(require("telescope.builtin").buffers, opts)
+  select_layout(require("telescope.builtin").buffers, opts)()
 end
 
-local map = vim.api.nvim_set_keymap
-map("n", "<leader>p", "<cmd>lua project_files()<cr>", {noremap = true})
-map("n", "<leader>P", "<cmd>lua all_project_files()<cr>", {noremap = true})
-map("n", "<leader>l", "<cmd>lua select_layout(require('telescope.builtin').live_grep)<cr>", {noremap = true})
-map("n", "<leader>g", "<cmd>lua select_layout(require('telescope.builtin').git_status)<cr>", {noremap = true})
-map("n", "<leader>G", "<cmd>Telescope git_branches<cr>", {noremap = true})
-map("n", "<leader>b", "<cmd>lua buffers()<cr>", {noremap = true})
-map("n", "<leader>H", "<cmd>lua select_layout(require('telescope.builtin').help_tags)<cr>", {noremap = true})
+local map = vim.keymap.set
+map("n", "<leader>p", project_files)
+map("n", "<leader>P", all_project_files)
+map("n", "<leader>l", select_layout(require("telescope.builtin").live_grep))
+map("n", "<leader>g", select_layout(require("telescope.builtin").git_status))
+map("n", "<leader>G", require("telescope.builtin").git_branches)
+map("n", "<leader>b", buffers)
+map("n", "<leader>H", select_layout(require("telescope.builtin").help_tags))
+
+return {select_layout = select_layout}
