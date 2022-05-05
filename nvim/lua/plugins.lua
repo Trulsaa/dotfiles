@@ -304,6 +304,10 @@ return require("packer").startup(
         "luisiacc/gruvbox-baby",
         branch = "main",
         config = function()
+          -- Set new collor for visual mode highlighting
+          vim.g.gruvbox_baby_highlights = {Visual = {bg = "#EEBD35", fg = "#202020"}}
+
+          -- Load the colorscheme
           vim.cmd([[colorscheme gruvbox-baby]])
         end
       }
