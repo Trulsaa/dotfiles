@@ -280,7 +280,7 @@ return require("packer").startup(
           vim.api.nvim_create_autocmd(
             "BufWritePost",
             {
-              pattern = "*",
+              buffer = 0, -- current buffer has buffer number 0
               desc = "Lint on save",
               callback = nvim_lint.try_lint
             }
