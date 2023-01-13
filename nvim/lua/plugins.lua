@@ -448,5 +448,24 @@ return require("packer").startup(
       }
     )
     use("kyazdani42/nvim-web-devicons")
+
+    use(
+      {
+        "epwalsh/obsidian.nvim",
+        config = function()
+          require("obsidian").setup(
+            {
+              dir = "~/Notater",
+              daily_notes = {
+                folder = "Daily"
+              },
+              completion = {
+                nvim_cmp = true -- if using nvim-cmp, otherwise set to false
+              }
+            }
+          )
+        end
+      }
+    )
   end
 )
