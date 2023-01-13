@@ -61,10 +61,23 @@ local find_files = function(opts)
   select_layout(require("telescope.builtin").find_files, opts)()
 end
 
+local notes_files = function()
+  local opts = {
+    cwd = "/Users/t/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notater",
+    find_command = {"rg", "--files"}
+  }
+  select_layout(require("telescope.builtin").find_files, opts)()
+end
+vim.api.nvim_create_user_command("Notes", notes_files, {})
+
 local project_files = function()
-  local ok = pcall(select_layout(require("telescope.builtin").git_files))
-  if not ok then
-    find_files()
+  if string.sub(vim.fn.getcwd(), -string.len("Notater")) == "Notater" then
+    notes_files()
+  else
+    local ok = pcall(select_layout(require("telescope.builtin").git_files))
+    if not ok then
+      find_files()
+    end
   end
 end
 
