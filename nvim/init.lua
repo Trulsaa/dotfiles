@@ -85,12 +85,7 @@ vim.api.nvim_create_autocmd(
 )
 
 -- Todo file and Daybook file
-cmd(
-  [[
-  command! Todo :!tmux split-window -h "joplin sync && joplin edit 'TODO' && tmux new -dssync 'joplin sync'"
-  command! Day :!tmux split-window -h "joplin sync && joplin edit 'Daybook' && tmux new -dssync 'joplin sync'"
-]]
-)
+vim.api.nvim_create_user_command("Todo", "vsplit /Users/t/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notater/Todo.md", {})
 
 -- Global mappings
 -- ===============
