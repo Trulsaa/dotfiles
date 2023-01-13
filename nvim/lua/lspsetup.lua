@@ -1,5 +1,5 @@
 local nvim_lsp = require("lspconfig")
-local nvim_cmp_capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local nvim_cmp_capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local select_layout = require("telescopesetup").select_layout
 
 -- Set color for error message
@@ -118,7 +118,7 @@ local on_attach = function(_, bufnr)
   map("n", "<space>e", vim.diagnostic.open_float)
   map("n", "[d", vim.diagnostic.goto_prev)
   map("n", "]d", vim.diagnostic.goto_next)
-  map("n", "<space>q", vim.lsp.diagnostic.set_loclist)
+  map("n", "<space>q", vim.diagnostic.setloclist)
 end
 
 local project_library_path = "/usr/local/lib/node_modules"
@@ -148,6 +148,7 @@ nvim_lsp.jsonls.setup(
   {
     settings = {
       json = {
+        validate = {enable = true},
         schemas = require("schemastore").json.schemas()
       }
     },
@@ -163,15 +164,17 @@ nvim_lsp.jsonls.setup(
   }
 )
 
-nvim_lsp.yamlls.setup {
+-- Plugin gives error
+--[[ nvim_lsp.yamlls.setup {
   settings = {
     on_attach = on_attach,
     capabilities = nvim_cmp_capabilities,
     yaml = {
+      validate = {enable = true},
       schemas = require("schemastore").json.schemas()
     }
   }
-}
+} ]]
 
 local lsp_organize_imports = function()
   local params = {
@@ -308,10 +311,10 @@ local jdtls_setup = function()
   local jdtls_on_attach = function(_, bufnr)
     on_attach(_, bufnr)
 
-    local function map(mode, l, r, opts)
+    local function map(mode, lhs, rhs, opts)
       opts = opts or {}
       opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
+      vim.keymap.set(mode, lhs, rhs, opts)
     end
 
     -- Java specific
