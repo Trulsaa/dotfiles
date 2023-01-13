@@ -335,14 +335,10 @@ return require("packer").startup(
     -- THEME AND STATUSLINE
     use(
       {
-        "luisiacc/gruvbox-baby",
-        branch = "main",
+        "ellisonleao/gruvbox.nvim",
         config = function()
-          -- Set new collor for visual mode highlighting
-          vim.g.gruvbox_baby_highlights = {Visual = {bg = "#EEBD35", fg = "#202020"}}
-
-          -- Load the colorscheme
-          vim.cmd([[colorscheme gruvbox-baby]])
+          vim.o.background = "dark" -- or "light" for light mode
+          vim.cmd([[colorscheme gruvbox]])
         end
       }
     ) -- Gruvbox theme for vim
@@ -353,7 +349,7 @@ return require("packer").startup(
         config = function()
           require("lualine").setup {
             options = {
-              theme = "gruvbox-baby"
+              theme = "gruvbox"
             }
           }
         end
