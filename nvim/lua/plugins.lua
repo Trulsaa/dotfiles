@@ -243,6 +243,8 @@ return require("packer").startup(
               }
             }
           )
+          -- make highlight_definitions react after 500 ms not 4000 ms (default)
+          vim.o.updatetime = 500
 
           require("nvim-ts-autotag").setup()
         end
