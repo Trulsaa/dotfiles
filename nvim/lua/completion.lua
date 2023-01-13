@@ -29,6 +29,7 @@ cmp.setup(
       {
         {name = "calc"},
         {name = "luasnip"},
+        {name = "copilot"},
         {name = "nvim_lua"},
         {name = "nvim_lsp"}
       },

@@ -134,8 +134,6 @@ return require("packer").startup(
     use("mfussenegger/nvim-jdtls")
     use("b0o/schemastore.nvim")
 
-    use("github/copilot.vim")
-
     use("hrsh7th/nvim-cmp")
     use("hrsh7th/cmp-nvim-lsp")
     use("hrsh7th/cmp-buffer")
@@ -158,6 +156,34 @@ return require("packer").startup(
         end
       }
     )
+
+    use(
+      {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "VimEnter",
+        config = function()
+          vim.defer_fn(
+            function()
+              require("copilot").setup(
+                {
+                  suggestion = {enabled = false},
+                  panel = {enabled = false}
+                }
+              )
+            end,
+            100
+          )
+        end
+      }
+    )
+    use {
+      "zbirenbaum/copilot-cmp",
+      after = {"copilot.lua"},
+      config = function()
+        require("copilot_cmp").setup()
+      end
+    }
 
     use(
       {
