@@ -295,6 +295,14 @@ for _, lsp in ipairs(servers) do
   )
 end
 
+nvim_lsp.kotlin_language_server.setup(
+  {
+    cmd = {
+      "/Users/t/Projects/kotlin-language-server/server/build/install/server/bin/kotlin-language-server"
+    }
+  }
+)
+
 local jdtls_setup = function()
   local jdtls = require("jdtls")
   local jdtls_on_attach = function(_, bufnr)
