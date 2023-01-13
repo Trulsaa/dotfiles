@@ -11,7 +11,6 @@ return require("packer").startup(
     -- Packer can manage itself
     use("wbthomason/packer.nvim")
 
-    use("jiangmiao/auto-pairs") -- Insert or delete brackets, parens, quotes in pair.
     use({"andymass/vim-matchup", event = "VimEnter"}) -- operate on sets of matching text. It extends vim's % key to language-specific words
     use("tpope/vim-vinegar") -- Add functionality to netrw
     use("b3nj5m1n/kommentary") -- Comment objects
