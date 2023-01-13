@@ -296,3 +296,5 @@ export JDTLS_HOME="$HOME/bin/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/re
 if [[ ! ":$PATH:" == *":$HOME/go/bin:"* ]]; then
   export PATH="${PATH:+${PATH}:}$HOME/go/bin"
 fi
+
+source /Users/t/.docker/init-zsh.sh || true # Added by Docker Desktop
