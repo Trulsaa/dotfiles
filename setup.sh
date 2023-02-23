@@ -1,17 +1,12 @@
 #!/bin/sh
 
-# !!!. RUN THIS SCRIPT FROM WITHIN THE REPO FOLDER. (because of the symlinking)
-if [ ! -f setup.sh ]; then
-  echo "Run the script from within the dotfiles repo!!!"
-  exit 1
-fi
-
-# Install Homebrew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+# Install Homebrew by using the link on the website brew.sh
+# Then install git with homebrew - brew install git
+# Clone this repo - git clone https://github.com/Trulsaa/dotfiles.git
+# !!!. THEN RUN THIS SCRIPT FROM WITHIN THE REPO FOLDER. (because of the symlinking)
 
 # Have brew install many things
 brew install \
-  git \
   git-lfs \
   fd \
   tmux \
