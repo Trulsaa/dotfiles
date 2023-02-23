@@ -72,6 +72,11 @@ local references = function(opts)
     return
   end
 
+  for _, location in pairs(locations) do
+    local newFileName = require("path").removeCwdFromPath(location.filename)
+    location.filename = newFileName
+  end
+
   pickers.new(
     opts,
     {
@@ -155,7 +160,7 @@ nvim_lsp.jsonls.setup(
     capabilities = nvim_cmp_capabilities,
     on_attach = function(client, bufnr)
       -- Disable document_formatting from lsp
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.document_formatting = false
       on_attach(client, bufnr)
     end,
     flags = {
@@ -175,7 +180,6 @@ nvim_lsp.jsonls.setup(
     }
   }
 } ]]
-
 local lsp_organize_imports = function()
   local params = {
     command = "_typescript.organizeImports",
@@ -190,7 +194,7 @@ nvim_lsp.tsserver.setup(
     capabilities = nvim_cmp_capabilities,
     on_attach = function(client, bufnr)
       -- Disable document_formatting from lsp
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.document_formatting = false
       vim.keymap.set(
         "n",
         "<space>i",
@@ -212,7 +216,7 @@ nvim_lsp.vuels.setup(
     capabilities = nvim_cmp_capabilities,
     on_attach = function(client, bufnr)
       -- Disable document_formatting from lsp
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.document_formatting = false
       on_attach(client, bufnr)
     end,
     flags = {

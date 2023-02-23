@@ -203,6 +203,7 @@ return require("packer").startup(
                 javascript = {prettier},
                 typescript = {prettier},
                 typescriptreact = {prettier},
+                javascriptreact = {prettier},
                 vue = {prettier},
                 json = {prettier},
                 markdown = {prettier},

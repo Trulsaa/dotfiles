@@ -52,6 +52,8 @@ fi
 alias lg1="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias lg2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias run="./run"
+alias kontoret='displayplacer "id:4FD644F6-ECC9-C033-8962-76FEA756A762 res:1792x1120 hz:59 color_depth:8 scaling:on origin:(0,0) degree:0" "id:2C54366F-0D6B-978E-A695-C6256DE17B42 res:3440x1440 hz:50 color_depth:8 scaling:off origin:(0,-1440) degree:0"'
+alias hjemme='displayplacer "id:4FD644F6-ECC9-C033-8962-76FEA756A762 res:1792x1120 hz:59 color_depth:8 scaling:on origin:(0,0) degree:0" "id:827F7224-9EBA-B60B-DDDD-13BAFAC592BF res:3440x1440 hz:50 color_depth:8 scaling:off origin:(1792,-153) degree:0"'
 
 # fkill - kill process
 fkill() {
@@ -131,7 +133,7 @@ export FZF_CTRL_T_COMMAND="$FZF_CTRL_T_COMMAND"
 
 alias tab-rename="pwd | awk -F/ '{print \$NF}' | xargs tmux rename-window"
 
-export JAVA_HOME=$(/usr/libexec/java_home)
+export JAVA_HOME=/usr/local/opt/openjdk@17
 
 # `git` wrapper:
 #

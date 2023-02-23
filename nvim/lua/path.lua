@@ -56,4 +56,18 @@ local function format(path)
   return editedPath
 end
 
-return {format = format}
+function literalize(str)
+  return str:gsub(
+    "[%(%)%.%%%+%-%*%?%[%]%^%$]",
+    function(c)
+      return "%" .. c
+    end
+  )
+end
+
+local function removeCwdFromPath(path)
+  local cleanCwd = vim.fn.getcwd() .. "/"
+  return string.gsub(path, literalize(cleanCwd), "")
+end
+
+return {format = format, removeCwdFromPath = removeCwdFromPath}
