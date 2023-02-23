@@ -13,14 +13,12 @@ fi
 brew install \
   git \
   git-lfs \
-  hub \
   fd \
   tmux \
   node \
   neovim \
   tree \
   reattach-to-user-namespace \
-  tldr \
   ripgrep \
   alacritty
 
