@@ -78,15 +78,6 @@ return require("packer").startup(
         end
       }
     )
-    use(
-      {
-        "iamcco/markdown-preview.nvim",
-        run = "cd app && yarn install",
-        opt = true,
-        ft = {"markdown"},
-        cmd = {"MarkdownPreview", "MarkdownPreviewToggle"}
-      }
-    )
     use("ntpeters/vim-better-whitespace") -- Highlight trailing whitespace in red
     use("editorconfig/editorconfig-vim") -- Makes use of editorconfig files
     use("tpope/vim-projectionist") -- Projection and alternate navigation
