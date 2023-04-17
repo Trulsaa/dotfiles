@@ -468,7 +468,7 @@ return require("packer").startup(
         config = function()
           require("obsidian").setup(
             {
-              dir = "~/Notater",
+              dir = "/Users/t/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notater",
               daily_notes = {
                 folder = "Daily"
               },
