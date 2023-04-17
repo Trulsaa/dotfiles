@@ -368,7 +368,7 @@ return require("packer").startup(
         end
       }
     )
-    -- use("edkolev/tmuxline.vim") -- Makes tmux status line match vim status line
+    use("edkolev/tmuxline.vim") -- Makes tmux status line match vim status line
 
     -- GIT PLUGINS
     use(
