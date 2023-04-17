@@ -79,7 +79,6 @@ return require("packer").startup(
       }
     )
     use("ntpeters/vim-better-whitespace") -- Highlight trailing whitespace in red
-    use("editorconfig/editorconfig-vim") -- Makes use of editorconfig files
     use("tpope/vim-projectionist") -- Projection and alternate navigation
     use("tpope/vim-dispatch")
     use("machakann/vim-highlightedyank") -- Highlight yanked text
