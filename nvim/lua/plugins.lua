@@ -53,12 +53,11 @@ return require("packer").startup(
               -- return true: if buffer is ok to be saved
               -- return false: if it's not ok to be saved
               condition = function(buf)
-                local fn = vim.fn
                 local utils = require("auto-save.utils.data")
 
                 if
-                  fn.getbufvar(buf, "&modifiable") == 1 and
-                    utils.not_in(fn.getbufvar(buf, "&filetype"), {"TelescopePrompt"})
+                  vim.fn.getbufvar(buf, "&modifiable") == 1 and
+                    utils.not_in(vim.fn.getbufvar(buf, "&filetype"), {"TelescopePrompt"})
                  then
                   return true -- met condition(s), can save
                 end
