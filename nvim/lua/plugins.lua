@@ -480,5 +480,26 @@ return require("packer").startup(
         end
       }
     )
+
+    use(
+      {
+        "dpayne/CodeGPT.nvim",
+        requires = {"nvim-lua/plenary.nvim", "MunifTanjim/nui.nvim"}
+      }
+    )
+
+    use(
+      {
+        "jackMort/ChatGPT.nvim",
+        config = function()
+          require("chatgpt").setup()
+        end,
+        requires = {
+          "MunifTanjim/nui.nvim",
+          "nvim-lua/plenary.nvim",
+          "nvim-telescope/telescope.nvim"
+        }
+      }
+    )
   end
 )
