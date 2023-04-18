@@ -49,7 +49,7 @@ local function format(path)
   end
 
   if string.find(cwdAndPath, "aize/vcp") ~= nil then
-    editedPath = string.gsub(editedPath, "java/io/aize/vcp/clientapi", "...")
+    editedPath = string.gsub(editedPath, "io/aize/vcp/clientapi", "...")
   elseif string.find(cwdAndPath, "aize/twin-explorer", 1, true) ~= nil then
     editedPath = string.gsub(editedPath, "java/io/aize/twin/explorer", "...")
   end
