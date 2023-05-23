@@ -205,6 +205,7 @@ function alvtime() {
   export ALVTIME_TOKEN="$(awk 'NR==1{ print $1 }' ~/.alvtime)"
   local ALVTIME_TOKEN_EXPIRY="$(awk 'NR==1{ print $2 }' ~/.alvtime)"
 
+  # Run brew install dateutils to install datetest and others
   datetest "$(date +'%Y-%m-%d')" --gt "$ALVTIME_TOKEN_EXPIRY" \
     && echo "Alvtime token has expired" \
     && return 1
@@ -298,5 +299,3 @@ export JDTLS_HOME="$HOME/bin/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/re
 if [[ ! ":$PATH:" == *":$HOME/go/bin:"* ]]; then
   export PATH="${PATH:+${PATH}:}$HOME/go/bin"
 fi
-
-source /Users/t/.docker/init-zsh.sh || true # Added by Docker Desktop

@@ -1,5 +1,5 @@
 return {
-  {"andymass/vim-matchup", event = "VimEnter"}, -- operate on sets of matching text. It extends vim's % key to language-specific words
+  { "andymass/vim-matchup", event = "VimEnter" }, -- operate on sets of matching text. It extends vim's % key to language-specific words
   "tpope/vim-vinegar", -- Add functionality to netrw
   "b3nj5m1n/kommentary", -- Comment objects
   "tpope/vim-repeat", -- Enable . repeating for more
@@ -16,7 +16,7 @@ return {
   {
     "mbbill/undotree",
     lazy = true,
-    cmd = {"UndotreeFocus", "UndotreeHide", "UndotreeShow", "UndotreeToggle"}
+    cmd = { "UndotreeFocus", "UndotreeHide", "UndotreeShow", "UndotreeToggle" },
   }, -- Undo history visualisation
   "nvim-lua/popup.nvim",
   {
@@ -24,7 +24,7 @@ return {
     config = function()
       vim.o.background = "dark" -- or "light" for light mode
       vim.cmd([[colorscheme gruvbox]])
-    end
+    end,
   }, -- Gruvbox theme for vim
   -- GIT PLUGINS
   "tpope/vim-fugitive", -- Git wrapper
@@ -32,7 +32,20 @@ return {
     "notjedi/nvim-rooter.lua",
     config = function()
       require("nvim-rooter").setup()
-    end
+    end,
   },
-  "kyazdani42/nvim-web-devicons"
+  "kyazdani42/nvim-web-devicons",
+  {
+    "echasnovski/mini.indentscope",
+    version = false,
+    config = function()
+      require("mini.indentscope").setup({
+        draw = {
+          delay = 0,
+          animation = require("mini.indentscope").gen_animation.none(),
+        },
+        symbol = "│",
+      })
+    end,
+  },
 }

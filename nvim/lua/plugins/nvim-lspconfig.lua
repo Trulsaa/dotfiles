@@ -78,7 +78,7 @@ local references = function(opts)
     :find()
 end
 
-function config()
+local function config()
   local nvim_lsp = require("lspconfig")
   local nvim_cmp_capabilities =
     require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -108,16 +108,16 @@ function config()
     map("n", "K", vim.lsp.buf.hover)
     map("n", "gi", select_layout(require("telescope.builtin").lsp_implementations))
     map("n", "gR", select_layout(references))
-    map("n", "<space>D", vim.lsp.buf.type_definition)
-    map("n", "<space>rn", vim.lsp.buf.rename)
-    map("n", "<space>A", vim.lsp.buf.code_action)
-    map("v", "<space>A", vim.lsp.buf.range_code_action)
-    map("n", "<space>s", select_layout(require("telescope.builtin").lsp_workspace_symbols))
-    map("n", "<space>E", select_layout(require("telescope.builtin").diagnostics))
-    map("n", "<space>e", vim.diagnostic.open_float)
+    -- map("n", "<Leader>D", vim.lsp.buf.type_definition)
+    map("n", "<Leader>rn", vim.lsp.buf.rename)
+    map("n", "<Leader>A", vim.lsp.buf.code_action)
+    map("v", "<Leader>A", vim.lsp.buf.code_action)
+    map("n", "<Leader>s", select_layout(require("telescope.builtin").lsp_workspace_symbols))
+    map("n", "<Leader>D", select_layout(require("telescope.builtin").diagnostics))
+    map("n", "<Leader>d", vim.diagnostic.open_float)
     map("n", "[d", vim.diagnostic.goto_prev)
     map("n", "]d", vim.diagnostic.goto_next)
-    map("n", "<space>q", vim.diagnostic.setloclist)
+    map("n", "<Leader>q", vim.diagnostic.setloclist)
   end
 
   nvim_lsp.jsonls.setup({
@@ -205,6 +205,7 @@ function config()
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = vim.api.nvim_get_runtime_file("", true),
+          checkThirdParty = false,
         },
         -- Do not send telemetry data containing a randomized but unique identifier
         telemetry = {
@@ -239,18 +240,26 @@ end
 
 return {
   {
+    "williamboman/mason.nvim",
+    build = ":MasonUpdate",
+    config = function()
+      require("mason").setup()
+    end,
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({
+        automatic_installation = true,
+      })
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       "mfussenegger/nvim-jdtls",
       "b0o/schemastore.nvim",
     },
     config = config,
-  },
-  {
-    "williamboman/mason.nvim",
-    build = ":MasonUpdate",
-    config = function()
-      require("mason").setup()
-    end,
   },
 } -- LSP

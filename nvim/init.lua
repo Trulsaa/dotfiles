@@ -25,29 +25,23 @@ opt.diffopt = "vertical" -- Diff opens side by side
 opt.lazyredraw = true -- Don't bother updating screen during macro playback
 opt.scrolloff = 3 -- Start scrolling 3 lines before edge of window
 opt.cursorline = true -- Highlights the line the cursor is on
-opt.shortmess:append({A = true}) -- don't give the ATTENTION message when an existing swap file is found.
+opt.shortmess:append({ A = true }) -- don't give the ATTENTION message when an existing swap file is found.
 opt.inccommand = "split" -- enables live preview of substitutions
 opt.showmode = false -- Disable showing of mode in command line
 opt.mouse = "a" -- scroll with mouse
 opt.laststatus = 3 -- show only one statusbar
 
-vim.api.nvim_create_autocmd(
-  "BufReadPost",
-  {
-    desc = "Open files with cursor at last known position",
-    pattern = "*",
-    command = [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]
-  }
-)
+vim.api.nvim_create_autocmd("BufReadPost", {
+  desc = "Open files with cursor at last known position",
+  pattern = "*",
+  command = [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]],
+})
 
-vim.api.nvim_create_autocmd(
-  "FileType",
-  {
-    desc = "Start git commit editing in insert mode",
-    pattern = "gitcommit",
-    command = "startinsert"
-  }
-)
+vim.api.nvim_create_autocmd("FileType", {
+  desc = "Start git commit editing in insert mode",
+  pattern = "gitcommit",
+  command = "startinsert",
+})
 
 -- Truncate branch name in airline to max 20 chars
 g["airline#extensions#branch#displayed_head_limit"] = 20
@@ -58,10 +52,10 @@ g["airline#extensions#branch#displayed_head_limit"] = 20
 
 -- EditorConfig settings
 -- To ensure that this plugin works well with Tim Pope's fugitive
-g.EditorConfig_exclude_patterns = {"fugitive://.*"}
+g.EditorConfig_exclude_patterns = { "fugitive://.*" }
 
 -- Emmet
-g.user_emmet_settings = {["javascript.jsx"] = {["extends"] = "jsx"}}
+g.user_emmet_settings = { ["javascript.jsx"] = { ["extends"] = "jsx" } }
 
 -- Underline matching bracket and remove background color
 cmd("hi MatchParen cterm=underline ctermbg=none")
@@ -73,19 +67,20 @@ cmd("hi MatchParen cterm=underline ctermbg=none")
 -- ]])
 cmd("highlight clear SignColumn")
 
-local netrw_mapping_id = vim.api.nvim_create_augroup("netrw_mapping", {clear = true})
-vim.api.nvim_create_autocmd(
-  "FileType",
-  {
-    pattern = "netrw",
-    desc = "vim-tmux-navigator: Overwrite <c-l> in netrw buffers to enable TmuxNavigateRight from",
-    group = netrw_mapping_id,
-    command = "nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>"
-  }
-)
+local netrw_mapping_id = vim.api.nvim_create_augroup("netrw_mapping", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "netrw",
+  desc = "vim-tmux-navigator: Overwrite <c-l> in netrw buffers to enable TmuxNavigateRight from",
+  group = netrw_mapping_id,
+  command = "nnoremap <silent> <buffer> <c-l> :TmuxNavigateRight<CR>",
+})
 
 -- Todo file and Daybook file
-vim.api.nvim_create_user_command("Todo", "vsplit /Users/t/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notater/Todo.md", {})
+vim.api.nvim_create_user_command(
+  "Todo",
+  "vsplit /Users/t/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notater/Todo.md",
+  {}
+)
 
 -- Global mappings
 -- ===============
@@ -110,18 +105,21 @@ map("n", "<Leader>a", ":A<cr>")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system(
-    {
-      "git",
-      "clone",
-      "--filter=blob:none",
-      "https://github.com/folke/lazy.nvim.git",
-      "--branch=stable", -- latest stable release
-      lazypath
-    }
-  )
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("plugins")
+require("lazy").setup("plugins", {
+  change_detection = {
+    -- automatically check for config file changes and reload the ui
+    notify = false, -- get a notification when changes are found
+  },
+})
 require("hiddenfilessetup")

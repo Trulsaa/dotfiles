@@ -1,4 +1,4 @@
-function config()
+local function config()
   vim.opt.completeopt = {"menu", "menuone", "noselect"}
 
   local cmp = require("cmp")

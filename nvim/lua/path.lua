@@ -56,7 +56,7 @@ local function format(path)
   return editedPath
 end
 
-function literalize(str)
+local function literalize(str)
   return str:gsub(
     "[%(%)%.%%%+%-%*%?%[%]%^%$]",
     function(c)
