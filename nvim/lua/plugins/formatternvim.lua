@@ -16,6 +16,7 @@ return {
         lua = { formatter.lua.stylua },
         terraform = { formatter.terraform.terraformfmt },
         sh = { formatter.sh.shfmt },
+        zsh = { formatter.sh.shfmt },
         go = { formatter.go.gofmt },
       },
     })
