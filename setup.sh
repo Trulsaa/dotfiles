@@ -6,7 +6,7 @@
 # !!!. THEN RUN THIS SCRIPT FROM WITHIN THE REPO FOLDER. (because of the symlinking)
 
 # Have brew install many things
-brew install \
+brew install --no-quarantine \
   git-lfs \
   fd \
   tmux \
