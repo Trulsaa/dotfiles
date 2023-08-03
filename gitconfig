@@ -1,5 +1,6 @@
 [credential]
-  helper = osxkeychain
+  useHttpPath = true
+  helper = !pass-git-helper $@
 [core]
   editor = nvim
   excludesfile = ~/.global_ignore
