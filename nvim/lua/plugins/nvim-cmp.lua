@@ -23,6 +23,7 @@ local function config()
       -- Set `select` to `false` to only confirm explicitly selected items.
       ["<CR>"] = cmp.mapping.confirm({ select = false }),
     },
+    performance = { max_view_entries = 10 },
     sources = cmp.config.sources({
       { name = "calc" },
       { name = "luasnip" },
@@ -39,6 +40,7 @@ local function config()
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
+    performance = { max_view_entries = 10 },
     sources = {
       { name = "path" },
       { name = "cmdline_history" },
@@ -49,6 +51,7 @@ local function config()
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
+    performance = { max_view_entries = 10 },
     sources = {
       { name = "buffer" },
       { name = "cmdline_history" },
@@ -57,6 +60,7 @@ local function config()
 
   cmp.setup.cmdline("?", {
     mapping = cmp.mapping.preset.cmdline(),
+    performance = { max_view_entries = 10 },
     sources = {
       { name = "buffer" },
       { name = "cmdline_history" },
