@@ -6,7 +6,7 @@
 # !!!. THEN RUN THIS SCRIPT FROM WITHIN THE REPO FOLDER. (because of the symlinking)
 
 # Have brew install many things
-brew install \
+brew install --no-quarantine \
   git-lfs \
   fd \
   tmux \
@@ -15,7 +15,11 @@ brew install \
   tree \
   reattach-to-user-namespace \
   ripgrep \
-  alacritty
+  alacritty \
+  pass \
+  pass-update \
+  pass-odt \
+  pass-git-helper
 
 brew tap homebrew/cask-fonts
 brew install --cask \
@@ -33,6 +37,8 @@ ln -sf "$PWD"/oh-my-zsh.sh ~/.oh-my-zsh.sh
 ln -sf "$PWD"/tmux.conf ~/.tmux.conf
 mkdir ~/.config/alacritty
 ln -sf "$PWD"/alacritty.yml ~/.config/alacritty/alacritty.yml
+mkdir ~/.config/pass-git-helper
+ln -sf "$PWD"/git-pass-mapping.ini ~/.config/pass-git-helper/git-pass-mapping.ini
 
 # Install Tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
