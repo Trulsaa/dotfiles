@@ -302,3 +302,4 @@ fi
 
 export OPENAI_API_KEY=$(pass show openai_api_key)
 
+alias pinentry='pinentry-mac'
