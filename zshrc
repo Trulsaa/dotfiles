@@ -299,3 +299,6 @@ export JDTLS_HOME="$HOME/bin/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/re
 if [[ ! ":$PATH:" == *":$HOME/go/bin:"* ]]; then
   export PATH="${PATH:+${PATH}:}$HOME/go/bin"
 fi
+
+export OPENAI_API_KEY=$(pass show openai_api_key)
+
