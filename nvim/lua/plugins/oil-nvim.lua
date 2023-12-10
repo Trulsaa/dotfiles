@@ -3,7 +3,7 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     require("oil").setup({
-      delete_to_trash = false,
+      delete_to_trash = true,
       view_options = {
         -- Show files and directories that start with "."
         show_hidden = true,
@@ -21,6 +21,25 @@ return {
           { "type", "asc" },
           { "name", "asc" },
         },
+      },
+      keymaps = {
+        ["g?"] = "actions.show_help",
+        ["<CR>"] = "actions.select",
+        ["<C-x>"] = "actions.select_split",
+        ["<C-v>"] = "actions.select_vsplit",
+        ["<C-t>"] = "actions.open_terminal",
+        ["<C-p>"] = "actions.preview",
+        ["<C-c>"] = "actions.open_cmdline_dir",
+        ["<C-l>"] = false,
+        ["<C-r>"] = "actions.refresh",
+        ["-"] = "actions.parent",
+        ["_"] = false,
+        ["`"] = false,
+        ["~"] = false,
+        ["gs"] = "actions.change_sort",
+        ["gx"] = "actions.open_external",
+        ["g."] = false,
+        ["g\\"] = false,
       },
     })
     vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
