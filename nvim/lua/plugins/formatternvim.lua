@@ -18,6 +18,7 @@ return {
         sh = { formatter.sh.shfmt },
         zsh = { formatter.sh.shfmt },
         go = { formatter.go.gofmt },
+        rust = { formatter.rust.rustfmt },
       },
     })
 

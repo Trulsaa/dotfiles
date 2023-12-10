@@ -24,7 +24,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git macos docker docker-compose terraform kubectl yarn npm helm ng yarn fzf-tab pass)
+plugins=(git macos docker docker-compose terraform kubectl yarn npm helm ng yarn fzf-tab pass rust)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -303,3 +303,19 @@ fi
 export OPENAI_API_KEY=$(pass show openai_api_key)
 
 alias pinentry='pinentry-mac'
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/t/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/t/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/t/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/t/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
