@@ -42,7 +42,7 @@ local function config()
       opts = {}
     end
 
-    opts.find_command = { "rg", "--files", "--hidden", "--glob", "!.git" }
+    opts.find_command = { "rg", "--files", "--hidden", "--glob", "!.git", "--glob", "!.DS_Store" }
     select_layout(require("telescope.builtin").find_files, opts)()
   end
 
