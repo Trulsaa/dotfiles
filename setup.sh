@@ -17,6 +17,7 @@ brew install --no-quarantine \
   reattach-to-user-namespace \
   ripgrep \
   alacritty \
+  fzf \
   pass \
   pass-update \
   pass-otp \
