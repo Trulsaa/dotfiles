@@ -108,24 +108,11 @@ brewuninstall() {
 }
 
 # Shell in vim mode
-bindkey -v
-
-bindkey '^?' backward-delete-char
-export KEYTIMEOUT=1
+set -o vi
 bindkey -M vicmd "k" history-beginning-search-backward
 bindkey -M vicmd "j" history-beginning-search-forward
 
-function zle-line-init zle-keymap-select {
-    VIM_PROMPT="[NORMAL]"
-    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $EPS1"
-    zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-
 # Load fzf settings
-set -o vi
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPS="--extended"
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
