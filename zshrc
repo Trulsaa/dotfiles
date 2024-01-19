@@ -60,8 +60,7 @@ fkill() {
   local pid
   pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
 
-  if [ "x$pid" != "x" ]
-  then
+  if [ "x$pid" != "x" ]; then
     echo $pid | xargs kill -${1:-9}
   fi
 }
@@ -70,41 +69,38 @@ fkill() {
 # using brew cask search as input source
 # and display a info quickview window for the currently marked application
 brewinstall() {
-    local token
-    token=$(brew search --casks /./ | fzf-tmux --query="$1" +m --preview 'brew info --cask {}')
+  local token
+  token=$(brew search --casks /./ | fzf-tmux --query="$1" +m --preview 'brew info --cask {}')
 
-    if [ "x$token" != "x" ]
-    then
-        echo "(I)nstall or open the (h)omepage of $token"
-        read input
-        if [ $input = "i" ] || [ $input = "I" ]; then
-            brew install --cask $token
-        fi
-        if [ $input = "h" ] || [ $input = "H" ]; then
-            brew home $token
-        fi
+  if [ "x$token" != "x" ]; then
+    echo "(I)nstall or open the (h)omepage of $token"
+    read input
+    if [ $input = "i" ] || [ $input = "I" ]; then
+      brew install --cask $token
     fi
+    if [ $input = "h" ] || [ $input = "H" ]; then
+      brew home $token
+    fi
+  fi
 }
-
 
 # Uninstall or open the webpage for the selected application
 # using brew list as input source (all brew cask installed applications)
 # and display a info quickview window for the currently marked application
 brewuninstall() {
-    local token
-    token=$(brew list --cask | fzf-tmux --query="$1" +m --preview 'brew info --cask {}')
+  local token
+  token=$(brew list --cask | fzf-tmux --query="$1" +m --preview 'brew info --cask {}')
 
-    if [ "x$token" != "x" ]
-    then
-        echo "(U)ninstall or open the (h)omepage of $token"
-        read input
-        if [ $input = "u" ] || [ $input = "U" ]; then
-            brew uninstall --cask $token
-        fi
-        if [ $input = "h" ] || [ $token = "H" ]; then
-            brew home $token
-        fi
+  if [ "x$token" != "x" ]; then
+    echo "(U)ninstall or open the (h)omepage of $token"
+    read input
+    if [ $input = "u" ] || [ $input = "U" ]; then
+      brew uninstall --cask $token
     fi
+    if [ $input = "h" ] || [ $token = "H" ]; then
+      brew home $token
+    fi
+  fi
 }
 
 # Shell in vim mode
@@ -161,7 +157,7 @@ function logGitTree() {
 function changeDirectoryToGitRoot() {
   shift
   local ROOT
-  if [ "$(command git rev-parse --is-inside-git-dir 2> /dev/null)" = true ]; then
+  if [ "$(command git rev-parse --is-inside-git-dir 2>/dev/null)" = true ]; then
     if [ "$(command git rev-parse --is-bare-repository)" = true ]; then
       ROOT="$(command git rev-parse --absolute-git-dir)"
     else
@@ -173,9 +169,9 @@ function changeDirectoryToGitRoot() {
     fi
   else
     # Git 2.13.0 and above:
-    ROOT="$(command git rev-parse --show-superproject-working-tree 2> /dev/null)"
+    ROOT="$(command git rev-parse --show-superproject-working-tree 2>/dev/null)"
     if [ -z "$ROOT" ]; then
-      ROOT="$(command git rev-parse --show-toplevel 2> /dev/null)"
+      ROOT="$(command git rev-parse --show-toplevel 2>/dev/null)"
     fi
   fi
   if [ -z "$ROOT" ]; then
@@ -193,9 +189,9 @@ function alvtime() {
   local ALVTIME_TOKEN_EXPIRY="$(awk 'NR==1{ print $2 }' ~/.alvtime)"
 
   # Run brew install dateutils to install datetest and others
-  datetest "$(date +'%Y-%m-%d')" --gt "$ALVTIME_TOKEN_EXPIRY" \
-    && echo "Alvtime token has expired" \
-    && return 1
+  datetest "$(date +'%Y-%m-%d')" --gt "$ALVTIME_TOKEN_EXPIRY" &&
+    echo "Alvtime token has expired" &&
+    return 1
 
   if [ "$#" -eq 0 ]; then
     echo "
@@ -219,7 +215,7 @@ ping                            : Check if the api is alive
   # If $2 is not a number replace it with the matching number from config
   if [ "$1" = week ] || [ "$1" = register ]; then
     RE='^[0-9]+$'
-    if ! [[ "$2" =~ $RE ]] ; then
+    if ! [[ "$2" =~ $RE ]]; then
       local ID="$(grep -i "${2}$" ~/.alvtime | awk '{print $1}')"
       set -- "$1" "$ID" "$3" "$4"
     fi
@@ -232,7 +228,7 @@ ping                            : Check if the api is alive
   elif [ "$1" = tasks ]; then
     alvtimeTasks "$@"
   elif [ "$1" = register ]; then
-    ~/Projects/alv/alvtime/packages/shell/alvtime.sh "$@" > /dev/null
+    ~/Projects/alv/alvtime/packages/shell/alvtime.sh "$@" >/dev/null
     alvtime hours
   else
     ~/Projects/alv/alvtime/packages/shell/alvtime.sh "$@"
@@ -245,13 +241,13 @@ function alvtimeWeek() {
   shift
   HOLIDAYS_TEMPFILE="$(mktemp)"
   trap "rm $HOLIDAYS_TEMPFILE" EXIT
-  ~/Projects/alv/alvtime/packages/shell/alvtime.sh holidays | jq -r '.[]' > $HOLIDAYS_TEMPFILE
+  ~/Projects/alv/alvtime/packages/shell/alvtime.sh holidays | jq -r '.[]' >$HOLIDAYS_TEMPFILE
   MON=$(date -v -Mon +'%Y-%m-%d')
   FRI=$(dateadd "$MON" +4d)
-  dateseq "$MON" "$FRI" \
-    | grep -v -x -F -f "$HOLIDAYS_TEMPFILE" \
-    | awk -v id="$1" -v hours="$2" '{print $0 " " id " " hours}' \
-    | ~/Projects/alv/alvtime/packages/shell/alvtime.sh multiregister > /dev/null
+  dateseq "$MON" "$FRI" |
+    grep -v -x -F -f "$HOLIDAYS_TEMPFILE" |
+    awk -v id="$1" -v hours="$2" '{print $0 " " id " " hours}' |
+    ~/Projects/alv/alvtime/packages/shell/alvtime.sh multiregister >/dev/null
   alvtime hours
 }
 
@@ -261,22 +257,22 @@ function alvtimeHours() {
   SUN=$(dateadd "$MON" +6d)
   FROM_DATE_INCLUSIVE="${1:-$MON}"
   TO_DATE_INCLUSIVE="${2:-$SUN}"
-  ~/Projects/alv/alvtime/packages/shell/alvtime.sh hours "$FROM_DATE_INCLUSIVE" "$TO_DATE_INCLUSIVE" \
-    | ~/Projects/dotfiles/alvtime/hours.js
+  ~/Projects/alv/alvtime/packages/shell/alvtime.sh hours "$FROM_DATE_INCLUSIVE" "$TO_DATE_INCLUSIVE" |
+    ~/Projects/dotfiles/alvtime/hours.js
 }
 
 function alvtimeTasks() {
   shift
-  local TASK=$(~/Projects/alv/alvtime/packages/shell/alvtime.sh tasks \
-    | jq -r '.[] | "\(.id) \(.project.customer.name) \(.project.name) \(.name)"' \
-    | fzf-tmux +m)
+  local TASK=$(~/Projects/alv/alvtime/packages/shell/alvtime.sh tasks |
+    jq -r '.[] | "\(.id) \(.project.customer.name) \(.project.name) \(.name)"' |
+    fzf-tmux +m)
 
   local ID=$(echo $TASK | awk '{print $1}')
   echo "Write ref name to save the task to favorites. Leave blank to to not save:"
   read INPUT
-  test -n "$INPUT" \
-    && echo "$ID $INPUT" \
-    && echo "$ID $INPUT" >> ~/.alvtime || true
+  test -n "$INPUT" &&
+    echo "$ID $INPUT" &&
+    echo "$ID $INPUT" >>~/.alvtime || true
 }
 
 export KUBE_CONFIG_PATH=~/.kube/config
@@ -293,16 +289,15 @@ alias pinentry='pinentry-mac'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/t/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/Users/t/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+  eval "$__conda_setup"
 else
-    if [ -f "/Users/t/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/t/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/t/miniconda3/bin:$PATH"
-    fi
+  if [ -f "/Users/t/miniconda3/etc/profile.d/conda.sh" ]; then
+    . "/Users/t/miniconda3/etc/profile.d/conda.sh"
+  else
+    export PATH="/Users/t/miniconda3/bin:$PATH"
+  fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
