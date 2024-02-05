@@ -36,6 +36,7 @@ ln -sf "$PWD"/nvim/lua ~/.config/nvim/lua
 ln -sf "$PWD"/nvim/init.lua ~/.config/nvim/init.lua
 ln -sf "$PWD"/oh-my-zsh.sh ~/.oh-my-zsh.sh
 ln -sf "$PWD"/tmux.conf ~/.tmux.conf
+ln -sf "$PWD"/ideavimrc ~/.ideavimrc
 mkdir ~/.config/alacritty
 ln -sf "$PWD"/alacritty.toml ~/.config/alacritty/alacritty.toml
 mkdir ~/.config/pass-git-helper
