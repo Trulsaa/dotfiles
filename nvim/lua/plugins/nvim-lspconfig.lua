@@ -215,6 +215,20 @@ local function config()
     },
   })
 
+  nvim_lsp.groovyls.setup({
+    capabilities = nvim_cmp_capabilities,
+    on_attach = on_attach,
+    cmd = { "groovy-language-server" },
+  })
+
+  nvim_lsp.kotlin_language_server.setup({
+    capabilities = nvim_cmp_capabilities,
+    on_attach = on_attach,
+    init_options = {
+      storagePath = "~/.config/nvim/tmp/data",
+    },
+  })
+
   -- /Users/t/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/bin/macOS/lua-language-server -E /Users/t/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/main.lua
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
