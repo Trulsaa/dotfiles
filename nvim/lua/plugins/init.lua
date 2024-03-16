@@ -26,6 +26,21 @@ return {
     end,
   }, -- Gruvbox theme for vim
   -- GIT PLUGINS
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed, not both.
+      "nvim-telescope/telescope.nvim", -- optional
+    },
+    config = function()
+      require("neogit").setup({
+        kind = "auto",
+      })
+    end,
+  },
   "tpope/vim-fugitive", -- Git wrapper
   {
     "notjedi/nvim-rooter.lua",
@@ -47,4 +62,6 @@ return {
       })
     end,
   },
+  "kevinhwang91/nvim-bqf",
+  "LunarVim/bigfile.nvim",
 }
