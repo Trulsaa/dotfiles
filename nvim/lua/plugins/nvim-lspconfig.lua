@@ -95,12 +95,9 @@ local function config()
       opts.buffer = bufnr
       vim.keymap.set(mode, l, r, opts)
     end
-    local function buf_set_option(...)
-      vim.api.nvim_buf_set_option(bufnr, ...)
-    end
 
     -- Enable completion triggered by <c-x><c-o>
-    buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     map("n", "gD", vim.lsp.buf.declaration)
@@ -108,16 +105,15 @@ local function config()
     map("n", "K", vim.lsp.buf.hover)
     map("n", "gi", select_layout(require("telescope.builtin").lsp_implementations))
     map("n", "gR", select_layout(references))
-    -- map("n", "<Leader>D", vim.lsp.buf.type_definition)
     map("n", "<Leader>rn", vim.lsp.buf.rename)
     map("n", "<Leader>A", vim.lsp.buf.code_action)
     map("v", "<Leader>A", vim.lsp.buf.code_action)
     map("n", "<Leader>s", select_layout(require("telescope.builtin").lsp_workspace_symbols))
     map("n", "<Leader>D", select_layout(require("telescope.builtin").diagnostics))
     map("n", "<Leader>d", vim.diagnostic.open_float)
-    map("n", "[d", vim.diagnostic.goto_prev)
-    map("n", "]d", vim.diagnostic.goto_next)
     map("n", "<Leader>q", vim.diagnostic.setloclist)
+
+    vim.lsp.inlay_hint.enable(true)
   end
 
   nvim_lsp.jsonls.setup({
@@ -149,6 +145,32 @@ local function config()
 
   nvim_lsp.tsserver.setup({
     capabilities = nvim_cmp_capabilities,
+    settings = {
+      typescript = {
+        inlayHints = {
+          includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+      javascript = {
+        inlayHints = {
+          includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all'
+          includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
+        },
+      },
+    },
     on_attach = function(client, bufnr)
       -- Disable document_formatting from lsp
       client.server_capabilities.document_formatting = false
@@ -192,6 +214,14 @@ local function config()
     on_attach = on_attach,
     settings = {
       Lua = {
+        hint = {
+          arrayIndex = "Enable",
+          await = true,
+          enable = true,
+          setType = true,
+          paramType = true,
+          paramName = "All",
+        },
         runtime = {
           -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
           version = "LuaJIT",
@@ -229,6 +259,27 @@ local function config()
     },
   })
 
+  nvim_lsp.gopls.setup({
+    capabilities = nvim_cmp_capabilities,
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    settings = {
+      gopls = {
+        hints = {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          compositeLiteralTypes = true,
+          constantValues = true,
+          functionTypeParameters = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
+        },
+      },
+    },
+  })
+
   -- /Users/t/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/bin/macOS/lua-language-server -E /Users/t/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/main.lua
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
@@ -237,10 +288,10 @@ local function config()
     "bashls",
     "dockerls",
     "docker_compose_language_service",
-    "gopls",
     "html",
     "terraformls",
     "rust_analyzer",
+    "awk_ls",
   }
   for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup({
