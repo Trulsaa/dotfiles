@@ -47,10 +47,4 @@ return {
     "nvim-lualine/lualine.nvim",
     config = config,
   },
-  {
-    "edkolev/tmuxline.vim",
-    init = function()
-      print("tmuxline")
-    end,
-  }, -- Makes tmux status line match vim status line
 }
