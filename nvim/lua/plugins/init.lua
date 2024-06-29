@@ -1,6 +1,5 @@
 return {
   { "andymass/vim-matchup", event = "VimEnter" }, -- operate on sets of matching text. It extends vim's % key to language-specific words
-  "b3nj5m1n/kommentary", -- Comment objects
   "tpope/vim-repeat", -- Enable . repeating for more
   "tpope/vim-surround", -- Surround objects with anything
   "tpope/vim-unimpaired", -- Tpope navigation mapppings
