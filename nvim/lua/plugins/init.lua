@@ -36,7 +36,7 @@ return {
     },
     config = function()
       require("neogit").setup({
-        kind = "auto",
+        kind = "split",
       })
     end,
   },
@@ -61,6 +61,8 @@ return {
       })
     end,
   },
-  "kevinhwang91/nvim-bqf",
+  { "kevinhwang91/nvim-bqf", dependencies = {
+    "junegunn/fzf",
+  } },
   "LunarVim/bigfile.nvim",
 }
