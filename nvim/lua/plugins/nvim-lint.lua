@@ -9,6 +9,7 @@ return {
       dockerfile = { "hadolint" },
       yaml = { "yamllint" },
       terraform = { "tflint" },
+      makefile = { "checkmake" },
     }
     local pattern = [[%s*(%d+):(%d+)%s+(%w+)%s+(.+%S)%s+(%S+)]]
     local groups = { "lnum", "col", "severity", "message", "code" }

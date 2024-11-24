@@ -143,7 +143,7 @@ local function config()
     vim.lsp.buf.execute_command(params)
   end
 
-  nvim_lsp.tsserver.setup({
+  nvim_lsp.ts_ls.setup({
     capabilities = nvim_cmp_capabilities,
     settings = {
       typescript = {
