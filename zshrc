@@ -15,7 +15,8 @@ DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
 
 # This needet to be before fzf-tab
-autoload -U compinit; compinit
+autoload -U compinit
+compinit
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.

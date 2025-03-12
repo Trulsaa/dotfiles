@@ -29,7 +29,7 @@ opt.shortmess:append({ A = true }) -- don't give the ATTENTION message when an e
 opt.inccommand = "split" -- enables live preview of substitutions
 opt.showmode = false -- Disable showing of mode in command line
 opt.mouse = "a" -- scroll with mouse
-opt.laststatus = 3 -- show only one statusbar
+opt.laststatus = 2 -- show only one statusbar
 
 vim.api.nvim_create_autocmd("BufReadPost", {
   desc = "Open files with cursor at last known position",
