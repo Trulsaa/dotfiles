@@ -23,7 +23,6 @@ brew install --no-quarantine \
   pass-otp \
   pass-git-helper
 
-brew tap homebrew/cask-fonts
 brew install --cask \
   font-fira-code-nerd-font
 
