@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
@@ -8,10 +5,10 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen-omp.toml)"
 fi
 
-# Uncomment the following line to disable auto-setting terminal title.
+# Disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
+# Display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
 # This needet to be before fzf-tab
@@ -55,8 +52,6 @@ fi
 alias lg1="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias lg2="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all"
 alias run="./run"
-alias kontoret='displayplacer "id:4FD644F6-ECC9-C033-8962-76FEA756A762 res:1792x1120 hz:59 color_depth:8 scaling:on origin:(0,0) degree:0" "id:2C54366F-0D6B-978E-A695-C6256DE17B42 res:3440x1440 hz:50 color_depth:8 scaling:off origin:(0,-1440) degree:0"'
-alias hjemme='displayplacer "id:4FD644F6-ECC9-C033-8962-76FEA756A762 res:1792x1120 hz:59 color_depth:8 scaling:on origin:(0,0) degree:0" "id:827F7224-9EBA-B60B-DDDD-13BAFAC592BF res:3440x1440 hz:50 color_depth:8 scaling:off origin:(1792,-153) degree:0"'
 
 # fkill - kill process
 fkill() {
@@ -118,8 +113,6 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -l -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_CTRL_T_COMMAND"
 
 alias tab-rename="pwd | awk -F/ '{print \$NF}' | xargs tmux rename-window"
-
-export JAVA_HOME=/usr/local/opt/openjdk@17
 
 # `git` wrapper:
 #
@@ -187,100 +180,7 @@ function changeDirectoryToGitRoot() {
   fi
 }
 
-function alvtime() {
-  export ALVTIME_TOKEN="$(awk 'NR==1{ print $1 }' ~/.alvtime)"
-  local ALVTIME_TOKEN_EXPIRY="$(awk 'NR==1{ print $2 }' ~/.alvtime)"
-
-  # Run brew install dateutils to install datetest and others
-  datetest "$(date +'%Y-%m-%d')" --gt "$ALVTIME_TOKEN_EXPIRY" &&
-    echo "Alvtime token has expired" &&
-    return 1
-
-  if [ "$#" -eq 0 ]; then
-    echo "
-Alvtime CLI wrapper
-
-register syk 3.5                : Registers 3.5 hours to task id 14 today
-week ferie 7.5                  : Register 7.5 hours to task 14 every working day this week
-multiregister data.txt          : Takes a file name or stdin of line with 'date taskid hours'
-hours [yyyy-mm-dd [yyyy-mm-dd]] : Prints the registerd hours between the two dates.
-                                  Dates default to monday and sunday in the current week
-tasks                           : Prints all tasks
-profile                         : Fetch user profile
-availableHours
-flexedHours
-payouts
-holidays [year]                 : Returns the alv holidays in a year. Defaults to current year
-ping                            : Check if the api is alive
-"
-  fi
-
-  # If $2 is not a number replace it with the matching number from config
-  if [ "$1" = week ] || [ "$1" = register ]; then
-    RE='^[0-9]+$'
-    if ! [[ "$2" =~ $RE ]]; then
-      local ID="$(grep -i "${2}$" ~/.alvtime | awk '{print $1}')"
-      set -- "$1" "$ID" "$3" "$4"
-    fi
-  fi
-
-  if [ "$1" = week ]; then
-    alvtimeWeek "$@"
-  elif [ "$1" = hours ]; then
-    alvtimeHours "$@"
-  elif [ "$1" = tasks ]; then
-    alvtimeTasks "$@"
-  elif [ "$1" = register ]; then
-    ~/Projects/alv/alvtime/packages/shell/alvtime.sh "$@" >/dev/null
-    alvtime hours
-  else
-    ~/Projects/alv/alvtime/packages/shell/alvtime.sh "$@"
-  fi
-
-  return 0
-}
-
-function alvtimeWeek() {
-  shift
-  HOLIDAYS_TEMPFILE="$(mktemp)"
-  trap "rm $HOLIDAYS_TEMPFILE" EXIT
-  ~/Projects/alv/alvtime/packages/shell/alvtime.sh holidays | jq -r '.[]' >$HOLIDAYS_TEMPFILE
-  MON=$(date -v -Mon +'%Y-%m-%d')
-  FRI=$(dateadd "$MON" +4d)
-  dateseq "$MON" "$FRI" |
-    grep -v -x -F -f "$HOLIDAYS_TEMPFILE" |
-    awk -v id="$1" -v hours="$2" '{print $0 " " id " " hours}' |
-    ~/Projects/alv/alvtime/packages/shell/alvtime.sh multiregister >/dev/null
-  alvtime hours
-}
-
-function alvtimeHours() {
-  shift
-  MON=$(date -v -Mon +'%Y-%m-%d')
-  SUN=$(dateadd "$MON" +6d)
-  FROM_DATE_INCLUSIVE="${1:-$MON}"
-  TO_DATE_INCLUSIVE="${2:-$SUN}"
-  ~/Projects/alv/alvtime/packages/shell/alvtime.sh hours "$FROM_DATE_INCLUSIVE" "$TO_DATE_INCLUSIVE" |
-    ~/Projects/dotfiles/alvtime/hours.js
-}
-
-function alvtimeTasks() {
-  shift
-  local TASK=$(~/Projects/alv/alvtime/packages/shell/alvtime.sh tasks |
-    jq -r '.[] | "\(.id) \(.project.customer.name) \(.project.name) \(.name)"' |
-    fzf-tmux +m)
-
-  local ID=$(echo $TASK | awk '{print $1}')
-  echo "Write ref name to save the task to favorites. Leave blank to to not save:"
-  read INPUT
-  test -n "$INPUT" &&
-    echo "$ID $INPUT" &&
-    echo "$ID $INPUT" >>~/.alvtime || true
-}
-
 export KUBE_CONFIG_PATH=~/.kube/config
-
-export JDTLS_HOME="$HOME/bin/eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository"
 
 if [[ ! ":$PATH:" == *":$HOME/go/bin:"* ]]; then
   export PATH="${PATH:+${PATH}:}$HOME/go/bin"
@@ -289,18 +189,3 @@ fi
 export OPENAI_API_KEY=$(pass show openai_api_key)
 
 alias pinentry='pinentry-mac'
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/t/miniconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
-if [ $? -eq 0 ]; then
-  eval "$__conda_setup"
-else
-  if [ -f "/Users/t/miniconda3/etc/profile.d/conda.sh" ]; then
-    . "/Users/t/miniconda3/etc/profile.d/conda.sh"
-  else
-    export PATH="/Users/t/miniconda3/bin:$PATH"
-  fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
