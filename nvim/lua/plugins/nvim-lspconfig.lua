@@ -184,27 +184,6 @@ local function config()
       debounce_text_changes = 150,
     },
   })
-  nvim_lsp.vuels.setup({
-    capabilities = nvim_cmp_capabilities,
-    on_attach = function(client, bufnr)
-      -- Disable document_formatting from lsp
-      client.server_capabilities.document_formatting = false
-      on_attach(client, bufnr)
-    end,
-    flags = {
-      debounce_text_changes = 150,
-    },
-  })
-  nvim_lsp.omnisharp.setup({
-    capabilities = nvim_cmp_capabilities,
-    on_attach = on_attach,
-    cmd = {
-      "/Users/t/bin/omnisharp-osx/run",
-      "--languageserver",
-      "--hostPID",
-      tostring(vim.fn.getpid()),
-    },
-  })
 
   local runtime_path = vim.split(package.path, ";")
   table.insert(runtime_path, "lua/?.lua")
