@@ -19,6 +19,7 @@ return {
         zsh = { formatter.sh.shfmt },
         go = { formatter.go.gofmt },
         rust = { formatter.rust.rustfmt },
+        python = { formatter.python.black },
       },
     })
 

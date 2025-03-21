@@ -113,7 +113,9 @@ local function config()
     map("n", "<Leader>d", vim.diagnostic.open_float)
     map("n", "<Leader>q", vim.diagnostic.setloclist)
 
-    vim.lsp.inlay_hint.enable(true)
+    map("n", "<Leader>h", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end)
   end
 
   nvim_lsp.jsonls.setup({
@@ -254,6 +256,23 @@ local function config()
           functionTypeParameters = true,
           parameterNames = true,
           rangeVariableTypes = true,
+        },
+      },
+    },
+  })
+
+  nvim_lsp.pylsp.setup({
+    capabilities = nvim_cmp_capabilities,
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    settings = {
+      pylsp = {
+        plugins = {
+          pycodestyle = {
+            ignore = { "E501", "W503" },
+          },
         },
       },
     },
