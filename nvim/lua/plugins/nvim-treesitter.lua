@@ -5,7 +5,7 @@
       "nvim-treesitter/nvim-treesitter-textobjects",
       "windwp/nvim-ts-autotag", -- Autoclose and autorename html tag
       "nvim-treesitter/nvim-treesitter-refactor",
-      "romgrk/nvim-treesitter-context"
+      "nvim-treesitter/nvim-treesitter-context"
     },
     config = function()
       require("nvim-treesitter.configs").setup(
