@@ -10,7 +10,7 @@ return {
   "tpope/vim-projectionist", -- Projection and alternate navigation
   "tpope/vim-dispatch",
   "machakann/vim-highlightedyank", -- Highlight yanked text
-  "vim-scripts/ReplaceWithRegister", -- Replace with registery content
+  { "echasnovski/mini.operators", version = "*", opts = {} }, -- Replace with registery content
   {
     "mbbill/undotree",
     lazy = true,
