@@ -79,7 +79,6 @@ local references = function(opts)
 end
 
 local function config()
-  local nvim_lsp = require("lspconfig")
   local nvim_cmp_capabilities =
     require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
   local select_layout = require("select_layout").select_layout
@@ -118,7 +117,7 @@ local function config()
     end)
   end
 
-  nvim_lsp.jsonls.setup({
+  vim.lsp.config("jsonls", {
     settings = {
       json = {
         validate = { enable = true },
@@ -145,7 +144,7 @@ local function config()
     vim.lsp.buf.execute_command(params)
   end
 
-  nvim_lsp.ts_ls.setup({
+  vim.lsp.config("ts_ls", {
     capabilities = nvim_cmp_capabilities,
     settings = {
       typescript = {
@@ -190,7 +189,7 @@ local function config()
   local runtime_path = vim.split(package.path, ";")
   table.insert(runtime_path, "lua/?.lua")
   table.insert(runtime_path, "lua/?/init.lua")
-  nvim_lsp.lua_ls.setup({
+  vim.lsp.config("lua_ls", {
     capabilities = nvim_cmp_capabilities,
     on_attach = on_attach,
     settings = {
@@ -226,13 +225,7 @@ local function config()
     },
   })
 
-  nvim_lsp.groovyls.setup({
-    capabilities = nvim_cmp_capabilities,
-    on_attach = on_attach,
-    cmd = { "groovy-language-server" },
-  })
-
-  nvim_lsp.kotlin_language_server.setup({
+  vim.lsp.config("kotlin_language_server", {
     capabilities = nvim_cmp_capabilities,
     on_attach = on_attach,
     init_options = {
@@ -240,7 +233,7 @@ local function config()
     },
   })
 
-  nvim_lsp.gopls.setup({
+  vim.lsp.config("gopls", {
     capabilities = nvim_cmp_capabilities,
     on_attach = on_attach,
     flags = {
@@ -292,7 +285,7 @@ local function config()
     "awk_ls",
   }
   for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup({
+    vim.lsp.config(lsp, {
       capabilities = nvim_cmp_capabilities,
       on_attach = on_attach,
       flags = {
