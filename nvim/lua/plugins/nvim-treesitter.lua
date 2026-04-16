@@ -1,30 +1,34 @@
   -- HIGHLIGHTING
   return {
     "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
+    build = ":TSUpdate",
     dependencies = {
       "nvim-treesitter/nvim-treesitter-textobjects",
       "windwp/nvim-ts-autotag", -- Autoclose and autorename html tag
-      "nvim-treesitter/nvim-treesitter-refactor",
-      "nvim-treesitter/nvim-treesitter-context"
+      {
+        "romgrk/nvim-treesitter-context",
+        opts = {},
+      },
     },
     config = function()
-      require("nvim-treesitter.configs").setup(
-        {
-          ensure_installed = "all",
-          highlight = {
-            enable = true -- false will disable the whole extension
-          },
-          incremental_selection = {enable = true},
-          textobjects = {enable = true},
-          refactor = {
-            highlight_definitions = {enable = true},
-            highlight_current_scope = {enable = false}
-          }
-        }
-      )
-      -- make highlight_definitions react after 500 ms not 4000 ms (default)
-      vim.o.updatetime = 500
+      require("nvim-treesitter").setup({
+        install_dir = vim.fn.stdpath("data") .. "/site",
+      })
 
+      require("nvim-treesitter").install("all")
+
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          pcall(vim.treesitter.start)
+          vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          vim.wo[0][0].foldmethod = "expr"
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end,
+      })
+
+      require("nvim-treesitter-textobjects").setup({})
       require("nvim-ts-autotag").setup()
-    end
+    end,
   }

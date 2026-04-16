@@ -86,36 +86,60 @@ local function config()
   -- Set color for error message
   vim.cmd("hi LspDiagnosticsDefaultError ctermfg=Red")
 
-  -- Use an on_attach function to only map the following keys
+  -- Use LspAttach autocommand to map the following keys
   -- after the language server attaches to the current buffer
-  local on_attach = function(_, bufnr)
-    local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
-    end
+  vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+      local bufnr = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-    -- Enable completion triggered by <c-x><c-o>
-    vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
+      local function map(mode, l, r, opts)
+        opts = opts or {}
+        opts.buffer = bufnr
+        vim.keymap.set(mode, l, r, opts)
+      end
 
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    map("n", "gD", vim.lsp.buf.declaration)
-    map("n", "gd", select_layout(require("telescope.builtin").lsp_definitions))
-    map("n", "K", vim.lsp.buf.hover)
-    map("n", "gi", select_layout(require("telescope.builtin").lsp_implementations))
-    map("n", "gR", select_layout(references))
-    map("n", "<Leader>rn", vim.lsp.buf.rename)
-    map("n", "<Leader>A", vim.lsp.buf.code_action)
-    map("v", "<Leader>A", vim.lsp.buf.code_action)
-    map("n", "<Leader>s", select_layout(require("telescope.builtin").lsp_workspace_symbols))
-    map("n", "<Leader>D", select_layout(require("telescope.builtin").diagnostics))
-    map("n", "<Leader>d", vim.diagnostic.open_float)
-    map("n", "<Leader>q", vim.diagnostic.setloclist)
+      -- Enable completion triggered by <c-x><c-o>
+      vim.api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
 
-    map("n", "<Leader>h", function()
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-    end)
-  end
+      -- See `:help vim.lsp.*` for documentation on any of the below functions
+      map("n", "gD", vim.lsp.buf.declaration)
+      map("n", "gd", select_layout(require("telescope.builtin").lsp_definitions))
+      map("n", "K", vim.lsp.buf.hover)
+      map("n", "gi", select_layout(require("telescope.builtin").lsp_implementations))
+      map("n", "gR", select_layout(references))
+      map("n", "<Leader>rn", vim.lsp.buf.rename)
+      map("n", "<Leader>A", vim.lsp.buf.code_action)
+      map("v", "<Leader>A", vim.lsp.buf.code_action)
+      map("n", "<Leader>s", select_layout(require("telescope.builtin").lsp_workspace_symbols))
+      map("n", "<Leader>D", select_layout(require("telescope.builtin").diagnostics))
+      map("n", "<Leader>d", vim.diagnostic.open_float)
+      map("n", "<Leader>q", vim.diagnostic.setloclist)
+
+      vim.lsp.inlay_hint.enable(true)
+
+      -- Server-specific settings
+      if client.name == "jsonls" then
+        -- Disable document_formatting from jsonls
+        client.server_capabilities.document_formatting = false
+      elseif client.name == "ts_ls" then
+        -- Disable document_formatting from ts_ls
+        client.server_capabilities.document_formatting = false
+        local lsp_organize_imports = function()
+          local params = {
+            command = "_typescript.organizeImports",
+            arguments = { vim.api.nvim_buf_get_name(0) },
+            title = "",
+          }
+          vim.lsp.buf.execute_command(params)
+        end
+        vim.keymap.set("n", "<space>i", lsp_organize_imports, {
+          silent = true,
+          buffer = bufnr,
+        })
+      end
+    end,
+  })
 
   vim.lsp.config("jsonls", {
     settings = {
@@ -125,24 +149,7 @@ local function config()
       },
     },
     capabilities = nvim_cmp_capabilities,
-    on_attach = function(client, bufnr)
-      -- Disable document_formatting from lsplsp
-      client.server_capabilities.document_formatting = false
-      on_attach(client, bufnr)
-    end,
-    flags = {
-      debounce_text_changes = 150,
-    },
   })
-
-  local lsp_organize_imports = function()
-    local params = {
-      command = "_typescript.organizeImports",
-      arguments = { vim.api.nvim_buf_get_name(0) },
-      title = "",
-    }
-    vim.lsp.buf.execute_command(params)
-  end
 
   vim.lsp.config("ts_ls", {
     capabilities = nvim_cmp_capabilities,
@@ -172,18 +179,6 @@ local function config()
         },
       },
     },
-    on_attach = function(client, bufnr)
-      -- Disable document_formatting from lsp
-      client.server_capabilities.document_formatting = false
-      vim.keymap.set("n", "<space>i", lsp_organize_imports, {
-        silent = true,
-        buffer = bufnr,
-      })
-      on_attach(client, bufnr)
-    end,
-    flags = {
-      debounce_text_changes = 150,
-    },
   })
 
   local runtime_path = vim.split(package.path, ";")
@@ -191,7 +186,6 @@ local function config()
   table.insert(runtime_path, "lua/?/init.lua")
   vim.lsp.config("lua_ls", {
     capabilities = nvim_cmp_capabilities,
-    on_attach = on_attach,
     settings = {
       Lua = {
         hint = {
@@ -227,7 +221,6 @@ local function config()
 
   vim.lsp.config("kotlin_language_server", {
     capabilities = nvim_cmp_capabilities,
-    on_attach = on_attach,
     init_options = {
       storagePath = "~/.config/nvim/tmp/data",
     },
@@ -235,10 +228,6 @@ local function config()
 
   vim.lsp.config("gopls", {
     capabilities = nvim_cmp_capabilities,
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
     settings = {
       gopls = {
         hints = {
@@ -254,7 +243,7 @@ local function config()
     },
   })
 
-  nvim_lsp.pylsp.setup({
+  vim.lsp.config("pylsp", {
     capabilities = nvim_cmp_capabilities,
     on_attach = on_attach,
     flags = {
@@ -274,6 +263,7 @@ local function config()
   -- /Users/t/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/bin/macOS/lua-language-server -E /Users/t/.cache/nvim/lspconfig/sumneko_lua/lua-language-server/main.lua
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
+  -- Use a loop to conveniently call 'config' on multiple servers
   local servers = {
     "vimls",
     "bashls",
@@ -287,12 +277,26 @@ local function config()
   for _, lsp in ipairs(servers) do
     vim.lsp.config(lsp, {
       capabilities = nvim_cmp_capabilities,
-      on_attach = on_attach,
-      flags = {
-        debounce_text_changes = 150,
-      },
     })
   end
+
+  -- Enable all configured LSP servers
+  vim.lsp.enable({
+    "jsonls",
+    "ts_ls",
+    "lua_ls",
+    "groovyls",
+    "kotlin_language_server",
+    "gopls",
+    "vimls",
+    "bashls",
+    "dockerls",
+    "docker_compose_language_service",
+    "html",
+    "terraformls",
+    "rust_analyzer",
+    "awk_ls",
+  })
 end
 
 return {

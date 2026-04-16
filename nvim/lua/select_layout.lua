@@ -3,8 +3,6 @@ local select_layout = function(builtin, opts)
     opts = {}
   end
 
-  opts.layout_strategy = "vertical"
-
   opts.path_display = function(_, path)
     return require("path").format(path)
   end
